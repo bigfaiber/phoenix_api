@@ -1,5 +1,6 @@
 class Admin < ApplicationRecord
   has_secure_password
+  mount_uploader :avatar, AvatarUploader
 
   validates_presence_of :name,:lastname,:email,:password
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
