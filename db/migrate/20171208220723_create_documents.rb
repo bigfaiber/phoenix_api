@@ -7,6 +7,6 @@ class CreateDocuments < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index [:document_type, :imageable_type, :imageable_id], unique: true
+    add_index :documents, [:document_type, :imageable_type, :imageable_id], unique: true, name: 'document_index'
   end
 end
