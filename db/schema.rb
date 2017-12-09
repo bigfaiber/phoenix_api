@@ -132,14 +132,17 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.integer "money", null: false
     t.integer "monthly_payment", null: false
     t.integer "month", null: false
+    t.float "fee", default: 0.0, null: false
+    t.boolean "approved", default: false
+    t.string "warranty", default: "", null: false
     t.float "interest_rate", default: 1.5, null: false
     t.bigint "investor_id"
     t.bigint "account_id"
-    t.bigint "clients_id"
+    t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_projects_on_account_id"
-    t.index ["clients_id"], name: "index_projects_on_clients_id"
+    t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["investor_id"], name: "index_projects_on_investor_id"
   end
 
@@ -164,7 +167,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
   add_foreign_key "estates", "clients"
   add_foreign_key "matches", "investors"
   add_foreign_key "matches", "projects"
-  add_foreign_key "projects", "clients", column: "clients_id"
+  add_foreign_key "projects", "clients"
   add_foreign_key "receipts", "projects"
   add_foreign_key "vehicles", "clients"
 end

@@ -19,6 +19,12 @@ Rails.application.routes.draw do
       end
     end
     resources :admins
+    resources :projects, only: [:create,:update,:destroy,:show] do
+      member do
+        post 'change-interest', to: "projects#rate"
+        post 'add-account', to: "projects#account"
+      end
+    end
   end
 
 end

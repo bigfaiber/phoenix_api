@@ -12,6 +12,7 @@ class Client < ApplicationRecord
   scope :include_vehicle, -> {includes(:vehicles) }
   scope :include_estate, -> {includes(:estates) }
   scope :include_document, -> {includes(:documents)}
+  scope :include_project, -> {includes(:projects)}
 
   enum people: {
     "Ninguna": 0,

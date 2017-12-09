@@ -6,10 +6,13 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.integer :money, null: false
       t.integer :monthly_payment, null: false
       t.integer :month, null: false
+      t.float :fee, null: false, default: 0
+      t.boolean :approved, default: false
+      t.string :warranty, null: false, default: ""
       t.float :interest_rate, null: false, default: 1.5
       t.belongs_to :investor, index: true
       t.belongs_to :account, index: true
-      t.references :clients, foreign_key: true
+      t.references :client, foreign_key: true
 
 
       t.timestamps

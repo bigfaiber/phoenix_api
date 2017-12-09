@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
-    @clients = @clients.include_vehicle.include_estate.include_document
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project
     render json: @clients, each_serializer: ClientSerializer, status: :ok
   end
 
