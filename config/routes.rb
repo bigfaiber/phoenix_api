@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         post 'upload-document', to: "investors#documents"
       end
     end
+    resources :admins
   end
 
 end
