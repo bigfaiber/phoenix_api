@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
-    @clients.include_vehicle.include_estate.include_payment
+    @clients = @clients.include_vehicle.include_estate.include_document
     render json: @clients, each_serializer: ClientSerializer, status: :ok
   end
 
@@ -33,7 +33,7 @@ class ClientsController < ApplicationController
       rescue Twilio::REST::TwilioError => error
         p error.message
       end
-      @client = @client.include_vehicle.include_estate.include_payment
+      @client = @client
       render json: @client, serializer: ClientSerializer, status: :created
     else
       @object = @client
@@ -43,7 +43,6 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      @client = @client.include_vehicle.include_estate.include_payment
       render json: @client, serializer: ClientSerializer, status: :ok
     else
       @object = @client
@@ -84,7 +83,6 @@ class ClientsController < ApplicationController
 
   def avatar
     if @current_client.update(avatar: params[:avatar])
-      @current_client = @current_client.include_vehicle.include_estate.include_payment
       render json: @current_client, serializer: ClientSerializer, status: :ok
     else
       @object = @current_client
@@ -99,7 +97,7 @@ class ClientsController < ApplicationController
 
   private
   def client_params
-    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation)
+    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions)
   end
   def set_client
     @client = Client.by_id(params[:id])

@@ -11,6 +11,4 @@ class Document < ApplicationRecord
 
   validates_inclusion_of :document_type, in: document_types.keys
 
-
-
 end

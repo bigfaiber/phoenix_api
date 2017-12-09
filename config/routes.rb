@@ -10,6 +10,14 @@ Rails.application.routes.draw do
         post 'upload-document', to: "clients#documents"
       end
     end
+    resources :investors do
+      collection do
+        get 'verification', to: "investors#verification"
+        post 'upload-avatar', to: "investors#avatar"
+        post 'create-payment', to: "investors#payment"
+        post 'upload-document', to: "investors#documents"
+      end
+    end
   end
 
 end

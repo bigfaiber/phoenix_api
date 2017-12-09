@@ -9,6 +9,8 @@ class CreateProjects < ActiveRecord::Migration[5.1]
       t.float :interest_rate, null: false, default: 1.5
       t.belongs_to :investor, index: true
       t.belongs_to :account, index: true
+      t.references :clients, foreign_key: true
+
 
       t.timestamps
     end

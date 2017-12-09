@@ -5,6 +5,7 @@ class Client < ApplicationRecord
   has_many :vehicles, dependent: :destroy
   has_many :estates, dependent: :destroy
   has_many :documents, as: :imageable, dependent: :destroy
+  has_many :projects, dependent: :destroy
 
 
   scope :new_clients, -> { where(new: true)   }
@@ -68,7 +69,6 @@ class Client < ApplicationRecord
   end
 
   def self.upload_document(client,type,file)
-    p client
     case type
     when "cc"
       cc = client.documents.cc.first
