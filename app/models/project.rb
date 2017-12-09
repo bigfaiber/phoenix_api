@@ -1,10 +1,14 @@
 class Project < ApplicationRecord
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
+  belongs_to :client
   has_many :receipts
+  has_many :matches
+  has_many :investors, through: :matches
 
   scope :include_investor, -> { includes(:investor) }
   scope :include_account, -> { includes(:account )}
+  scope :include_client, -> { includes(:client )}
   scope :include_receipts, -> { includes(:receipts )}
   scope :by_investor, -> (id:) { where(investor_id: id) }
   scope :by_account, -> (id:) { where(account_id: id) }

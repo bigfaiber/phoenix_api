@@ -6,7 +6,7 @@ class CreateInvestors < ActiveRecord::Migration[5.1]
       t.string :identification, null: false, unique: true
       t.string :phone, null: false, unique: true
       t.string :address, null: false
-      t.date :birhtday, null: false
+      t.date :birthday, null: false
       t.string :email, null: false, unique: true
       t.string :city, null: false
       t.string :password_digest, null: false

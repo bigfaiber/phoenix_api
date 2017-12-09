@@ -4,9 +4,9 @@ class CreateClients < ActiveRecord::Migration[5.1]
       t.string :name, null: false
       t.string :lastname, null: false
       t.string :identification, null: false, unique: true
-      t.string :phohe, null: false, unique: true
+      t.string :phone, null: false, unique: true
       t.string :address, null: false
-      t.date :birhtday, null: false
+      t.date :birthday, null: false
       t.string :email, null: false, unique: true
       t.string :city, null: false
       t.text :password_digest, null: false
