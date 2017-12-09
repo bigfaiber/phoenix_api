@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171209000014) do
+ActiveRecord::Schema.define(version: 20171209024314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,9 +37,9 @@ ActiveRecord::Schema.define(version: 20171209000014) do
     t.string "name", null: false
     t.string "lastname", null: false
     t.string "identification", null: false
-    t.string "phohe", null: false
+    t.string "phone", null: false
     t.string "address", null: false
-    t.date "birhtday", null: false
+    t.date "birthday", null: false
     t.string "email", null: false
     t.string "city", null: false
     t.text "password_digest", null: false
@@ -100,6 +100,17 @@ ActiveRecord::Schema.define(version: 20171209000014) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "investor_id"
+    t.boolean "approved", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["investor_id"], name: "index_matches_on_investor_id"
+    t.index ["project_id", "investor_id"], name: "index_matches_on_project_id_and_investor_id"
+    t.index ["project_id"], name: "index_matches_on_project_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer "payment_type", default: 0, null: false
     t.string "name", null: false
@@ -149,6 +160,8 @@ ActiveRecord::Schema.define(version: 20171209000014) do
   end
 
   add_foreign_key "estates", "clients"
+  add_foreign_key "matches", "investors"
+  add_foreign_key "matches", "projects"
   add_foreign_key "receipts", "projects"
   add_foreign_key "vehicles", "clients"
 end

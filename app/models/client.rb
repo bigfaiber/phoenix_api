@@ -12,41 +12,41 @@ class Client < ApplicationRecord
   scope :include_estate, -> {includes(:estates) }
   scope :include_document, -> {includes(:documents)}
 
-  enum people: [
+  enum people: {
     "Ninguna": 0,
     "Una": 1,
     "Dos": 2,
     "tres": 3,
     "Mas de 3": 4
-  ]
+  }
 
-  enum education: [
+  enum education: {
     "Primaria": 0,
     "Secundaria": 1,
     "Profesional": 2,
     "Maestria": 3
-  ]
+  }
 
-  enum marital_status: [
+  enum marital_status: {
     "Soltero": 0,
     "Casado": 1,
     "Divorciado": 2,
     "Viudo": 3
-  ]
+  }
 
-  enum employment_status: [
+  enum employment_status: {
     "Desempleado": 0,
     "Empleado": 1,
     "Independiente": 2
-  ]
+  }
 
-  validates_presence_of :name,:lastname,:identification,:phone,:address,:birhtday,:email,:city,:password
+  validates_presence_of :name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password
   validates_uniqueness_of :phone,:identification,:email
   validates_length_of :name,:lastname, minimum: 3
   validates_length_of :password, minimum: 8
   validate :valid_age
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
-  validates_inclusion_of :people, in: peoples.keys
+  validates_inclusion_of :people, in: people.keys
   validates_inclusion_of :education, in: educations.keys
   validates_inclusion_of :marital_status, in: marital_statuses.keys
   validates_inclusion_of :employment_status, in: employment_statuses.keys
@@ -69,7 +69,7 @@ class Client < ApplicationRecord
 
   private
   def valid_age
-    errors.add(:birhtday,"you are under 18") if Date.today.year - self.birhtday.year < 18
-    errors.add(:birhtday,"you are under 18") if Date.today.month > self.birhtday.month
+    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year < 18
+    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
   end
 end

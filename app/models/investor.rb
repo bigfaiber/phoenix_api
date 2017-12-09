@@ -4,6 +4,8 @@ class Investor < ApplicationRecord
 
   has_one :payment
   has_many :documents, as: :imageable
+  has_many :matches
+  has_many :projects, through: :matches
 
   scope :include_payment, -> { includes(:payment) }
   scope :include_document, -> { includes(:documents) }
@@ -48,7 +50,7 @@ class Investor < ApplicationRecord
   private
   def valid_age
     errors.add(:birhtday,"you are under 18") if Date.today.year - self.birhtday.year < 18
-    errors.add(:birhtday,"you are under 18") if Date.today.month > self.birhtday.month
+    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
   end
 
 

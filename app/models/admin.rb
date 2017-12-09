@@ -15,7 +15,7 @@ class Admin < ApplicationRecord
     find_by_id(id)
   end
 
-  def self.by_email
+  def self.by_email(email)
     find_by_email(email)
   end
 
