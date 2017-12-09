@@ -2,9 +2,9 @@ class Admin < ApplicationRecord
   has_secure_password
   mount_uploader :avatar, AvatarUploader
 
-  validates_presence_of :name,:lastname,:email,:password
+  validates_presence_of :name,:lastname,:email
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
-  validates_length_of :password, minimum: 8
+  validates_length_of :password, minimum: 8, if: Proc.new {|a| a.new_record? }
   validates_length_of :name,:lastname, minimum: 3
 
   def self.load(page: 1, per_page: 10)

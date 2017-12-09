@@ -53,7 +53,7 @@ module Secured
   def authenticate_client!
     begin
       obj = auth_token
-      if obj[:type] != "Admin"
+      if obj[:type] != "Client"
         raise JWT::VerificationError
       else
         @current_client = Client.by_id(obj[:id])
@@ -73,7 +73,7 @@ module Secured
   def authenticate_investor!
     begin
       obj = auth_token
-      if obj[:type] != "Admin"
+      if obj[:type] != "Investor"
         raise JWT::VerificationError
       else
         @current_investor = Investor.by_id(obj[:id])

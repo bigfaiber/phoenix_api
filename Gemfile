@@ -51,3 +51,5 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 #Serializer
 gem 'active_model_serializers', '~> 0.10.0'
+#SMS
+gem 'twilio-ruby'

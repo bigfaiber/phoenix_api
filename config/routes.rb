@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   scope '/', defaults: { format: 'json' } do
     post '/login',  to: "authenticate#login"
-    resources :clients
+    resources :clients do
+      collection do
+        get 'verification', to: "clients#verification"
+        post 'upload-avatar', to: "clients#avatar"
+        post 'create-goods', to: "clients#goods"
+        post 'upload-document', to: "clients#documents"
+      end
+    end
   end
 
 end

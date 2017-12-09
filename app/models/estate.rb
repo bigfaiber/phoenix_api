@@ -18,7 +18,7 @@ class Estate < ApplicationRecord
 
   private
   def valid_price
-    erros.add(:price, "can't be negative") if self.price && self.price < 0
+    erros.add(:price, "can't be negative") if self.price && self.price.to_i < 0
   end
 
 end

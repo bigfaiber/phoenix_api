@@ -1,10 +1,12 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:destroy]
   before_action :authenticate_admin_or_client!, only: [:update]
+  before_action :authenticate_client!, only: [:verification,:avatar,:goods,:documents]
   before_action :set_client, only: [:show,:update,:destroy,:show]
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
+    @clients.include_vehicle.include_estate.include_payment
     render json: @clients, each_serializer: ClientSerializer, status: :ok
   end
 
@@ -23,6 +25,15 @@ class ClientsController < ApplicationController
       @current_client = @client
       @token = command.result
       ClientMailer.welcome(@client).deliver_later
+      begin
+        code = SecureRandom.uuid[0..7]
+        MessageSender.send_message(code,params[:client][:phone])
+        @client.code = code
+        @client.save
+      rescue Twilio::REST::TwilioError => error
+        p error.message
+      end
+      @client = @client.include_vehicle.include_estate.include_payment
       render json: @client, serializer: ClientSerializer, status: :created
     else
       @object = @client
@@ -32,6 +43,7 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
+      @client = @client.include_vehicle.include_estate.include_payment
       render json: @client, serializer: ClientSerializer, status: :ok
     else
       @object = @client
@@ -42,6 +54,47 @@ class ClientsController < ApplicationController
   def destroy
     @client.destroy!
     head :no_content
+  end
+
+  def verification
+    code = params[:code]
+    if @current_client.code == code
+      @current_client.code_confirmation = true
+      @current_client.save
+      head :ok
+    else
+      render json: {
+        data:{
+          errors: ['The codes are differents']
+        }
+      },status: 500
+    end
+  end
+
+  def goods
+    params[:goods].each do |v|
+      if v[:type] == "Vehicles"
+        Vehicle.new(price: v[:price],client_id: @current_client.id).save
+      else
+        Estate.new(price: v[:price],client_id: @current_client.id).save
+      end
+    end
+    head :ok
+  end
+
+  def avatar
+    if @current_client.update(avatar: params[:avatar])
+      @current_client = @current_client.include_vehicle.include_estate.include_payment
+      render json: @current_client, serializer: ClientSerializer, status: :ok
+    else
+      @object = @current_client
+      error_render
+    end
+  end
+
+  def documents
+    Client.upload_document(@current_client,params[:type],params[:file])
+    head :ok
   end
 
   private
