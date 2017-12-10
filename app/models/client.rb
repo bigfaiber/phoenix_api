@@ -8,11 +8,13 @@ class Client < ApplicationRecord
   has_many :projects, dependent: :destroy
 
 
-  scope :new_clients, -> { where(new: true)   }
+  scope :new_clients, -> { where(new_client: true) }
+  scope :old_clients, -> { where(new_client: false) }
   scope :include_vehicle, -> {includes(:vehicles) }
   scope :include_estate, -> {includes(:estates) }
   scope :include_document, -> {includes(:documents)}
   scope :include_project, -> {includes(:projects)}
+
 
   enum people: {
     "Ninguna": 0,
@@ -56,6 +58,7 @@ class Client < ApplicationRecord
   validates_length_of :phone, minimum: 10, maximum: 15
   validates_length_of :identification, minimum: 8, maximum: 12
   validates_numericality_of :rent_payment, only_integer: true
+  validate :valid_rating
 
   def self.load(page: 1, per_page: 10)
     paginate(page: page, per_page: per_page)
@@ -102,5 +105,10 @@ class Client < ApplicationRecord
   def valid_age
     errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year < 18
     errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
+  end
+
+  def valid_rating
+    errors.add(:rating,"is not valid") if self.rating && self.rating < 0
+
   end
 end

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     post '/login',  to: "authenticate#login"
     resources :clients do
       collection do
+        get 'new-clients', to: "clients#new_clients"
+        get 'old-clients', to: "clients#old_clients"
         get 'verification', to: "clients#verification"
         post 'upload-avatar', to: "clients#avatar"
         post 'create-goods', to: "clients#goods"
@@ -17,6 +19,8 @@ Rails.application.routes.draw do
         end
       end
       collection do
+        get 'new-investors', to: "investors#new_investors"
+        get 'old-investors', to: "investors#old_investors"
         get 'verification', to: "investors#verification"
         post 'upload-avatar', to: "investors#avatar"
         post 'create-payment', to: "investors#payment"
@@ -24,14 +28,16 @@ Rails.application.routes.draw do
       end
     end
     resources :admins
-    resources :projects, only: [:create,:update,:destroy,:show] do
+    resources :projects, only: [:create,:update,:destroy,:show,:index] do
       member do
         post 'change-interest', to: "projects#rate"
         post 'add-account', to: "projects#account"
         post 'approve-project', to: "projects#approve"
         post 'like', to: "projects#like"
+        post 'add-receipt', to: "projects#receipt"
       end
     end
+    resources :matches, only: [:index]
   end
 
 end

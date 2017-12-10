@@ -1,14 +1,26 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show,:update,:destroy]
   before_action :authenticate_admin_or_investor!, only: [:update]
-  before_action :authenticate_admin!, only: [:destroy]
+  before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors]
   before_action :authenticate_investor!, only: [:verification,:avatar,:payment,:documents]
 
 
   def index
     @investors = Investor.load(page: params[:page], per_page: params[:per_page])
     @investors = @investors.include_payment.include_document.include_project
-    render json: @investors, each_serializer: InvestorSerializer
+    render json: @investors, each_serializer: InvestorSerializer, status: :ok
+  end
+
+  def new_investors
+    @investors = Investor.load(page: params[:page],per_page: params[:per_page]).new_investors
+    @investors = @investors.include_document.include_project.include_payment
+    render json: @investors, each_serializer: InvestorSerializer, status: :ok
+  end
+
+  def old_investors
+    @investors = Investor.load(page: params[:page],per_page: params[:per_page]).old_investors
+    @investors = @investors.include_payment.include_document.include_project
+    render json: @investors, each_serializer: InvestorSerializer, status: :ok
   end
 
   def show

@@ -21,7 +21,8 @@ class CreateClients < ActiveRecord::Migration[5.1]
       t.integer :employment_status, null: false, default: 0
       t.boolean :terms_and_conditions, default: false
       t.boolean :new_client, default: true
-      t.text :avatar
+      t.float :rating
+      t.text :avatar, default: 0
 
       t.timestamps
     end
