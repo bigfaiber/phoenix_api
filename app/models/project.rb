@@ -13,7 +13,8 @@ class Project < ApplicationRecord
   scope :include_account, -> { includes(:account )}
   scope :include_client, -> { includes(:client )}
   scope :include_receipts, -> { includes(:receipts )}
-  scope :by_investor, -> (id:) { where(investor_id: id) }
+  scope :by_client, -> (id:) {where(client_id: id) }
+  scope :by_investor, -> (id:) { where(investor_id: id).where(approved: true) }
   scope :by_account, -> (id:) { where(account_id: id) }
   scope :by_price, -> (price_start:,price_end:) { where(money: price_start..price_end) }
   scope :by_interest, -> (interest_start:,interest_end:) { where(interest_rate: interest_start..interest_end) }

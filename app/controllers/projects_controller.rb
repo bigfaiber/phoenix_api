@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_client!, only: [:create,:receipt]
+  before_action :authenticate_client!, only: [:create,:receipt,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account]
-  before_action :authenticate_admin!, only: [:destroy,:rate,:approve,:match]
-  before_action :authenticate_investor!, only: [:like]
+  before_action :authenticate_admin!, only: [:destroy,:rate,:approve,:match,:search]
+  before_action :authenticate_investor!, only: [:like,:investors]
   before_action :set_project, only: [:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
   before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
 
@@ -19,6 +19,36 @@ class ProjectsController < ApplicationController
     end
     @projects = @projects.include_investor.include_account.include_client.include_receipts
     render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+  end
+
+  def clients
+    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: @current_client.id)
+    @projects = @projects.include_investor.include_account.include_client.include_receipts
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+  end
+
+  def investors
+    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: @current_investor.id)
+    @projects = @projects.include_investor.include_account.include_client.include_receipts
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+  end
+
+  def search
+    if params.has_key?(:client)
+      @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: params[:client])
+      @projects = @projects.include_investor.include_account.include_client.include_receipts
+      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+    elsif params.has_key?(:investors)
+      @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: params[:investor])
+      @projects = @projects.include_investor.include_account.include_client.include_receipts
+      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+    else
+      render json: {
+        data: {
+          errors: ["The key client or investor is required"]
+        }
+      }, status: 500
+    end
   end
 
   def show

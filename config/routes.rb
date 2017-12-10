@@ -34,6 +34,11 @@ Rails.application.routes.draw do
       end
     end
     resources :projects, only: [:create,:update,:destroy,:show,:index] do
+      collection do
+        get 'by-clients', to: "projects#clients"
+        get 'by-investors', to: "projects#investors"
+        get 'search', to: "projects#search"
+      end
       member do
         post 'change-interest', to: "projects#rate"
         post 'add-account', to: "projects#account"
