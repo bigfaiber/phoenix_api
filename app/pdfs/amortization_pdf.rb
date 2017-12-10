@@ -40,7 +40,7 @@ class AmortizationPdf < Prawn::Document
         money_temp = money_temp - payment
         data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","#{price(@project.fee)}","$ #{price(money_temp.round)}"]]
       else
-        data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","#{price(money_temp.round)}","$ 0"]]
+        data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}","#{price(money_temp.round + interest_temp.round)}","$ 0"]]
         money_temp = 0
       end
 

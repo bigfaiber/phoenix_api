@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       @projects = @projects.by_time(time_start: params[:time_start],time_end: params[:time_end])
     end
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects, each_serializer: ProjectSerializer, status: :ok
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
   end
 
   def show
@@ -118,26 +118,31 @@ class ProjectsController < ApplicationController
   end
 
   def account
-    if (@current_client && @current_client.id == @project.client_id) || @current_admin
-      if @project.account
-        @project.account.destroy
-      end
-      @account = Account.new(account_params)
-      if @account.save
-        @project.account_id = @account.id
-        @project.save
-        render json: @project, serializer: ProjectSerializer, status: :ok
+    if @project
+      if (@current_client && @current_client.id == @project.client_id) || @current_admin
+        if @project.account
+          @project.account.destroy
+        end
+        @account = Account.new(account_params)
+        if @account.save
+          @project.account_id = @account.id
+          @project.save
+          render json: @project, serializer: ProjectSerializer, status: :ok
+        else
+          @object = @account
+          error_render
+        end
       else
-        @object = @account
-        error_render
+        render json: {
+          data: {
+            errors: ["The client is not the owner of the project"]
+          }
+        }, status: 401
       end
     else
-      render json: {
-        data: {
-          errors: ["The client is not the owner of the project"]
-        }
-      }, status: 401
+      error_not_found
     end
+
   end
 
   def receipt
@@ -167,6 +172,8 @@ class ProjectsController < ApplicationController
 
   def generate_table
     if @project
+      p @current_client
+      p @project.client.id
       if @current_admin
         pdf = AmortizationPdf.new(@project)
         send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'

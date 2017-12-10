@@ -8,19 +8,19 @@ class InvestorsController < ApplicationController
   def index
     @investors = Investor.load(page: params[:page], per_page: params[:per_page])
     @investors = @investors.include_payment.include_document.include_project
-    render json: @investors, each_serializer: InvestorSerializer, status: :ok
+    render json: @investors, meta: pagination_dict(@investors), each_serializer: InvestorSerializer, status: :ok
   end
 
   def new_investors
     @investors = Investor.load(page: params[:page],per_page: params[:per_page]).new_investors
     @investors = @investors.include_document.include_project.include_payment
-    render json: @investors, each_serializer: InvestorSerializer, status: :ok
+    render json: @investors, meta: pagination_dict(@investors), each_serializer: InvestorSerializer, status: :ok
   end
 
   def old_investors
     @investors = Investor.load(page: params[:page],per_page: params[:per_page]).old_investors
     @investors = @investors.include_payment.include_document.include_project
-    render json: @investors, each_serializer: InvestorSerializer, status: :ok
+    render json: @investors,meta: pagination_dict(@investors), each_serializer: InvestorSerializer, status: :ok
   end
 
   def show

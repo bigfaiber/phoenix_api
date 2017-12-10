@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
 
   private
-  
+
   def set_header
     @type = nil
     if @current_admin
@@ -32,6 +32,16 @@ class ApplicationController < ActionController::API
         errors: ['Not found']
       }
     }, status: 404
+  end
+
+  def pagination_dict(collection)
+  {
+    current_page: collection.current_page,
+    next_page: collection.next_page,
+    prev_page: collection.previous_page , # use collection.previous_page when using will_paginate
+    total_pages: collection.total_pages,
+    total_count: collection.total_entries
+  }
   end
 
 end

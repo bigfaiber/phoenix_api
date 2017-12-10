@@ -36,7 +36,7 @@ class Project < ApplicationRecord
   end
 
   def self.add_receipt(project, params)
-    r = Recipt.new(params)
+    r = Receipt.new(params)
     r.project_id = project
     r.save
   end

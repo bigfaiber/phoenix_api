@@ -7,19 +7,19 @@ class ClientsController < ApplicationController
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def new_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def old_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def show

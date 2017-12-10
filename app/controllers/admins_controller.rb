@@ -1,10 +1,10 @@
 class AdminsController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_admin, only: [:show,:update,:destroy]
+  before_action :set_admin, only: [:show,:update,:destroy,:avatar]
 
   def index
     @admins = Admin.load(page: params[:page], per_page: params[:per_page])
-    render json: @admins, each_serializer: AdminSerializer,status: :ok
+    render json: @admins, each_serializer: AdminSerializer, meta: pagination_dict(@admins),status: :ok
   end
 
   def show
@@ -40,6 +40,15 @@ class AdminsController < ApplicationController
       @admin.destroy
     end
     head :no_content
+  end
+
+  def avatar
+    if @current_admin.update(avatar: params[:avatar])
+      render json: @current_admin, serializer: AdminSerializer, status: :ok
+    else
+      @object = @current_admin
+      error_render
+    end
   end
 
   private

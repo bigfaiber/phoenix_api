@@ -28,7 +28,11 @@ Rails.application.routes.draw do
         post 'upload-document', to: "investors#documents"
       end
     end
-    resources :admins
+    resources :admins do
+      collection do
+        post 'upload-avatar', to: "admins#avatar"
+      end
+    end
     resources :projects, only: [:create,:update,:destroy,:show,:index] do
       member do
         post 'change-interest', to: "projects#rate"
