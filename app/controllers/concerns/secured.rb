@@ -30,6 +30,39 @@ module Secured
 
   end
 
+  def authenticate_admin_or_client_investor!
+    begin
+      obj = auth_token
+      if obj[:type] == "Client"
+        @current_client = Client.by_id(obj[:id])
+        unless @current_client
+          raise JWT::VerificationError
+        end
+        @token = JsonWebToken.encode(playload: {id: @current_client.id,type: @current_client.class.name})
+      elsif obj[:type] == "Admin"
+        @current_admin = Admin.by_id(obj[:id])
+        unless @current_admin
+          raise JWT::VerificationError
+        end
+        @token = JsonWebToken.encode(playload: {id: @current_admin.id,type: @current_admin.class.name})
+      elsif obj[:type] == "Investor"
+        @current_investor = Investor.by_id(obj[:id])
+        unless @current_investor
+          raise JWT::VerificationError
+        end
+        @token = JsonWebToken.encode(playload: {id: @current_investor.id,type: @current_investor.class.name})
+      else
+        raise JWT::VerificationError
+      end
+    rescue JWT::VerificationError, JWT::DecodeError
+      render json: { data: {
+        errors: ['Not authorized']
+        }
+      }, status: :unauthorized
+    end
+
+  end
+
   def authenticate_admin_or_investor!
     begin
       obj = auth_token

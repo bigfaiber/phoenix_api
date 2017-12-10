@@ -3,7 +3,8 @@ class ProjectsController < ApplicationController
   before_action :authenticate_admin_or_client!, only: [:update,:account]
   before_action :authenticate_admin!, only: [:destroy,:rate,:approve,:match]
   before_action :authenticate_investor!, only: [:like]
-  before_action :set_project, only: [:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :set_project, only: [:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
 
   def index
     @projects = Project.load(page: params[:page],per_page: params[:per_page])
@@ -162,6 +163,26 @@ class ProjectsController < ApplicationController
       error_not_found
     end
     head :ok
+  end
+
+  def generate_table
+    if @project
+      if @current_admin
+        pdf = AmortizationPdf.new(@project)
+        send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
+      elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
+        pdf = AmortizationPdf.new(@project)
+        send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
+      else
+        render json: {
+          data: {
+            errors: ["You are not allowed to download this table"]
+          }
+        }, status: :ok
+      end
+    else
+      error_not_found
+    end
   end
 
 

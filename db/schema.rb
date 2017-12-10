@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.integer "employment_status", default: 0, null: false
     t.boolean "terms_and_conditions", default: false
     t.boolean "new_client", default: true
-    t.float "rating"
+    t.float "rating", default: 0.0
     t.text "avatar", default: "0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
