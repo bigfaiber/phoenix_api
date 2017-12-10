@@ -3,4 +3,5 @@ class ClientSerializer < ActiveModel::Serializer
   has_many :vehicles
   has_many :estates
   has_many :documents
+  has_many :projects
 end

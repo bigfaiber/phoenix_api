@@ -17,7 +17,7 @@ class CreateInvestors < ActiveRecord::Migration[5.1]
       t.boolean :rent_tax, default: false
       t.boolean :terms_and_conditions, default: false
       t.text :avatar
-      t.boolean :new, default: true
+      t.boolean :new_investor, default: true
 
       t.timestamps
     end

@@ -7,6 +7,6 @@ class CreateMatches < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :matches, [:project_id,:investor_id]
+    add_index :matches, [:project_id,:investor_id], unique: true
   end
 end

@@ -20,7 +20,7 @@ class CreateClients < ActiveRecord::Migration[5.1]
       t.boolean :rent_tax, default: false
       t.integer :employment_status, null: false, default: 0
       t.boolean :terms_and_conditions, default: false
-      t.boolean :new, default: true
+      t.boolean :new_client, default: true
       t.text :avatar
 
       t.timestamps

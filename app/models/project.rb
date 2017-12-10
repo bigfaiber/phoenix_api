@@ -1,4 +1,7 @@
 class Project < ApplicationRecord
+  before_save :update_fee
+  before_update :update_fee
+
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
   belongs_to :client
@@ -28,6 +31,14 @@ class Project < ApplicationRecord
   end
 
   private
+  def update_fee
+    interest = self.interest_rate/100.0
+    value = 1+interest
+    partial_fee = self.money * ((interest * value**month)/((value**month) -1))
+    partial_fee = (partial_fee / 5000.0).round
+    partial_fee = partial_fee * 5000
+    self.fee = partial_fee
+  end
   def validate_number
     errors.add(:money, "can't be negative") if self.money && self.money < 0
     errors.add(:monthly_payment, "can't be negative") if self.monthly_payment && self.monthly_payment < 0

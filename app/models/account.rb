@@ -1,9 +1,9 @@
 class Account < ApplicationRecord
 
-  enum account_types: [
+  enum account_type: {
     "Ahorros": 0,
     "Corriente": 1
-  ]
+  }
 
   validates_presence_of :bank,:account_number
   validates_inclusion_of :account_type, in: account_types.keys
