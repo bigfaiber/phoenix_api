@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "bank", null: false
-    t.integer "account_type", default: 0, null: false
+    t.bigint "account_type", default: 0, null: false
     t.integer "account_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.boolean "rent_tax", default: false
     t.integer "employment_status", default: 0, null: false
     t.boolean "terms_and_conditions", default: false
-    t.boolean "new", default: true
+    t.boolean "new_client", default: true
     t.text "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.boolean "rent_tax", default: false
     t.boolean "terms_and_conditions", default: false
     t.text "avatar"
-    t.boolean "new", default: true
+    t.boolean "new_investor", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["investor_id"], name: "index_matches_on_investor_id"
-    t.index ["project_id", "investor_id"], name: "index_matches_on_project_id_and_investor_id"
+    t.index ["project_id", "investor_id"], name: "index_matches_on_project_id_and_investor_id", unique: true
     t.index ["project_id"], name: "index_matches_on_project_id"
   end
 

@@ -11,4 +11,17 @@ class ClientMailer < ApplicationMailer
     @pass = password
     mail(to: email, subject: 'Welcome to Phoenix')
   end
+
+  def project_approved(email)
+    @email = email
+    mail(to: email, subject: 'Project approved')
+  end
+
+  def clinet_match(email)
+    mail(to: email, subject: 'Match')
+  end
+
+  def investor_match(email)
+    mail(to: email, subject: 'Match')
+  end
 end

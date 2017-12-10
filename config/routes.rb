@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       end
     end
     resources :investors do
+      resources :projects, only: [] do
+        member do
+          post 'match', to: "projects#match"
+        end
+      end
       collection do
         get 'verification', to: "investors#verification"
         post 'upload-avatar', to: "investors#avatar"
@@ -23,6 +28,8 @@ Rails.application.routes.draw do
       member do
         post 'change-interest', to: "projects#rate"
         post 'add-account', to: "projects#account"
+        post 'approve-project', to: "projects#approve"
+        post 'like', to: "projects#like"
       end
     end
   end
