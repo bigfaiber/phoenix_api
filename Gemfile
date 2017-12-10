@@ -53,3 +53,6 @@ gem 'mini_magick'
 gem 'active_model_serializers', '~> 0.10.0'
 #SMS
 gem 'twilio-ruby'
+#pdf
+gem 'prawn'
+gem 'prawn-table'

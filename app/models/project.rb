@@ -15,6 +15,11 @@ class Project < ApplicationRecord
   scope :include_receipts, -> { includes(:receipts )}
   scope :by_investor, -> (id:) { where(investor_id: id) }
   scope :by_account, -> (id:) { where(account_id: id) }
+  scope :by_price, -> (price_start:,price_end:) { where(money: price_start..price_end) }
+  scope :by_interest, -> (interest_start:,interest_end:) { where(interest_rate: interest_start..interest_end) }
+  scope :by_time, -> (time_start:,time_end:) { where(month: time_start..time_end) }
+
+
 
 
   validates_presence_of :dream, :description,:money,:monthly_payment,:month
@@ -28,6 +33,12 @@ class Project < ApplicationRecord
 
   def self.by_id(id)
     find_by_id(id)
+  end
+
+  def self.add_receipt(project, params)
+    r = Recipt.new(params)
+    r.project_id = project
+    r.save
   end
 
   private

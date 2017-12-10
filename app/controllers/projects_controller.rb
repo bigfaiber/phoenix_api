@@ -1,9 +1,25 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_client!, only: [:create]
+  before_action :authenticate_client!, only: [:create,:receipt]
   before_action :authenticate_admin_or_client!, only: [:update,:account]
   before_action :authenticate_admin!, only: [:destroy,:rate,:approve,:match]
   before_action :authenticate_investor!, only: [:like]
-  before_action :set_project, only: [:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :set_project, only: [:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
+
+  def index
+    @projects = Project.load(page: params[:page],per_page: params[:per_page])
+    if params.has_key?(:price_start) && params.has_key?(:price_end)
+      @projects = @projects.by_price(price_start: params[:price_start],price_end: params[:price_end])
+    end
+    if params.has_key?(:interest_start) && params.has_key?(:interest_end)
+      @projects = @projects.by_interest(interest_start: params[:interest_start],interest_end: params[:interest_end])
+    end
+    if params.has_key?(:time_start) && params.has_key?(:time_end)
+      @projects = @projects.by_time(time_start: params[:time_start],time_end: params[:time_end])
+    end
+    @projects = @projects.include_investor.include_account.include_client.include_receipts
+    render json: @projects, each_serializer: ProjectSerializer, status: :ok
+  end
 
   def show
     if @project
@@ -124,6 +140,51 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def receipt
+    if @project
+      if @current_client.id == @project.client.id
+        if Project.add_receipt(@project.id,receipt_params)
+          head :ok
+        else
+          render json: {
+            data: {
+              errors: ["We can't add the receipt"]
+            }
+          }, status: 500
+        end
+      else
+        render json: {
+          data: {
+            errors: ["This project doesn't belongs you"]
+          }
+        }, status: 500
+      end
+    else
+      error_not_found
+    end
+    head :ok
+  end
+
+  def generate_table
+    if @project
+      if @current_admin
+        pdf = AmortizationPdf.new(@project)
+        send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
+      elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
+        pdf = AmortizationPdf.new(@project)
+        send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
+      else
+        render json: {
+          data: {
+            errors: ["You are not allowed to download this table"]
+          }
+        }, status: :ok
+      end
+    else
+      error_not_found
+    end
+  end
+
 
   private
   def set_project
@@ -132,6 +193,10 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month)
+  end
+
+  def receipt_params
+    params.require(:receipt).permit(:month,:year,:receipt)
   end
 
   def account_params

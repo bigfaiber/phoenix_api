@@ -1,11 +1,23 @@
 class ClientsController < ApplicationController
-  before_action :authenticate_admin!, only: [:destroy]
+  before_action :authenticate_admin!, only: [:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
   before_action :authenticate_client!, only: [:verification,:avatar,:goods,:documents]
   before_action :set_client, only: [:show,:update,:destroy,:show]
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    render json: @clients, each_serializer: ClientSerializer, status: :ok
+  end
+
+  def new_clients
+    @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    render json: @clients, each_serializer: ClientSerializer, status: :ok
+  end
+
+  def old_clients
+    @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
     render json: @clients, each_serializer: ClientSerializer, status: :ok
   end
@@ -97,7 +109,7 @@ class ClientsController < ApplicationController
 
   private
   def client_params
-    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions)
+    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:rating)
   end
   def set_client
     @client = Client.by_id(params[:id])
