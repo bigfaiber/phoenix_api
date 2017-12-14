@@ -86,4 +86,4 @@ production:
   <<: *default
   database: phoenix_production
   username: phoenix
-  password: <%= ENV['PHOENIX_DATABASE_PASSWORD'] %>
+  password: 0123456789
