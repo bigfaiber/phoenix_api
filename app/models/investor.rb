@@ -5,7 +5,7 @@ class Investor < ApplicationRecord
   has_one :payment, dependent: :destroy
   has_many :documents, as: :imageable, dependent: :destroy
   has_many :matches, dependent: :destroy
-  has_many :projects, -> { where("matches.approved = ?", true) } ,through: :matches
+  has_many :projects, -> {where(matches: {approved: true})} ,through: :matches
 
   scope :new_investors, -> { where(new_investor: true) }
   scope :old_investors, -> { where(new_investor: false) }

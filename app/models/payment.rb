@@ -2,10 +2,10 @@ class Payment < ApplicationRecord
 
   scope :by_investor, -> (id:) { where(investor_id: id) }
 
-  enum payment_type: [
+  enum payment_type: {
     "Tarjeta de credito": 0,
     "Tarjeta de debito": 1
-  ]
+  }
 
   enum card_type: [
     "Credito": 0,

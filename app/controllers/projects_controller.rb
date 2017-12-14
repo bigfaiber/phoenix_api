@@ -123,15 +123,17 @@ class ProjectsController < ApplicationController
     if @project
       @investor = Investor.by_id(params[:investor_id])
       if @investor
-        @investor.new_investor = true
+        @investor.new_investor = false
         @investor.save
         @client = @project.client
-        @client.new_client = true
+        @client.new_client = false
         @client.save
         m = Match.by_project_and_investor(@project.id,@investor.id)
         if m
           m.approved = true
           m.save
+          @project.investor_id = @investor.id
+          @project.save
           ClientMailer.investor_match(@investor.email).deliver_later
           ClientMailer.clinet_match(@client.email).deliver_later
           Match.delete_not_approved(@project.id)
@@ -202,8 +204,6 @@ class ProjectsController < ApplicationController
 
   def generate_table
     if @project
-      p @current_client
-      p @project.client.id
       if @current_admin
         pdf = AmortizationPdf.new(@project)
         send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
