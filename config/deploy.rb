@@ -2,7 +2,7 @@
 lock "3.9.1"
 
 # Change these
-server '35.196.251.3', port: 22, roles: [:web, :app]
+server '35.196.251.3', port: 22, roles: [:web, :app], primary: true
 server '35.185.111.46', port: 22, roles: [:db], primary: true
 
 
@@ -11,6 +11,8 @@ set :application,     'phoenix'
 set :user,            'agutierrezt'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
+set :migration_role, :db
+
 
 # Don't change these unless you know what you're doing
 set :pty,             true
