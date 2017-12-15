@@ -108,7 +108,7 @@ class Client < ApplicationRecord
   end
 
   def valid_rating
-    errors.add(:rating,"is not valid") if self.rating && self.rating < 0 && self.tating <= 5 
+    errors.add(:rating,"is not valid") if self.rating && (self.rating < 0 || self.rating > 5) 
 
   end
 end
