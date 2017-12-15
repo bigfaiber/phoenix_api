@@ -38,6 +38,7 @@ module Phoenix
         :methods => [:get,:post,:options,:delete,:put,:patch,:head]
       end
     end
+    config.enable_dependency_loading = true
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths += %W(#{config.root}/app/pdfs)
 

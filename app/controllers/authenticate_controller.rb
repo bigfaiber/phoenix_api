@@ -14,5 +14,5 @@ class AuthenticateController < ApplicationController
       }, status: :unauthorized
     end
   end
-  
+
 end
