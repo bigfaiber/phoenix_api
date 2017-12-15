@@ -35,10 +35,10 @@ class AmortizationPdf < Prawn::Document
     while is_creating
       period = period + 1
       interest_temp = (@project.interest_rate/100.0)*money_temp
-      payment = @project.fee - interest_temp
-      if money_temp >= @project.fee
+      payment = @project.monthly_payment - interest_temp
+      if money_temp >= @project.monthly_payment
         money_temp = money_temp - payment
-        data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","#{price(@project.fee)}","$ #{price(money_temp.round)}"]]
+        data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","#{price(@project.monthly_payment)}","$ #{price(money_temp.round)}"]]
       else
         data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}","#{price(money_temp.round + interest_temp.round)}","$ 0"]]
         money_temp = 0

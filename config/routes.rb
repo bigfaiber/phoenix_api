@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/login',  to: "authenticate#login"
       resources :clients do
         collection do
+          get 'new-code', to: "clients#new_verification_code"
           get 'new-clients', to: "clients#new_clients"
           get 'old-clients', to: "clients#old_clients"
           get 'verification', to: "clients#verification"
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
           end
         end
         collection do
+          get 'new-code', to: "investors#new_verification_code"
           get 'new-investors', to: "investors#new_investors"
           get 'old-investors', to: "investors#old_investors"
           get 'verification', to: "investors#verification"

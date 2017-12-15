@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
-  before_action :authenticate_client!, only: [:verification,:avatar,:goods,:documents]
+  before_action :authenticate_client!, only: [:verification,:avatar,:goods,:documents,:new_verification_code]
   before_action :set_client, only: [:show,:update,:destroy,:show]
 
   def index
@@ -43,7 +43,11 @@ class ClientsController < ApplicationController
         @client.code = code
         @client.save
       rescue Twilio::REST::TwilioError => error
-        p error.message
+        ender json: {
+          data: {
+            errors: ["We can't send the code"]
+          }
+        }, status: 500
       end
       @client = @client
       render json: @client, serializer: ClientSerializer, status: :created
@@ -80,6 +84,22 @@ class ClientsController < ApplicationController
         }
       },status: 500
     end
+  end
+
+  def new_verification_code
+    begin
+      code = SecureRandom.uuid[0..7]
+      MessageSender.send_message(code,params[:client][:phone])
+      @current_client.code = code
+      @current_client.save
+    rescue Twilio::REST::TwilioError => error
+      render json: {
+        data: {
+          errors: ["We can't send the code"]
+        }
+      }, status: 500
+    end
+    head :ok
   end
 
   def goods

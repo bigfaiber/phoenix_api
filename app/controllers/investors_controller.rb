@@ -2,7 +2,7 @@ class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show,:update,:destroy]
   before_action :authenticate_admin_or_investor!, only: [:update]
   before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors]
-  before_action :authenticate_investor!, only: [:verification,:avatar,:payment,:documents]
+  before_action :authenticate_investor!, only: [:verification,:avatar,:payment,:documents,:new_verification_code]
 
 
   def index
@@ -83,6 +83,22 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def new_verification_code
+    begin
+      code = SecureRandom.uuid[0..7]
+      MessageSender.send_message(code,params[:client][:phone])
+      @current_investor.code = code
+      @current_investor.save
+    rescue Twilio::REST::TwilioError => error
+      render json: {
+        data: {
+          errors: ["We can't send the code"]
+        }
+      }, status: 500
+    end
+    head :ok
+  end
+
   def avatar
     if @current_investor.update(avatar: params[:avatar])
       render json: @current_investor, serializer: InvestorSerializer, status: :ok
@@ -111,7 +127,7 @@ class InvestorsController < ApplicationController
 
   private
   def investor_params
-    params.require(:investor).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions)
+    params.require(:investor).permit(:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions)
   end
 
   def payment_params

@@ -1,5 +1,5 @@
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id,:dream,:description,:money,:warranty,:monthly_payment,:fee,:month,:interest_rate,:approved
+  attributes :id,:dream,:description,:money,:warranty,:monthly_payment,:month,:interest_rate,:approved
   has_many :receipts
   belongs_to :investor
   belongs_to :account

@@ -18,6 +18,10 @@ class CreateInvestors < ActiveRecord::Migration[5.1]
       t.boolean :terms_and_conditions, default: false
       t.text :avatar
       t.boolean :new_investor, default: true
+      t.integer :money_invest, null: false
+      t.integer :month, null: false, default: 1
+      t.integer :monthly_payment, null: false
+      t.integer :profitability, null: false 
 
       t.timestamps
     end

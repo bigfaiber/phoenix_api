@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  before_save :update_fee
-  before_update :update_fee
+  #before_save :update_fee
+  #before_update :update_fee
 
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
@@ -19,8 +19,6 @@ class Project < ApplicationRecord
   scope :by_price, -> (price_start:,price_end:) { where(money: price_start..price_end) }
   scope :by_interest, -> (interest_start:,interest_end:) { where(interest_rate: interest_start..interest_end) }
   scope :by_time, -> (time_start:,time_end:) { where(month: time_start..time_end) }
-
-
 
 
   validates_presence_of :dream, :description,:money,:monthly_payment,:month
@@ -43,14 +41,14 @@ class Project < ApplicationRecord
   end
 
   private
-  def update_fee
-    interest = self.interest_rate/100.0
-    value = 1+interest
-    partial_fee = self.money * ((interest * value**month)/((value**month) -1))
-    partial_fee = (partial_fee / 5000.0).round
-    partial_fee = partial_fee * 5000
-    self.fee = partial_fee
-  end
+  #def update_fee
+  #  interest = self.interest_rate/100.0
+  #  value = 1+interest
+  #  partial_fee = self.money * ((interest * value**month)/((value**month) -1))
+  #  partial_fee = (partial_fee / 5000.0).round
+  #  partial_fee = partial_fee * 5000
+  #  self.fee = partial_fee
+  #end
   def validate_number
     errors.add(:money, "can't be negative") if self.money && self.money < 0
     errors.add(:monthly_payment, "can't be negative") if self.monthly_payment && self.monthly_payment < 0

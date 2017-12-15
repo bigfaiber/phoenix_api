@@ -22,7 +22,7 @@ class CreateClients < ActiveRecord::Migration[5.1]
       t.boolean :terms_and_conditions, default: false
       t.boolean :new_client, default: true
       t.float :rating, default: 0
-      t.text :avatar, default: 0
+      t.text :avatar
 
       t.timestamps
     end
