@@ -2,7 +2,7 @@
 lock "3.9.1"
 
 # Change these
-server '35.196.251.3', port: 22, roles: [:web, :app], primary: true
+server '35.196.251.3', port: 22, roles: [:web, :app]
 server '35.185.111.46', port: 22, roles: [:db], primary: true
 
 
