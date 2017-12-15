@@ -86,5 +86,5 @@ production:
   <<: *default
   database: phoenix_production
   username: phoenix
-  host: 35.185.111.46 
+  #host: 35.185.111.46 
   password: 0123456789
