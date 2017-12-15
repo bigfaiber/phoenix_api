@@ -2,8 +2,7 @@
 lock "3.9.1"
 
 # Change these
-server '35.196.251.3', port: 22, roles: [:web, :app], primary: true
-server '35.227.37.83', port: 22, roles: [:db], primary: true
+server '35.196.251.3', port: 22, roles: [:web, :app, :db], primary: true
 
 
 set :repo_url,        'git@bitbucket.org:slabcode/phoenix_api.git'
@@ -32,7 +31,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Defaults:
 # set :scm,           :git
-set :branch,        "feature/deploy"
+set :branch,        :develop
 set :format,        :pretty
 set :log_level,     :debug
 set :keep_releases, 5
@@ -57,7 +56,7 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/feature/deploy`
+      unless `git rev-parse HEAD` == `git rev-parse origin/develop`
         puts "WARNING: HEAD is not the same as origin/master"
         puts "Run `git push` to sync changes."
         exit
