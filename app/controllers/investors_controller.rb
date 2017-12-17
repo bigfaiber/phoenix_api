@@ -2,7 +2,7 @@ class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show,:update,:destroy]
   before_action :authenticate_admin_or_investor!, only: [:update]
   before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors]
-  before_action :authenticate_investor!, only: [:verification,:avatar,:payment,:documents,:new_verification_code]
+  before_action :authenticate_investor!, only: [:token,:verification,:avatar,:payment,:documents,:new_verification_code]
 
 
   def index
@@ -29,6 +29,10 @@ class InvestorsController < ApplicationController
     else
       error_not_found
     end
+  end
+
+  def token
+    render json: @current_investor, serializer: InvestorSerializer, status: :ok
   end
 
   def create

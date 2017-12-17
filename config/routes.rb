@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/login',  to: "authenticate#login"
       resources :clients do
         collection do
+          get 'by-token', to: "clients#token"
           get 'new-code', to: "clients#new_verification_code"
           get 'new-clients', to: "clients#new_clients"
           get 'old-clients', to: "clients#old_clients"
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
           end
         end
         collection do
+          get 'by-token', to: "investors#token"
           get 'new-code', to: "investors#new_verification_code"
           get 'new-investors', to: "investors#new_investors"
           get 'old-investors', to: "investors#old_investors"
@@ -33,6 +35,7 @@ Rails.application.routes.draw do
       end
       resources :admins do
         collection do
+          get 'by-token', to: "admins#token"
           post 'upload-avatar', to: "admins#avatar"
         end
       end

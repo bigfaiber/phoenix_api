@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
-  before_action :authenticate_client!, only: [:verification,:avatar,:goods,:documents,:new_verification_code]
+  before_action :authenticate_client!, only: [:token,:verification,:avatar,:goods,:documents,:new_verification_code]
   before_action :set_client, only: [:show,:update,:destroy,:show]
 
   def index
@@ -28,6 +28,10 @@ class ClientsController < ApplicationController
     else
       error_not_found
     end
+  end
+
+  def token
+    render json: @current_client, serializer: ClientSerializer, status: :ok
   end
 
   def create

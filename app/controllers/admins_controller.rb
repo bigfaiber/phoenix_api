@@ -15,6 +15,10 @@ class AdminsController < ApplicationController
     end
   end
 
+  def token
+    render json: @current_admin, serializer: AdminSerializer
+  end
+
   def create
     @admin = Admin.new(admin_params)
     if @admin.save
