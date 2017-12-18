@@ -90,7 +90,7 @@ class InvestorsController < ApplicationController
   def new_verification_code
     begin
       code = SecureRandom.uuid[0..7]
-      MessageSender.send_message(code,params[:client][:phone])
+      MessageSender.send_message(code,@current_investor.phone)
       @current_investor.code = code
       @current_investor.save
     rescue Twilio::REST::TwilioError => error
