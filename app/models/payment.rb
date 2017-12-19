@@ -16,8 +16,8 @@ class Payment < ApplicationRecord
   validates_presence_of :name,:lastname,:card_number,:month,:year
   validates_inclusion_of :payment_type, in: payment_types.keys
   validates_inclusion_of :card_type, in: card_types.keys
-  validates_length_of :cvv, minimum: 3, maximum: 3, if: :is_credit?
-  validates_numericality_of :cvv, only_integer: true, if: :is_credit?
+  validates_length_of :ccv, minimum: 3, maximum: 3, if: :is_credit?
+  validates_numericality_of :ccv, only_integer: true, if: :is_credit?
   validates_length_of :card_number, minimum: 8
   validates_numericality_of :card_number, only_integer: true
   validate :valid_card
