@@ -34,7 +34,7 @@ module Phoenix
         origins "*"
         resource "*",
         :headers => :any,
-        :expose => :any,
+        :expose => ['token','token-type'],
         :methods => [:get,:post,:options,:delete,:put,:patch,:head]
       end
     end
