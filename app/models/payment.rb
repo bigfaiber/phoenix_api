@@ -7,11 +7,11 @@ class Payment < ApplicationRecord
     "Tarjeta de debito": 1
   }
 
-  enum card_type: [
+  enum card_type: {
     "Credito": 0,
     "Ahorros": 1,
     "Corriente": 2
-  ]
+  }
 
   validates_presence_of :name,:lastname,:card_number,:month,:year
   validates_inclusion_of :payment_type, in: payment_types.keys
