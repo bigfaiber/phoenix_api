@@ -17,4 +17,5 @@ class Match < ApplicationRecord
   def self.load(page: 1, per_page: 10)
     where(approved: false).paginate(page: page, per_page: per_page).order("created_at DESC")
   end
+
 end

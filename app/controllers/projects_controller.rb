@@ -105,7 +105,9 @@ class ProjectsController < ApplicationController
   def like
     if @project
       if @project.approved
-        Match.new(project_id: @project.id,investor_id: @current_investor.id).save
+        unless Match.by_project_and_investor(@project.id,@current_investor.id)
+          Match.new(project_id: @project.id,investor_id: @current_investor.id).save
+        end
         head :ok
       else
         render json: {
