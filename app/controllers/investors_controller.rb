@@ -129,6 +129,46 @@ class InvestorsController < ApplicationController
     head :ok
   end
 
+  def reset
+    investor = Investor.by_email(params[:email])
+    if investor
+      investor.token = SecureRandom.uuid
+      investor.save
+      ClientMailer.new_password(investor, investor.token).deliver_later
+      render json: {data: {
+        message: 'We have sent an email with the instructioins'
+        }}, status: :ok
+    else
+      render json: {data: {
+        errors: ["We don't have a client with that email"]
+        }}, status: 500
+    end
+  end
+
+  def new_password
+    investor = Investor.by_email(params[:email])
+    if investor
+      if investor.token == params[:token]
+        investor.password = params[:password]
+        investor.password_confirmation =  params[:password_confirmation]
+        investor.token = nil
+        investor.save
+        ClientMailer.new_password_confirmation(params[:email],params[:password]).deliver_later
+        render json: {data: {
+          message: 'We have sent an email the confirmation'
+          }}, status: :ok
+      else
+        render json: {data: {
+          errors: ["The tokens doesn't match"]
+          }}, status: 500
+      end
+    else
+      render json: {data: {
+        errors: ["We don't have a client with that email"]
+        }}, status: 500
+    end
+  end
+
   private
   def investor_params
     params.require(:investor).permit(:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions)
