@@ -2,6 +2,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage :file
+  process resize_to_fill: [450, 320]
+
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/avatars/#{mounted_as}/#{model.id}"

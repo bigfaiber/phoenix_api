@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
-  before_action :authenticate_client!, only: [:token,:verification,:avatar,:goods,:documents,:new_verification_code]
+  before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:goods,:documents,:new_verification_code]
   before_action :set_client, only: [:show,:update,:destroy,:show]
 
   def index
@@ -34,13 +34,53 @@ class ClientsController < ApplicationController
     render json: @current_client, serializer: ClientSerializer, status: :ok
   end
 
+  def reset
+    client = Client.by_email(params[:email])
+    if client
+      client.token = SecureRandom.uuid
+      client.save
+      ClientMailer.new_password(client, client.token).deliver_later
+      render json: {data: {
+        message: 'We have sent an email with the instructioins'
+        }}, status: :ok
+    else
+      render json: {data: {
+        errors: ["We don't have a client with that email"]
+        }}, status: 500
+    end
+  end
+
+  def new_password
+    client = Client.by_email(params[:email])
+    if client
+      if client.token == params[:token]
+        client.password = params[:password]
+        client.password_confirmation =  params[:password_confirmation]
+        client.token = nil
+        client.save
+        ClientMailer.new_password_confirmation(params[:email],params[:password]).deliver_later
+        render json: {data: {
+          message: 'We have sent an email the confirmation'
+          }}, status: :ok
+      else
+        render json: {data: {
+          errors: ["The tokens doesn't match"]
+          }}, status: 500
+      end
+    else
+      render json: {data: {
+        errors: ["We don't have a client with that email"]
+        }}, status: 500
+    end
+  end
+
   def create
     @client = Client.new(client_params)
     if @client.save
       command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
       @current_client = @client
       @token = command.result
-      ClientMailer.welcome(@client).deliver_later
+      #ClientMailer.welcome(@client).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
         MessageSender.send_message(code,params[:client][:phone])
@@ -72,6 +112,11 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy!
+    head :no_content
+  end
+
+  def end_sign_up
+    ClientMailer.welcome(@current_client).deliver_later
     head :no_content
   end
 

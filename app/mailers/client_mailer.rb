@@ -24,4 +24,15 @@ class ClientMailer < ApplicationMailer
   def investor_match(email)
     mail(to: email, subject: 'Match')
   end
+
+  def new_password(resource, token)
+    @resource = resource
+    @token = token
+    mail(to: resource.email, subject: 'Reset password')
+  end
+
+  def new_password_confirmation(email, pass)
+    @pass = pass
+    mail(to: email, subject: 'New password')
+  end
 end
