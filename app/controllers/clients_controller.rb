@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
-  before_action :authenticate_client!, only: [:token,:verification,:avatar,:goods,:documents,:new_verification_code]
+  before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:goods,:documents,:new_verification_code]
   before_action :set_client, only: [:show,:update,:destroy,:show]
 
   def index
@@ -80,7 +80,7 @@ class ClientsController < ApplicationController
       command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
       @current_client = @client
       @token = command.result
-      ClientMailer.welcome(@client).deliver_later
+      #ClientMailer.welcome(@client).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
         MessageSender.send_message(code,params[:client][:phone])
@@ -112,6 +112,11 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy!
+    head :no_content
+  end
+
+  def end_sign_up
+    ClientMailer.welcome(@current_client).deliver_later
     head :no_content
   end
 

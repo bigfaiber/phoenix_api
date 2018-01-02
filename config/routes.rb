@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/login',  to: "authenticate#login"
       resources :clients do
         collection do
+          get 'end-sign-up', to: "clients#end_sign_up"
           get 'reset-password', to: "clients#reset"
           post 'new-password', to: "clients#new_password"
           get 'by-token', to: "clients#token"
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
           end
         end
         collection do
+          get 'end-sign-up', to: "investors#end_sign_up"
           get 'reset-password', to: "investors#reset"
           post 'new-password', to: "investors#new_password"
           get 'by-token', to: "investors#token"

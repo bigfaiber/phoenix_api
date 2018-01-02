@@ -2,7 +2,7 @@ class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show,:update,:destroy]
   before_action :authenticate_admin_or_investor!, only: [:update]
   before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors]
-  before_action :authenticate_investor!, only: [:token,:verification,:avatar,:payment,:documents,:new_verification_code]
+  before_action :authenticate_investor!, only: [:end_sign_up,:token,:verification,:avatar,:payment,:documents,:new_verification_code]
 
 
   def index
@@ -41,7 +41,7 @@ class InvestorsController < ApplicationController
       command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
       @current_investor = @investor
       @token = command.result
-      ClientMailer.welcome(@investor).deliver_later
+      #ClientMailer.welcome(@investor).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
         MessageSender.send_message(code,params[:investor][:phone])
@@ -101,6 +101,11 @@ class InvestorsController < ApplicationController
       }, status: 500
     end
     head :ok
+  end
+
+  def end_sign_up
+    ClientMailer.welcome(@current_investor).deliver_later
+    head :no_content
   end
 
   def avatar
