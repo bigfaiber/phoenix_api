@@ -34,6 +34,46 @@ class ClientsController < ApplicationController
     render json: @current_client, serializer: ClientSerializer, status: :ok
   end
 
+  def reset
+    client = Client.by_email(params[:email])
+    if client
+      client.token = SecureRandom.uuid
+      client.save
+      ClientMailer.new_password(client, client.token).deliver_later
+      render json: {data: {
+        message: 'We have sent an email with the instructioins'
+        }}, status: :ok
+    else
+      render json: {data: {
+        errors: ["We don't have a client with that email"]
+        }}, status: 500
+    end
+  end
+
+  def new_password
+    client = Client.by_email(params[:email])
+    if client
+      if client.token == params[:token]
+        client.password = params[:password]
+        client.password_confirmation =  params[:password_confirmation]
+        client.token = nil
+        client.save
+        ClientMailer.new_password_confirmation(params[:email],params[:password]).deliver_later
+        render json: {data: {
+          message: 'We have sent an email the confirmation'
+          }}, status: :ok
+      else
+        render json: {data: {
+          errors: ["The tokens doesn't match"]
+          }}, status: 500
+      end
+    else
+      render json: {data: {
+        errors: ["We don't have a client with that email"]
+        }}, status: 500
+    end
+  end
+
   def create
     @client = Client.new(client_params)
     if @client.save

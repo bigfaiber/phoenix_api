@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171209024314) do
+ActiveRecord::Schema.define(version: 20180102181941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.text "avatar", default: "0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "token"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(version: 20171209024314) do
     t.boolean "new_investor", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "token"
   end
 
   create_table "matches", force: :cascade do |t|

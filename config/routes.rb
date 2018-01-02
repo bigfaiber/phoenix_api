@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       post '/login',  to: "authenticate#login"
       resources :clients do
         collection do
+          get 'reset-password', to: "clients#reset"
+          post 'new-password', to: "clients#new_password"
           get 'by-token', to: "clients#token"
           get 'new-code', to: "clients#new_verification_code"
           get 'new-clients', to: "clients#new_clients"
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
           end
         end
         collection do
+          get 'reset-password', to: "investors#reset"
+          post 'new-password', to: "investors#new_password"
           get 'by-token', to: "investors#token"
           get 'new-code', to: "investors#new_verification_code"
           get 'new-investors', to: "investors#new_investors"
