@@ -2,7 +2,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   storage :file
-  process resize_to_fill: [450, 320]
+  process resize_to_fill: [450, 450]
 
 
   def store_dir
