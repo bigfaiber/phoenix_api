@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20180102181941) do
     t.boolean "terms_and_conditions", default: false
     t.boolean "new_client", default: true
     t.float "rating", default: 0.0
-    t.text "avatar", default: "0"
+    t.text "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "token"
@@ -98,6 +98,10 @@ ActiveRecord::Schema.define(version: 20180102181941) do
     t.boolean "terms_and_conditions", default: false
     t.text "avatar"
     t.boolean "new_investor", default: true
+    t.integer "money_invest", null: false
+    t.integer "month", default: 1, null: false
+    t.integer "monthly_payment", null: false
+    t.integer "profitability", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "token"
@@ -135,7 +139,6 @@ ActiveRecord::Schema.define(version: 20180102181941) do
     t.integer "money", null: false
     t.integer "monthly_payment", null: false
     t.integer "month", null: false
-    t.float "fee", default: 0.0, null: false
     t.boolean "approved", default: false
     t.string "warranty", default: "", null: false
     t.float "interest_rate", default: 1.5, null: false
