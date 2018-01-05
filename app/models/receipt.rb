@@ -42,7 +42,7 @@ class Receipt < ApplicationRecord
     if p && p.initial_payment
       if p.initial_payment.year > self.year
         errors.add(:year, "can't be less than initial payment year")
-      elsif p.initial_payment.year == self.year && p.initial_payment.month > Receipt.months[self.month]
+      elsif p.initial_payment.year == self.year && p.initial_payment.month >= Receipt.months[self.month]
         errors.add(:month, "can't be less than initial payment month")
       end
     end
