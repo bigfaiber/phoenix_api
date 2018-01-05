@@ -8,6 +8,7 @@ class Account < ApplicationRecord
   validates_presence_of :bank,:account_number
   validates_inclusion_of :account_type, in: account_types.keys
   validates_numericality_of :account_number, only_integer: true
+  validates_length_of :account_number, minimum: 6, maximum: 14
 
   def load(page: 1, per_page: 10)
     paginate(page: 1, per_page: 10)

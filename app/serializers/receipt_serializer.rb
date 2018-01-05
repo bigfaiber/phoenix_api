@@ -1,3 +1,3 @@
 class ReceiptSerializer < ActiveModel::Serializer
-  attributes :id,:month,:year,:receipt
+  attributes :id,:year,:month,:day,:receipt
 end
