@@ -32,7 +32,7 @@ class InvestorsController < ApplicationController
   end
 
   def token
-    render json: @current_investor, serializer: InvestorSerializer, include: 'projects.client, projects.account', status: :ok
+    render json: @current_investor, serializer: InvestorSerializer, include: ['projects.client', 'projects.account'], status: :ok
   end
 
   def create
