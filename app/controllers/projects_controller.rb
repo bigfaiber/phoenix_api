@@ -201,7 +201,6 @@ class ProjectsController < ApplicationController
     else
       error_not_found
     end
-    head :ok
   end
 
   def generate_table
