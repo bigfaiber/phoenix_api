@@ -147,7 +147,7 @@ ActiveRecord::Schema.define(version: 20180105213427) do
     t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "initial_payment", null: false
+    t.date "initial_payment"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["investor_id"], name: "index_projects_on_investor_id"
