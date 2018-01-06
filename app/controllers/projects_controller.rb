@@ -205,7 +205,13 @@ class ProjectsController < ApplicationController
 
   def generate_table
     if @project
-      if @current_admin
+      if @project.initial_payment == nil
+        render json: {
+          data: {
+            errors: ["The project doesn't have a date for the initial payment"]
+          }
+        }, status: 500
+      elsif @current_admin
         pdf = AmortizationPdf.new(@project)
         send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
       elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
@@ -216,7 +222,7 @@ class ProjectsController < ApplicationController
           data: {
             errors: ["You are not allowed to download this table"]
           }
-        }, status: :ok
+        }, status: 500
       end
     else
       error_not_found
