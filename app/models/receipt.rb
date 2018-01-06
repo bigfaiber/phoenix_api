@@ -39,10 +39,12 @@ class Receipt < ApplicationRecord
 
   def valid_date
     p = Project.by_id(self.project_id)
+    r = p.receipts.count + 1
     if p && p.initial_payment
-      if p.initial_payment.year > self.year
+      date = p.initial_payment + r.month
+      if date.year > self.year
         errors.add(:year, "can't be less than initial payment year")
-      elsif p.initial_payment.year == self.year && p.initial_payment.month >= Receipt.months[self.month]
+      elsif date.year == self.year && date.month != Receipt.months[self.month]
         errors.add(:month, "can't be less than initial payment month")
       end
     end
