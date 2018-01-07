@@ -12,7 +12,7 @@ class ReceiptUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-     "#{secure_token}" if original_filename.present?
+     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   protected

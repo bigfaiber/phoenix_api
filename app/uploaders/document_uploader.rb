@@ -8,11 +8,11 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(pdf)
+    %w(pdf jpg jpeg gif png)
   end
 
   def filename
-     "#{secure_token}" if original_filename.present?
+     "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   protected
