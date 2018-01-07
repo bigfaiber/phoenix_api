@@ -45,7 +45,7 @@ class Project < ApplicationRecord
     if self.changed.include?("interest_rate") || self.changed.include?("monthly_payment") || self.changed.include?("money")
       period = 0
       is_creating = true
-      money_temp = self..money + 0.0
+      money_temp = self.money + 0.0
       while is_creating
         period = period + 1
         interest_temp = (self..interest_rate/100.0)*money_temp
