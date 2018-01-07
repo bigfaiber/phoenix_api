@@ -24,7 +24,7 @@ class ClientsController < ApplicationController
 
   def show
     if @client
-      render json: @client, serializer: ClientSerializer, status: :ok
+      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
     else
       error_not_found
     end
