@@ -48,7 +48,7 @@ class Project < ApplicationRecord
       money_temp = self.money + 0.0
       while is_creating
         period = period + 1
-        interest_temp = (self..interest_rate/100.0)*money_temp
+        interest_temp = (self.interest_rate/100.0)*money_temp
         payment = self.monthly_payment - interest_temp
         if money_temp >= @project.monthly_payment
           money_temp = money_temp - payment
