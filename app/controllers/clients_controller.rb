@@ -31,7 +31,7 @@ class ClientsController < ApplicationController
   end
 
   def token
-    render json: @current_client, serializer: ClientSerializer, include: ['projects.investor', 'projects.account'], status: :ok
+    render json: @current_client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
   end
 
   def reset
