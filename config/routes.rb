@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     scope '/', defaults: { format: 'json' } do
       post '/login',  to: "authenticate#login"
       resources :clients do
+        member do
+          post 'add-additional-data', to: "clients#additional_data"
+        end
         collection do
           get 'end-sign-up', to: "clients#end_sign_up"
           get 'reset-password', to: "clients#reset"

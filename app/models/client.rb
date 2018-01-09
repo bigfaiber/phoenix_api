@@ -57,7 +57,7 @@ class Client < ApplicationRecord
   validates_numericality_of :identification, only_integer: true
   validates_length_of :phone, minimum: 10, maximum: 15
   validates_length_of :identification, minimum: 8, maximum: 12
-  validates_numericality_of :rent_payment, only_integer: true
+  validates_numericality_of :rent_payment, :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, only_integer: true
   validate :valid_rating
 
   def self.load(page: 1, per_page: 10)
@@ -108,7 +108,7 @@ class Client < ApplicationRecord
   end
 
   def valid_rating
-    errors.add(:rating,"is not valid") if self.rating && (self.rating < 0 || self.rating > 5) 
+    errors.add(:rating,"is not valid") if self.rating && (self.rating < 0 || self.rating > 5)
 
   end
 end

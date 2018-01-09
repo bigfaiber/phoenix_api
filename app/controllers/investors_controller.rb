@@ -60,7 +60,7 @@ class InvestorsController < ApplicationController
 
   def update
     if @investor.update(investor_params)
-      render json: @investor, serializer: InvestorSerializer, status: :ok
+      render json: @investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account'], status: :ok
     else
       @object = @investor
       error_render

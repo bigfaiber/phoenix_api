@@ -1,8 +1,8 @@
 class ClientsController < ApplicationController
-  before_action :authenticate_admin!, only: [:destroy,:new_clients,:old_clients]
+  before_action :authenticate_admin!, only: [:additional_data,:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
   before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:goods,:documents,:new_verification_code]
-  before_action :set_client, only: [:show,:update,:destroy,:show]
+  before_action :set_client, only: [:additional_data,:show,:update,:destroy,:show]
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
@@ -103,7 +103,7 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      render json: @client, serializer: ClientSerializer, status: :ok
+      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
     else
       @object = @client
       error_render
@@ -176,7 +176,24 @@ class ClientsController < ApplicationController
     head :ok
   end
 
+  def additional_data
+    if @client
+      if @client.update(client_params_additional_data)
+        render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
+      else
+        @object = @client
+        error_render
+      end
+    else
+      error_not_found
+    end
+
+  end
+
   private
+  def client_params_additional_data
+    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:nivel,:stability,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity)
+  end
   def client_params
     params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:rating)
   end
