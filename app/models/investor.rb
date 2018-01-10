@@ -11,7 +11,7 @@ class Investor < ApplicationRecord
   scope :old_investors, -> { where(new_investor: false) }
   scope :include_payment, -> { includes(:payment) }
   scope :include_document, -> { includes(:documents) }
-  scope :include_project, -> { includes(:projects) }
+  scope :include_project, -> { includes(:projects).references(:projects) }
 
 
   enum education: {

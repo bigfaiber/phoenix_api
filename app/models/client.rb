@@ -57,8 +57,9 @@ class Client < ApplicationRecord
   validates_numericality_of :identification, only_integer: true
   validates_length_of :phone, minimum: 10, maximum: 15
   validates_length_of :identification, minimum: 8, maximum: 12
-  validates_numericality_of :rent_payment, :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, only_integer: true
+  validates_numericality_of :rent_payment, only_integer: true
   validate :valid_rating
+  validates_numericality_of :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, allow_nil: true, only_integer: true
 
   def self.load(page: 1, per_page: 10)
     paginate(page: page, per_page: per_page)
@@ -103,8 +104,8 @@ class Client < ApplicationRecord
 
   private
   def valid_age
-    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year < 18
-    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
+    errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year < 18
+    errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
   end
 
   def valid_rating
