@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:receipt,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account]
-  before_action :authenticate_admin!, only: [:destroy,:rate,:approve,:match,:search]
+  before_action :authenticate_admin!, only: [:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
-  before_action :set_project, only: [:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :set_project, only: [:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
   before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
 
   def index
@@ -177,6 +177,16 @@ class ProjectsController < ApplicationController
       error_not_found
     end
 
+  end
+
+  def new_project
+    if @project
+      @project.new_project = false
+      @project.save
+      head :ok
+    else
+      error_not_found
+    end
   end
 
   def receipt

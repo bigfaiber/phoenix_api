@@ -55,6 +55,7 @@ Rails.application.routes.draw do
           get 'search', to: "projects#search"
         end
         member do
+          post 'new-project', to: "projects#new_project"
           post 'change-interest', to: "projects#rate"
           post 'add-account', to: "projects#account"
           post 'approve-project', to: "projects#approve"
