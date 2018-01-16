@@ -5,8 +5,8 @@ class Project < ApplicationRecord
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
   belongs_to :client
-  has_many :receipts
-  has_many :matches
+  has_many :receipts, dependent: :destroy
+  has_many :matches, dependent: :destroy
   has_many :investors, through: :matches
 
   scope :include_investor, -> { includes(:investor) }
