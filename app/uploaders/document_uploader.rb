@@ -8,7 +8,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(pdf)
+    %w(jpg jpeg gif png pdf)
   end
 
   def filename

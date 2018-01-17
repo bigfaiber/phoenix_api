@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20180111001745) do
     t.integer "monthly_payment", null: false
     t.integer "month", null: false
     t.boolean "approved", default: false
-    t.string "warranty", default: "", null: false
+    t.integer "warranty", default: 0, null: false
     t.float "interest_rate", default: 1.5, null: false
     t.bigint "investor_id"
     t.bigint "account_id"

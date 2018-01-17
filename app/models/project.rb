@@ -13,6 +13,7 @@ class Project < ApplicationRecord
   scope :include_account, -> { includes(:account )}
   scope :include_client, -> { includes(:client )}
   scope :include_receipts, -> { includes(:receipts )}
+  scope :approved?, -> {where(approved: true)}
   scope :by_client, -> (id:) {where(client_id: id) }
   scope :by_investor, -> (id:) { where(investor_id: id).where(approved: true) }
   scope :by_account, -> (id:) { where(account_id: id) }
@@ -21,10 +22,18 @@ class Project < ApplicationRecord
   scope :by_time, -> (time_start:,time_end:) { where(month: time_start..time_end) }
 
 
+  enum warranty: {
+    "Prenda":0,
+    "Hipoteca":1,
+    "Pagare": 2
+  }
+
   validates_presence_of :dream, :description,:money,:monthly_payment,:month
   validates_numericality_of :money,:monthly_payment,:month, only_integer: true
   validates_numericality_of :month
   validate :validate_number
+  validates_inclusion_of :warranty, in: warranties.keys
+
 
   def self.load(page:1 ,per_page: 10)
     paginate(page: page, per_page: per_page)

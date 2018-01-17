@@ -17,7 +17,7 @@ class ProjectsController < ApplicationController
     if params.has_key?(:time_start) && params.has_key?(:time_end)
       @projects = @projects.by_time(time_start: params[:time_start],time_end: params[:time_end])
     end
-    @projects = @projects.include_investor.include_account.include_client.include_receipts
+    @projects = @projects.approved?.include_investor.include_account.include_client.include_receipts
     render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
   end
 

@@ -41,7 +41,8 @@ class Client < ApplicationRecord
   enum employment_status: {
     "Desempleado": 0,
     "Empleado": 1,
-    "Independiente": 2
+    "Independiente": 2,
+    "Contratista": 3
   }
 
   validates_presence_of :name,:lastname,:identification,:phone,:address,:birthday,:email,:city
