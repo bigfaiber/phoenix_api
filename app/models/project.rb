@@ -49,6 +49,14 @@ class Project < ApplicationRecord
     r.save
   end
 
+  def self.new_projects
+    joins(:client).select("clients.id, count(projects.id) AS total_projects").where(clients:{
+      new_client: false
+      }).where(projects: {
+        new_project: true
+        }).group("clients.id")
+  end
+
   private
   def update_month
     if self.changed.include?("interest_rate") || self.changed.include?("monthly_payment") || self.changed.include?("money")

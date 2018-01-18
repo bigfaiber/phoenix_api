@@ -44,4 +44,26 @@ class ApplicationController < ActionController::API
   }
   end
 
+  def pagination_dict_new_client(collection)
+  {
+    current_page: collection.current_page,
+    next_page: collection.next_page,
+    prev_page: collection.previous_page , # use collection.previous_page when using will_paginate
+    total_pages: collection.total_pages,
+    total_count: collection.total_entries,
+    new_clients: Client.new_clients.count
+  }
+  end
+
+  def pagination_dict_old_client(collection)
+  {
+    current_page: collection.current_page,
+    next_page: collection.next_page,
+    prev_page: collection.previous_page , # use collection.previous_page when using will_paginate
+    total_pages: collection.total_pages,
+    total_count: collection.total_entries,
+    new_projects: Project.new_projects.length
+  }
+  end
+
 end

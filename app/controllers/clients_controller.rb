@@ -13,13 +13,13 @@ class ClientsController < ApplicationController
   def new_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict_new_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def old_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def show
