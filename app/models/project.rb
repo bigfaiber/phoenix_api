@@ -52,7 +52,9 @@ class Project < ApplicationRecord
   def self.new_projects
     joins(:client).select("clients.id, count(projects.id) AS total_projects").where(clients:{
       new_client: false
-      }).where(projects: {
+      }).where(clients: {
+        step: 5
+        }).where(projects: {
         new_project: true
         }).group("clients.id")
   end

@@ -9,6 +9,7 @@ class Client < ApplicationRecord
 
 
   scope :new_clients, -> { where(new_client: true) }
+  scope :valid_form, -> {where(step: 5)}
   scope :old_clients, -> { where(new_client: false) }
   scope :include_vehicle, -> {includes(:vehicles) }
   scope :include_estate, -> {includes(:estates) }
@@ -60,6 +61,7 @@ class Client < ApplicationRecord
   validates_length_of :identification, minimum: 8, maximum: 12
   validates_numericality_of :rent_payment, only_integer: true
   validate :valid_rating
+  validate :valid_step
   validates_numericality_of :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, allow_nil: true, only_integer: true
 
   def self.load(page: 1, per_page: 10)
@@ -107,6 +109,10 @@ class Client < ApplicationRecord
   def valid_age
     errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year < 18
     errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
+  end
+
+  def valid_step
+    errors.add(:step,'is not valid') if self.step < 1 || self.step > 5
   end
 
   def valid_rating

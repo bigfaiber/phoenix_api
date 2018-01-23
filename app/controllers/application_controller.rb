@@ -51,7 +51,7 @@ class ApplicationController < ActionController::API
     prev_page: collection.previous_page , # use collection.previous_page when using will_paginate
     total_pages: collection.total_pages,
     total_count: collection.total_entries,
-    new_clients: Client.new_clients.count
+    new_clients: Client.new_clients.valid_form.count
   }
   end
 

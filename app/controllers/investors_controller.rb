@@ -12,13 +12,13 @@ class InvestorsController < ApplicationController
   end
 
   def new_investors
-    @investors = Investor.load(page: params[:page],per_page: params[:per_page]).new_investors
+    @investors = Investor.load(page: params[:page],per_page: params[:per_page]).new_investors.valid_form
     @investors = @investors.include_document.include_project.include_payment
     render json: @investors, meta: pagination_dict(@investors), each_serializer: InvestorSerializer, status: :ok
   end
 
   def old_investors
-    @investors = Investor.load(page: params[:page],per_page: params[:per_page]).old_investors
+    @investors = Investor.load(page: params[:page],per_page: params[:per_page]).old_investors.valid_form
     @investors = @investors.include_payment.include_document.include_project
     render json: @investors,meta: pagination_dict(@investors), each_serializer: InvestorSerializer, status: :ok
   end
@@ -176,7 +176,7 @@ class InvestorsController < ApplicationController
 
   private
   def investor_params
-    params.require(:investor).permit(:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions)
+    params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions)
   end
 
   def payment_params

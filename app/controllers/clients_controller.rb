@@ -11,13 +11,13 @@ class ClientsController < ApplicationController
   end
 
   def new_clients
-    @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients
+    @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients.valid_form
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
     render json: @clients, meta: pagination_dict_new_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def old_clients
-    @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients
+    @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients.valid_form
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
     render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
@@ -195,7 +195,7 @@ class ClientsController < ApplicationController
     params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:nivel,:stability,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity)
   end
   def client_params
-    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:rating)
+    params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:rating)
   end
   def set_client
     @client = Client.by_id(params[:id])
