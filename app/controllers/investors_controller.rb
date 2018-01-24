@@ -44,11 +44,15 @@ class InvestorsController < ApplicationController
       #ClientMailer.welcome(@investor).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
-        MessageSender.send_message(code,params[:investor][:phone])
+        MessageSender.send_message(code,@investor.phone)
         @investor.code = code
         @investor.save
       rescue Twilio::REST::TwilioError => error
-        p error.message
+        render json: {
+          data: {
+            errors: ["We can't send the code"]
+          }
+        }, status: 500
       end
       render json: @investor, serializer: InvestorSerializer, status: :created
     else

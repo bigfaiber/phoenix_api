@@ -83,11 +83,11 @@ class ClientsController < ApplicationController
       #ClientMailer.welcome(@client).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
-        MessageSender.send_message(code,params[:client][:phone])
+        MessageSender.send_message(code,@client.phone)
         @client.code = code
         @client.save
       rescue Twilio::REST::TwilioError => error
-        ender json: {
+        render json: {
           data: {
             errors: ["We can't send the code"]
           }
