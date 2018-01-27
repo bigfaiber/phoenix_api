@@ -31,7 +31,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Defaults:
 # set :scm,           :git
-set :branch,        "feature/email_template"
+set :branch,        "feature/email_templates"
 set :format,        :pretty
 set :log_level,     :debug
 set :keep_releases, 5
@@ -56,7 +56,7 @@ namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/feature/email_template`
+      unless `git rev-parse HEAD` == `git rev-parse origin/feature/email_templates`
         puts "WARNING: HEAD is not the same as origin/master"
         puts "Run `git push` to sync changes."
         exit
