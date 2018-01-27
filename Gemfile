@@ -57,6 +57,9 @@ gem 'twilio-ruby'
 gem 'prawn'
 gem 'prawn-table'
 
+#mandrill
+gem 'mandrill-api'
+
 group :development do
     gem 'capistrano',         require: false
     gem 'capistrano-rvm',     require: false
