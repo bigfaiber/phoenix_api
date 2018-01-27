@@ -1,5 +1,3 @@
-require 'mandrill'
-
 class ClientMailer < ApplicationMailer
 
   def code(user)
