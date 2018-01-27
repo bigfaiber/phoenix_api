@@ -1,4 +1,4 @@
-class ClientMailer < ApplicationMailer
+  class ClientMailer < ApplicationMailer
 
   def code(user)
     options = {
@@ -72,11 +72,9 @@ class ClientMailer < ApplicationMailer
                 "type"=>"to"}],
       :global_merge_vars => opts[:global_merge_vars]
       }
-    mandrill = Mandrill::API.new 'wz2YKz7YFKjJdwymttjL1g'
-    sending = mandrill.messages.send_template opts[:template], [], message
+    sending = MANDRILL.messages.send_template opts[:template], [], message
     rescue Mandrill::Error => e
-      Rails.logger.debug("#{e.class}: #{e.message}")
-      raise
+      Rails.logger.debug(e)
   end
 
 end
