@@ -48,7 +48,7 @@ class InvestorsController < ApplicationController
         @investor.code = code
         @investor.save
       rescue Twilio::REST::TwilioError => error
-        render json: {
+        return render json: {
           data: {
             errors: ["We can't send the code"]
           }
@@ -98,7 +98,7 @@ class InvestorsController < ApplicationController
       @current_investor.code = code
       @current_investor.save
     rescue Twilio::REST::TwilioError => error
-      render json: {
+      return render json: {
         data: {
           errors: ["We can't send the code"]
         }

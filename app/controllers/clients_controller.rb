@@ -87,7 +87,7 @@ class ClientsController < ApplicationController
         @client.code = code
         @client.save
       rescue Twilio::REST::TwilioError => error
-        render json: {
+        return render json: {
           data: {
             errors: ["We can't send the code"]
           }
@@ -142,7 +142,7 @@ class ClientsController < ApplicationController
       @current_client.code = code
       @current_client.save
     rescue Twilio::REST::TwilioError => error
-      render json: {
+      return render json: {
         data: {
           errors: ["We can't send the code"]
         }
