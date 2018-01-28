@@ -1,38 +1,196 @@
-class ClientMailer < ApplicationMailer
+  class ClientMailer < ApplicationMailer
+
+  def code(user)
+    options = {
+      :subject => 'Codigo de confirmacion',
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: user.name
+        },
+        {
+          name: 'lastname',
+          content: user.lastname
+        },
+        {
+          name: 'code',
+          content: user.code
+        }
+      ],
+      template: 'PHX_CODE'
+    }
+    mandrill_send(options)
+  end
 
   def welcome(user)
-    @user = user
-    mail(to: @user.email, subject: 'Welcome to Phoenix')
+    options = {
+      :subject => 'Bienvenido a Phoenix',
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: user.name
+        },
+        {
+          name: 'lastname',
+          content: user.lastname
+        }
+      ],
+      template: 'WELCOME'
+    }
+    mandrill_send(options)
   end
 
   def admin_account(name,lastname,password,email)
-    @name = name
-    @lastname = lastname
-    @pass = password
-    mail(to: email, subject: 'Welcome to Phoenix')
+    options = {
+      :subject => 'Nueva cuenta de administrador',
+      :email => email,
+      :name => "#{name} #{lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: name
+        },
+        {
+          name: 'lastname',
+          content: lastname
+        },
+        {
+          name: 'pass',
+          content: password
+        }
+      ],
+      template: 'NEW_ADMIN'
+    }
+    mandrill_send(options)
   end
 
-  def project_approved(email)
-    @email = email
-    mail(to: email, subject: 'Project approved')
+  def project_approved(user)
+    options = {
+      :subject => 'Proyecto Aprovado',
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: name
+        },
+        {
+          name: 'lastname',
+          content: lastname
+        }
+      ],
+      template: 'PROJECT_APPROVED'
+    }
+    mandrill_send(options)
   end
 
-  def clinet_match(email)
-    mail(to: email, subject: 'Match')
+  def clinet_match(user)
+    options = {
+      :subject => 'Match Proyecto',
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: name
+        },
+        {
+          name: 'lastname',
+          content: lastname
+        }
+      ],
+      template: 'CLIENT_MATCH'
+    }
+    mandrill_send(options)
   end
 
-  def investor_match(email)
-    mail(to: email, subject: 'Match')
+  def investor_match(user)
+    options = {
+      :subject => 'Match Proyecto',
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: name
+        },
+        {
+          name: 'lastname',
+          content: lastname
+        }
+      ],
+      template: 'INVESTOR_MATCH'
+    }
+    mandrill_send(options)
   end
 
   def new_password(resource, token)
-    @resource = resource
-    @token = token
-    mail(to: resource.email, subject: 'Reset password')
+    options = {
+      :subject => "Solicitud Nueva Contrasena",
+      :email => resource.email,
+      :name => "#{resource.name} #{resource.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: resource.name
+        },
+        {
+          name: 'lastname',
+          content: resource.lastname
+        },
+        {
+          name: 'new_password',
+          content: "https://www.phx.com.co/new-password?email=#{resource.email}&token=#{token}&type=#{resource.class.name.downcase}"
+        }
+      ],
+      template: 'NEW_PASSWORD'
+    }
+    mandrill_send(options)
   end
 
-  def new_password_confirmation(email, pass)
-    @pass = pass
-    mail(to: email, subject: 'New password')
+  def new_password_confirmation(user, pass)
+    options = {
+      :subject => "Solicitud Nueva Contrasena",
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: user.name
+        },
+        {
+          name: 'lastname',
+          content: user.lastname
+        },
+        {
+          name: 'new_password',
+          content: pass
+        }
+      ],
+      template: 'NEW_PASSWORD_CONFIRMATION'
+    }
+    mandrill_send(options)
   end
+
+  private
+  def mandrill_send(opts={})
+    message = {
+      :subject=> "#{opts[:subject]}",
+      :from_name=> "Phoenix team",
+      :from_email=>"non_reply@phx.com.co",
+      :to=>
+            [{"name"=>"#{opts[:name]}",
+                "email"=>"#{opts[:email]}",
+                "type"=>"to"}],
+      :global_merge_vars => opts[:global_merge_vars]
+      }
+    sending = MANDRILL.messages.send_template opts[:template], [], message
+    rescue Mandrill::Error => e
+      Rails.logger.debug(e)
+  end
+
 end
