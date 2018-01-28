@@ -58,7 +58,7 @@ class ClientsController < ApplicationController
         client.password_confirmation =  params[:password_confirmation]
         client.token = nil
         client.save
-        ClientMailer.new_password_confirmation(params[:email],params[:password]).deliver_later
+        ClientMailer.new_password_confirmation(client,params[:password]).deliver_later
         render json: {data: {
           message: 'We have sent an email the confirmation'
           }}, status: :ok
@@ -83,10 +83,10 @@ class ClientsController < ApplicationController
       #ClientMailer.welcome(@client).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
-        ClientMailer.code(@client).deliver_later
         MessageSender.send_message(code,@client.phone)
         @client.code = code
         @client.save
+        ClientMailer.code(@client).deliver_later
       rescue Twilio::REST::TwilioError => error
         return render json: {
           data: {
@@ -139,10 +139,10 @@ class ClientsController < ApplicationController
   def new_verification_code
     begin
       code = SecureRandom.uuid[0..7]
-      ClientMailer.code(@current_client).deliver_later
       MessageSender.send_message(code,@current_client.phone)
       @current_client.code = code
       @current_client.save
+      ClientMailer.code(@current_client).deliver_later
     rescue Twilio::REST::TwilioError => error
       return render json: {
         data: {

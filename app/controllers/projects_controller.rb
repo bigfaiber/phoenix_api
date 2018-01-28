@@ -98,7 +98,7 @@ class ProjectsController < ApplicationController
   def approve
     @project.approved = true
     @project.save
-    ClientMailer.project_approved(@project.client.email).deliver_later
+    ClientMailer.project_approved(@project.client).deliver_later
     head :ok
   end
 
@@ -136,8 +136,8 @@ class ProjectsController < ApplicationController
           m.save
           @project.investor_id = @investor.id
           @project.save
-          ClientMailer.investor_match(@investor.email).deliver_later
-          ClientMailer.clinet_match(@client.email).deliver_later
+          ClientMailer.investor_match(@investor).deliver_later
+          ClientMailer.clinet_match(@client).deliver_later
           Match.delete_not_approved(@project.id)
           head :ok
         else

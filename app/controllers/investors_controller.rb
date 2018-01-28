@@ -44,10 +44,10 @@ class InvestorsController < ApplicationController
       #ClientMailer.welcome(@investor).deliver_later
       begin
         code = SecureRandom.uuid[0..7]
-        ClientMailer.code(@investor).deliver_later
         MessageSender.send_message(code,@investor.phone)
         @investor.code = code
         @investor.save
+        ClientMailer.code(@investor).deliver_later
       rescue Twilio::REST::TwilioError => error
         return render json: {
           data: {
@@ -96,9 +96,9 @@ class InvestorsController < ApplicationController
     begin
       code = SecureRandom.uuid[0..7]
       MessageSender.send_message(code,@current_investor.phone)
-      ClientMailer.code(@current_investor).deliver_later
       @current_investor.code = code
       @current_investor.save
+      ClientMailer.code(@current_investor).deliver_later
     rescue Twilio::REST::TwilioError => error
       return render json: {
         data: {
@@ -164,7 +164,7 @@ class InvestorsController < ApplicationController
         investor.password_confirmation =  params[:password_confirmation]
         investor.token = nil
         investor.save
-        ClientMailer.new_password_confirmation(params[:email],params[:password]).deliver_later
+        ClientMailer.new_password_confirmation(investor,params[:password]).deliver_later
         render json: {data: {
           message: 'We have sent an email the confirmation'
           }}, status: :ok
