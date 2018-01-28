@@ -75,30 +75,38 @@ class ClientsController < ApplicationController
   end
 
   def create
-    @client = Client.new(client_params)
-    if @client.save
-      command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
-      @current_client = @client
-      @token = command.result
-      #ClientMailer.welcome(@client).deliver_later
-      begin
-        code = SecureRandom.uuid[0..7]
-        MessageSender.send_message(code,@client.phone)
-        @client.code = code
-        @client.save
-        ClientMailer.code(@client).deliver_later
-      rescue Twilio::REST::TwilioError => error
-        return render json: {
-          data: {
-            errors: ["We can't send the code"]
-          }
-        }, status: 500
+    if !Investor.by_identification(params[:client][:identification])
+      @client = Client.new(client_params)
+      if @client.save
+        command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
+        @current_client = @client
+        @token = command.result
+        #ClientMailer.welcome(@client).deliver_later
+        begin
+          code = SecureRandom.uuid[0..7]
+          MessageSender.send_message(code,@client.phone)
+          @client.code = code
+          @client.save
+          ClientMailer.code(@client).deliver_later
+        rescue Twilio::REST::TwilioError => error
+          return render json: {
+            data: {
+              errors: ["We can't send the code"]
+            }
+          }, status: 500
+        end
+        @client = @client
+        render json: @client, serializer: ClientSerializer, status: :created
+      else
+        @object = @client
+        error_render
       end
-      @client = @client
-      render json: @client, serializer: ClientSerializer, status: :created
     else
-      @object = @client
-      error_render
+      return render json: {
+        data: {
+          errors: ["We have an investor account with the same identification"]
+        }
+      }, status: 500
     end
   end
 

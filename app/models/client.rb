@@ -76,6 +76,10 @@ class Client < ApplicationRecord
     find_by_email(email)
   end
 
+  def self.by_identification(identification)
+    find_by_identification(identification)
+  end
+
   def self.upload_document(client,type,file)
     case type
     when "cc"

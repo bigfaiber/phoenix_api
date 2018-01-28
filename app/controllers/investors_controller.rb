@@ -36,29 +36,37 @@ class InvestorsController < ApplicationController
   end
 
   def create
-    @investor = Investor.new(investor_params)
-    if @investor.save
-      command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
-      @current_investor = @investor
-      @token = command.result
-      #ClientMailer.welcome(@investor).deliver_later
-      begin
-        code = SecureRandom.uuid[0..7]
-        MessageSender.send_message(code,@investor.phone)
-        @investor.code = code
-        @investor.save
-        ClientMailer.code(@investor).deliver_later
-      rescue Twilio::REST::TwilioError => error
-        return render json: {
-          data: {
-            errors: ["We can't send the code"]
-          }
-        }, status: 500
+    if !Client.by_identification(params[:investor][:identification])
+      @investor = Investor.new(investor_params)
+      if @investor.save
+        command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
+        @current_investor = @investor
+        @token = command.result
+        #ClientMailer.welcome(@investor).deliver_later
+        begin
+          code = SecureRandom.uuid[0..7]
+          MessageSender.send_message(code,@investor.phone)
+          @investor.code = code
+          @investor.save
+          ClientMailer.code(@investor).deliver_later
+        rescue Twilio::REST::TwilioError => error
+          return render json: {
+            data: {
+              errors: ["We can't send the code"]
+            }
+          }, status: 500
+        end
+        render json: @investor, serializer: InvestorSerializer, status: :created
+      else
+        @object = @investor
+        error_render
       end
-      render json: @investor, serializer: InvestorSerializer, status: :created
     else
-      @object = @investor
-      error_render
+      return render json: {
+        data: {
+          errors: ["We have a client account with the same identification"]
+        }
+      }, status: 500
     end
 
   end
