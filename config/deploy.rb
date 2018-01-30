@@ -2,7 +2,7 @@
 lock "3.9.1"
 
 # Change these
-server '35.196.251.3', port: 22, roles: [:web, :app, :db], primary: true
+server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
 
 
 set :repo_url,        'git@bitbucket.org:slabcode/phoenix_api.git'
