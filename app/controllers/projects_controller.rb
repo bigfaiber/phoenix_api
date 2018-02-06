@@ -246,7 +246,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month,:initial_payment)
+    params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month,:initial_payment,:approved_date)
   end
 
   def receipt_params

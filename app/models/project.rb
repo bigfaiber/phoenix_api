@@ -32,6 +32,7 @@ class Project < ApplicationRecord
   validates_numericality_of :money,:monthly_payment,:month, only_integer: true
   validates_numericality_of :month
   validate :validate_number
+  validate :valid_date
   validates_inclusion_of :warranty, in: warranties.keys
 
 
@@ -82,10 +83,18 @@ class Project < ApplicationRecord
       self.month = period
     end
   end
+
   def validate_number
     errors.add(:money, "can't be negative") if self.money && self.money < 0
     errors.add(:monthly_payment, "can't be negative") if self.monthly_payment && self.monthly_payment < 0
     errors.add(:month, "can't be negative") if self.month && self.month < 0
     errors.add(:interest_rate, "can't be negative") if self.interest_rate && self.interest_rate < 0
+  end
+
+  def valid_date
+    if self.approved_date && self.initial_payment && self.approved_date > self.initial_payment
+      errors.add(:approved_date, "can't be higher than initial_payment")
+      errors.add(:initial_payment, "can't be less than approved_date") 
+    end
   end
 end
