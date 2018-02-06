@@ -76,11 +76,11 @@
       :global_merge_vars => [
         {
           name: 'name',
-          content: name
+          content: user.name
         },
         {
           name: 'lastname',
-          content: lastname
+          content: user.lastname
         }
       ],
       template: 'PROJECT_APPROVED'
@@ -96,11 +96,11 @@
       :global_merge_vars => [
         {
           name: 'name',
-          content: name
+          content: user.name
         },
         {
           name: 'lastname',
-          content: lastname
+          content: user.lastname
         }
       ],
       template: 'CLIENT_MATCH'
@@ -116,11 +116,11 @@
       :global_merge_vars => [
         {
           name: 'name',
-          content: name
+          content: user.name
         },
         {
           name: 'lastname',
-          content: lastname
+          content: user.lastname
         }
       ],
       template: 'INVESTOR_MATCH'
@@ -154,7 +154,7 @@
 
   def new_password_confirmation(user, pass)
     options = {
-      :subject => "Solicitud Nueva Contrasena",
+      :subject => "Confirmacion Nueva Contrasena",
       :email => user.email,
       :name => "#{user.name} #{user.lastname}",
       :global_merge_vars => [
