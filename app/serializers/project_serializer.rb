@@ -4,4 +4,5 @@ class ProjectSerializer < ActiveModel::Serializer
   belongs_to :investor
   belongs_to :account
   belongs_to :client
+  has_one :amortization_table
 end

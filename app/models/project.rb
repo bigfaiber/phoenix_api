@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
   belongs_to :client
+  has_one :amortization_table
   has_many :receipts, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_many :investors, through: :matches
@@ -94,7 +95,7 @@ class Project < ApplicationRecord
   def valid_date
     if self.approved_date && self.initial_payment && self.approved_date > self.initial_payment
       errors.add(:approved_date, "can't be higher than initial_payment")
-      errors.add(:initial_payment, "can't be less than approved_date") 
+      errors.add(:initial_payment, "can't be less than approved_date")
     end
   end
 end

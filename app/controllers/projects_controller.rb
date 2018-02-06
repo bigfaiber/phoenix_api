@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:receipt,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account]
-  before_action :authenticate_admin!, only: [:new_project,:destroy,:rate,:approve,:match,:search]
+  before_action :authenticate_admin!, only: [:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
-  before_action :set_project, only: [:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :set_project, only: [:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
   before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
 
   def index
@@ -236,6 +236,26 @@ class ProjectsController < ApplicationController
       end
     else
       error_not_found
+    end
+  end
+
+  def add_table
+    if @project
+      if AmortizationTable.add_table(project: params[:id],table: params[:table])
+        head :ok
+      else
+        render json: {
+          data: {
+            errors: ["We can't uploaded the table"]
+          }
+        }, status: 500
+      end
+    else
+      render json: {
+        data: {
+          errors: ["We can't find any project"]
+        }
+      }, status: 404
     end
   end
 
