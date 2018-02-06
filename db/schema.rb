@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123205143) do
+ActiveRecord::Schema.define(version: 20180206202521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20180123205143) do
     t.text "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "amortization_tables", force: :cascade do |t|
+    t.text "amortization_table"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_amortization_tables_on_project_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -159,6 +167,7 @@ ActiveRecord::Schema.define(version: 20180123205143) do
     t.datetime "updated_at", null: false
     t.date "initial_payment"
     t.boolean "new_project", default: true
+    t.date "approved_date"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["investor_id"], name: "index_projects_on_investor_id"
@@ -183,6 +192,7 @@ ActiveRecord::Schema.define(version: 20180123205143) do
     t.index ["client_id"], name: "index_vehicles_on_client_id"
   end
 
+  add_foreign_key "amortization_tables", "projects"
   add_foreign_key "estates", "clients"
   add_foreign_key "matches", "investors"
   add_foreign_key "matches", "projects"
