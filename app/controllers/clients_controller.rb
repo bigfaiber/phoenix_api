@@ -77,16 +77,11 @@ class ClientsController < ApplicationController
   def create
     if !Investor.by_identification(params[:client][:identification])
       @client = Client.new(client_params)
-      if @client.save
-        command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
-        @current_client = @client
-        @token = command.result
-        #ClientMailer.welcome(@client).deliver_later
+      code = SecureRandom.uuid[0..7]
+      MessageSender.send_message(code,@client.phone)
+      @client.code = code
+      if @client.valid?
         begin
-          code = SecureRandom.uuid[0..7]
-          MessageSender.send_message(code,@client.phone)
-          @client.code = code
-          @client.save
           ClientMailer.code(@client).deliver_later
         rescue Twilio::REST::TwilioError => error
           return render json: {
@@ -95,6 +90,10 @@ class ClientsController < ApplicationController
             }
           }, status: 500
         end
+        @client.save
+        command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
+        @current_client = @client
+        @token = command.result
         @client = @client
         render json: @client, serializer: ClientSerializer, status: :created
       else

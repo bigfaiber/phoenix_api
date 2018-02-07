@@ -1,3 +1,3 @@
 class AmortizationTableSerializer < ActiveModel::Serializer
-  attributes :id,:table
+  attributes :id,:amortization_table
 end
