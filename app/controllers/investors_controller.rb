@@ -39,12 +39,11 @@ class InvestorsController < ApplicationController
     if !Client.by_identification(params[:investor][:identification])
       @investor = Investor.new(investor_params)
       code = SecureRandom.uuid[0..7]
-      MessageSender.send_message(code,@investor.phone)
       @investor.code = code
       if @investor.valid?
         #ClientMailer.welcome(@investor).deliver_later
         begin
-          ClientMailer.code(@investor).deliver_later
+          MessageSender.send_message(code,@investor.phone)
         rescue Twilio::REST::TwilioError => error
           return render json: {
             data: {
@@ -62,6 +61,7 @@ class InvestorsController < ApplicationController
         command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
         @current_investor = @investor
         @token = command.result
+        ClientMailer.code(@investor).deliver_later
         render json: @investor, serializer: InvestorSerializer, status: :created
       else
         @object = @investor
