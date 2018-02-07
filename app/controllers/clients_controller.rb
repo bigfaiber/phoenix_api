@@ -89,6 +89,12 @@ class ClientsController < ApplicationController
               errors: ["We can't send the code"]
             }
           }, status: 500
+        rescue Twilio::REST::RestError => error
+          return render json: {
+            data: {
+              errors: ["We can't send the code"]
+            }
+          }, status: 500
         end
         @client.save
         command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
