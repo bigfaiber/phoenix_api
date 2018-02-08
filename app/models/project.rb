@@ -5,7 +5,7 @@ class Project < ApplicationRecord
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
   belongs_to :client
-  has_one :amortization_table
+  has_one :amortization_table, dependent: :destroy
   has_many :receipts, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_many :investors, through: :matches
