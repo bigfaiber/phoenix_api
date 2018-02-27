@@ -221,18 +221,25 @@ class ProjectsController < ApplicationController
             errors: ["The project doesn't have a date for the initial payment"]
           }
         }, status: 500
-      elsif @current_admin
-        pdf = AmortizationPdf.new(@project)
-        send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
+      elsif @current_admin  
+        send_data Prawn::Document.generate("hello.pdf") do
+          image open("https://phx.com.co/assets/images/home/logo.png")
+        end,
+        type: 'application/pdf',
+        disposition: 'inline'
       elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
         pdf = AmortizationPdf.new(@project)
-        send_data pdf.render, filename: 'tabla_amortizacion.pdf', type: 'application/pdf'
+        send_data pdf.render,
+        filename: "table.pdf",
+        type: 'application/pdf',
+        disposition: 'inline'
       else
         render json: {
           data: {
             errors: ["You are not allowed to download this table"]
           }
         }, status: 500
+        
       end
     else
       error_not_found

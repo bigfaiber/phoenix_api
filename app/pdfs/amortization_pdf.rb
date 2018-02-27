@@ -8,7 +8,8 @@ class AmortizationPdf < Prawn::Document
 
   def generate_table
     move_down 10
-    image open("https://phx.com.co/assets/images/home/logo.png"), position: :left, width: 150, height: 50
+    image open("https://phx.com.co/assets/images/home/logo.png"), width: 130, height: 50, position: :left
+
     font("Times-Roman") do
       text "TABLA DE AMORTIZACION", :align => :center, :size => 15, :style => :bold
     end
@@ -21,7 +22,7 @@ class AmortizationPdf < Prawn::Document
       text "#{@project.client.name} #{@project.client.lastname}", :align => :center, :size => 12
     end
     font("Times-Roman") do
-      text "#{@project.client.identification}", :align => :center, :size => 12
+      text "CC: #{@project.client.identification}", :align => :center, :size => 12
     end
     move_down 5
     font("Times-Roman") do
@@ -31,7 +32,7 @@ class AmortizationPdf < Prawn::Document
     period = 0
     is_creating = true
     money_temp = @project.money + 0.0
-    data = [["periodo","intereses","abono capital","cuota a pagar","saldo"]]
+    data = [["Periodo","Intereses","Abono a capital","Cuota a pagar","Saldo"]]
     data += [["#{@project.initial_payment.strftime("%D")}","","","","$ #{price(@project.money)}"]]
     while is_creating
       period = period + 1
@@ -39,9 +40,9 @@ class AmortizationPdf < Prawn::Document
       payment = @project.monthly_payment - interest_temp
       if money_temp >= @project.monthly_payment
         money_temp = money_temp - payment
-        data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","#{price(@project.monthly_payment)}","$ #{price(money_temp.round)}"]]
+        data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","$ #{price(@project.monthly_payment)}","$ #{price(money_temp.round)}"]]
       else
-        data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}","#{price(money_temp.round + interest_temp.round)}","$ 0"]]
+        data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}"," $ #{price(money_temp.round + interest_temp.round)}","$ 0"]]
         money_temp = 0
       end
       
@@ -50,7 +51,7 @@ class AmortizationPdf < Prawn::Document
       end
     end
 
-    table(data,header: true, :row_colors => ["ddd", "fff"]))
+    table(data, header: true, row_colors: ["DDDDDD", "FFFFFF"], position: :center)
   end
 
   def price(num)
