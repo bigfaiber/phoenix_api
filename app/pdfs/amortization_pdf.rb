@@ -8,6 +8,7 @@ class AmortizationPdf < Prawn::Document
 
   def generate_table
     move_down 10
+    image open("https://phx.com.co/assets/images/home/logo.png"), position: :left, width: 150, height: 50
     font("Times-Roman") do
       text "TABLA DE AMORTIZACION", :align => :center, :size => 15, :style => :bold
     end
@@ -49,7 +50,7 @@ class AmortizationPdf < Prawn::Document
       end
     end
 
-    table(data,header: true)
+    table(data,header: true, :row_colors => ["ddd", "fff"]))
   end
 
   def price(num)
