@@ -222,9 +222,7 @@ class ProjectsController < ApplicationController
           }
         }, status: 500
       elsif @current_admin 
-        pdf = Prawn::Document.new
-        pdf.image open("https://phx.com.co/assets/images/home/logo.png")
-
+        pdf = AmortizationPdf.new(@project)
         send_data pdf.render,
         filename: "table.pdf",
         type: 'application/pdf',
