@@ -221,10 +221,11 @@ class ProjectsController < ApplicationController
             errors: ["The project doesn't have a date for the initial payment"]
           }
         }, status: 500
-      elsif @current_admin  
-        send_data Prawn::Document.generate("hello.pdf") do
-          image open("https://phx.com.co/assets/images/home/logo.png")
-        end,
+      elsif @current_admin 
+        pdf = Prawn::Document.new
+        pdf.image open("https://phx.com.co/assets/images/home/logo.png")
+
+        send_data pdf.render,
         type: 'application/pdf',
         disposition: 'inline'
       elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
