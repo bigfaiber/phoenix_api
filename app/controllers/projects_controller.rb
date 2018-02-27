@@ -226,6 +226,7 @@ class ProjectsController < ApplicationController
         pdf.image open("https://phx.com.co/assets/images/home/logo.png")
 
         send_data pdf.render,
+        filename: "table.pdf",
         type: 'application/pdf',
         disposition: 'inline'
       elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
