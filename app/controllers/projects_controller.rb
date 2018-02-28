@@ -223,16 +223,16 @@ class ProjectsController < ApplicationController
         }, status: 500
       elsif @current_admin 
         pdf = AmortizationPdf.new(@project)
-        send_data pdf.render,
+        send_data pdf.render.force_encoding('BINARY'),
         filename: "table.pdf",
         type: 'application/pdf',
-        disposition: 'inline'
+        disposition: 'attachment'
       elsif (@current_client && @project.client && @project.client.id == @current_client.id) || (@current_investor && @project.investor && @project.investor.id == @current_investor.id)
         pdf = AmortizationPdf.new(@project)
-        send_data pdf.render,
+        send_data pdf.render.force_encoding('BINARY'),
         filename: "table.pdf",
         type: 'application/pdf',
-        disposition: 'inline'
+        disposition: 'attachment'
       else
         render json: {
           data: {
