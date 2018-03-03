@@ -5,5 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-a = Admin.new(name: 'Admin', lastname: 'Phoenix', email: 'admin@phx.com.co',password: '0123456789', password_confirmation: '0123456789')
+a = Admin.new(name: 'Carlos', lastname: 'Phoenix', email: 'carlos@phx.com.co',password: 'Tikeromm1', password_confirmation: 'Tikeromm1')
 a.save
+b = Admin.new(name: 'Andres', lastname: 'Gutierrez', email: "agutierrezt@slabcode.com", password: 'Gutierrez1003739139',password_confirmation:'Gutierrez1003739139')
+b.save
