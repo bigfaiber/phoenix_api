@@ -81,10 +81,10 @@ class Investor < ApplicationRecord
       end
       Document.new(document_type: 1, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "extractos"
-      extractos = investor.documents.extractos.first
-      if extractos
-        extractos.destroy
-      end
+      # extractos = investor.documents.extractos.first
+      # if extractos
+      #   extractos.destroy
+      # end
       Document.new(document_type: 2, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "ingresos"
       ingresos = investor.documents.ingresos.first

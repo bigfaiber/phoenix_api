@@ -95,10 +95,10 @@ class Client < ApplicationRecord
       end
       Document.new(document_type: 1, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "extractos"
-      extractos = client.documents.extractos.first
-      if extractos
-        extractos.destroy
-      end
+      # extractos = client.documents.extractos.first
+      # if extractos
+      #   extractos.destroy
+      # end
       Document.new(document_type: 2, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "ingresos"
       ingresos = client.documents.ingresos.first

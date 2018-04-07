@@ -70,7 +70,7 @@
 
   def project_approved(user)
     options = {
-      :subject => 'Proyecto Aprovado',
+      :subject => 'Proyecto Aprobado',
       :email => user.email,
       :name => "#{user.name} #{user.lastname}",
       :global_merge_vars => [
@@ -84,6 +84,26 @@
         }
       ],
       template: 'PROJECT_APPROVED'
+    }
+    mandrill_send(options)
+  end
+
+  def client_like(user)
+    options = {
+      :subject => "Inversionista Interesado",
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: user.name
+        },
+        {
+          name: 'lastname',
+          content: user.lastname
+        }
+      ],
+      template: 'CLIENT_LIKE'
     }
     mandrill_send(options)
   end
@@ -188,9 +208,11 @@
                 "type"=>"to"}],
       :global_merge_vars => opts[:global_merge_vars]
       }
-    sending = MANDRILL.messages.send_template opts[:template], [], message
+    begin
+      sending = MANDRILL.messages.send_template opts[:template], [], message
     rescue Mandrill::Error => e
       Rails.logger.debug(e)
+    end
   end
 
 end

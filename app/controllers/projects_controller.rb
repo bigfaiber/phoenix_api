@@ -107,6 +107,7 @@ class ProjectsController < ApplicationController
       if @project.approved
         unless Match.by_project_and_investor(@project.id,@current_investor.id)
           Match.new(project_id: @project.id,investor_id: @current_investor.id).save
+          ClientMailer.client_like(@project.client).deliver_later
         end
         head :ok
       else
