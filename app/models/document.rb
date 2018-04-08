@@ -9,6 +9,6 @@ class Document < ApplicationRecord
     "ingresos": 3
   }
 
-  validates_inclusion_of :document_type, in: document_types.keys
+  #validates_inclusion_of :document_type, in: document_types.keys
 
 end
