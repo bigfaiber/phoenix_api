@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
   #before_save :update_fee
   before_update :update_month
+  before_create :set_code
 
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
@@ -62,6 +63,25 @@ class Project < ApplicationRecord
   end
 
   private
+  def set_code
+    code = Code.first
+    number = code.code[3..code.code.size].to_i
+    number += 1
+    self.code = code.code
+    number_string = number.to_s
+    if number_string.size == 1
+      code_temp = "000#{number_string}"
+    elsif number_string.size == 2
+      code_temp = "00#{number_string}"
+    elsif number_string.size == 3
+      code_temp = "0#{number_string}"
+    else
+      code_temp = number_string
+    end
+    code.code = "PRY#{code_temp}"
+    code.save
+  end
+
   def update_month
     if self.changed.include?("interest_rate") || self.changed.include?("monthly_payment") || self.changed.include?("money")
       period = 0
