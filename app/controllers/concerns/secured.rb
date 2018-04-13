@@ -2,7 +2,6 @@ module Secured
   extend ActiveSupport::Concern
   attr_reader :current_client, :current_investor, :current_admin,:token
 
-
   def authenticate_admin_or_client!
     begin
       obj = auth_token

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180408042924) do
+ActiveRecord::Schema.define(version: 20180413165321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,12 @@ ActiveRecord::Schema.define(version: 20180408042924) do
     t.string "income"
     t.string "payment_capacity"
     t.integer "step", default: 1
+  end
+
+  create_table "codes", force: :cascade do |t|
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "documents", force: :cascade do |t|
@@ -167,6 +173,7 @@ ActiveRecord::Schema.define(version: 20180408042924) do
     t.date "initial_payment"
     t.boolean "new_project", default: true
     t.date "approved_date"
+    t.string "code"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["investor_id"], name: "index_projects_on_investor_id"

@@ -9,6 +9,12 @@ class Document < ApplicationRecord
     "ingresos": 3
   }
 
+  class << self
+    def by_id(id)
+      find_by_id(id)
+    end
+  end
+
   #validates_inclusion_of :document_type, in: document_types.keys
 
 end

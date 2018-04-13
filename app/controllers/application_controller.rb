@@ -34,6 +34,14 @@ class ApplicationController < ActionController::API
     }, status: 404
   end
 
+  def error_not_authorized
+    render json: {
+      data: {
+        errors: ['You are not the owner of this record']
+      }
+    }, status: 401
+  end
+
   def pagination_dict(collection)
   {
     current_page: collection.current_page,

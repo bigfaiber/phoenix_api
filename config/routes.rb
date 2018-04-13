@@ -65,6 +65,11 @@ Rails.application.routes.draw do
         end
       end
       resources :matches, only: [:index]
+      resources :documents, only: [] do
+        member do
+          put 'replace-document', to: "documents#replace"
+        end
+      end
     end
   #end
 
