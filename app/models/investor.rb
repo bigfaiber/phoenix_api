@@ -69,28 +69,12 @@ class Investor < ApplicationRecord
   def self.upload_document(investor,type,file)
     case type
     when "cc"
-      cc = investor.documents.cc.first
-      if cc
-        cc.destroy
-      end
       Document.new(document_type: 0, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "renta"
-      renta = investor.documents.renta.first
-      if renta
-        renta.destroy
-      end
       Document.new(document_type: 1, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "extractos"
-      # extractos = investor.documents.extractos.first
-      # if extractos
-      #   extractos.destroy
-      # end
       Document.new(document_type: 2, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "ingresos"
-      ingresos = investor.documents.ingresos.first
-      if ingresos
-        ingresos.destroy
-      end
       Document.new(document_type: 3, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     end
   end

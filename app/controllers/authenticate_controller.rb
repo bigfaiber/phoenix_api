@@ -6,7 +6,7 @@ class AuthenticateController < ApplicationController
       render json: { data: {
         auth_token: command.result
         }
-      }
+      }, status: :ok
     else
       render json: { data: {
         errors: command.errors

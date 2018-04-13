@@ -83,28 +83,12 @@ class Client < ApplicationRecord
   def self.upload_document(client,type,file)
     case type
     when "cc"
-      cc = client.documents.cc.first
-      if cc
-        cc.destroy
-      end
       Document.new(document_type: 0, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "renta"
-      renta = client.documents.renta.first
-      if renta
-        renta.destroy
-      end
       Document.new(document_type: 1, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "extractos"
-      # extractos = client.documents.extractos.first
-      # if extractos
-      #   extractos.destroy
-      # end
       Document.new(document_type: 2, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "ingresos"
-      ingresos = client.documents.ingresos.first
-      if ingresos
-        ingresos.destroy
-      end
       Document.new(document_type: 3, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     end
   end
