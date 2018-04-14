@@ -4,6 +4,10 @@ class Match < ApplicationRecord
 
   scope :include_project, -> { includes(project: :client) }
   scope :include_investor, -> { includes(:investor) }
+  scope :by_current, -> {includes(:project).where(projects: {
+    finished: false
+  })}
+  scope :by_approved, -> (value: ) { where(approved: value)}
 
 
   def self.by_project_and_investor(project,investor)
@@ -15,7 +19,7 @@ class Match < ApplicationRecord
   end
 
   def self.load(page: 1, per_page: 10)
-    where(approved: false).paginate(page: page, per_page: per_page).order("created_at DESC")
+    paginate(page: page, per_page: per_page).order("matches.created_at DESC")
   end
 
 end

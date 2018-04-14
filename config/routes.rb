@@ -53,8 +53,12 @@ Rails.application.routes.draw do
           get 'by-clients', to: "projects#clients"
           get 'by-investors', to: "projects#investors"
           get 'search', to: "projects#search"
+          get 'historical', to: "projects#historical"
+          get 'by-code', to: "projects#by_code"
         end
         member do
+          post 'add-warranty', to: "projects#add_warranty"
+          post 'finish', to: "projects#finish"
           post 'add-table', to: "projects#add_table"
           post 'new-project', to: "projects#new_project"
           post 'change-interest', to: "projects#rate"
@@ -64,7 +68,11 @@ Rails.application.routes.draw do
           post 'add-receipt', to: "projects#receipt"
         end
       end
-      resources :matches, only: [:index]
+      resources :matches, only: [:index] do
+        collection do
+          get 'current-projects', to: "matches#current_projects"
+        end
+      end
       resources :documents, only: [] do
         member do
           put 'replace-document', to: "documents#replace"

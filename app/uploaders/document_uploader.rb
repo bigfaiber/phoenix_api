@@ -4,7 +4,11 @@ class DocumentUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{model.imageable_type}/documents/#{mounted_as}/#{model.id}"
+    if model.class.name == "WarrantyFile"
+      "uploads/#{model.class.to_s.underscore}/documents/#{mounted_as}/#{model.id}"
+    else
+      "uploads/#{model.class.to_s.underscore}/#{model.imageable_type}/documents/#{mounted_as}/#{model.id}"
+    end
   end
 
   def extension_whitelist

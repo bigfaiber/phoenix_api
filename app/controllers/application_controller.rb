@@ -42,6 +42,14 @@ class ApplicationController < ActionController::API
     }, status: 401
   end
 
+  def error_warranty
+    render json: {
+      data: {
+        errors: ['We can upload the file']
+      }
+    }, status: 500
+  end
+
   def pagination_dict(collection)
   {
     current_page: collection.current_page,
