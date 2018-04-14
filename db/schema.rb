@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414223858) do
+ActiveRecord::Schema.define(version: 20180414230622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,14 @@ ActiveRecord::Schema.define(version: 20180414223858) do
     t.index ["client_id"], name: "index_vehicles_on_client_id"
   end
 
+  create_table "warranty_files", force: :cascade do |t|
+    t.text "document", null: false
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_warranty_files_on_project_id"
+  end
+
   add_foreign_key "amortization_tables", "projects"
   add_foreign_key "estates", "clients"
   add_foreign_key "matches", "investors"
@@ -206,4 +214,5 @@ ActiveRecord::Schema.define(version: 20180414223858) do
   add_foreign_key "projects", "clients"
   add_foreign_key "receipts", "projects"
   add_foreign_key "vehicles", "clients"
+  add_foreign_key "warranty_files", "projects"
 end

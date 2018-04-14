@@ -54,8 +54,10 @@ Rails.application.routes.draw do
           get 'by-investors', to: "projects#investors"
           get 'search', to: "projects#search"
           get 'historical', to: "projects#historical"
+          get 'by-code', to: "projects#by_code"
         end
         member do
+          post 'add-warranty', to: "projects#add_warranty"
           post 'finish', to: "projects#finish"
           post 'add-table', to: "projects#add_table"
           post 'new-project', to: "projects#new_project"
