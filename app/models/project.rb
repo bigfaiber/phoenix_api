@@ -22,6 +22,7 @@ class Project < ApplicationRecord
   scope :by_price, -> (price_start:,price_end:) { where(money: price_start..price_end) }
   scope :by_interest, -> (interest_start:,interest_end:) { where(interest_rate: interest_start..interest_end) }
   scope :by_time, -> (time_start:,time_end:) { where(month: time_start..time_end) }
+  scope :by_finished, -> (value: ) {where(finished:  value)}
 
 
   enum warranty: {

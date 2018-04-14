@@ -1,13 +1,13 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:receipt,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account]
-  before_action :authenticate_admin!, only: [:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
+  before_action :authenticate_admin!, only: [:finish,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
-  before_action :set_project, only: [:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
   before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
 
   def index
-    @projects = Project.load(page: params[:page],per_page: params[:per_page])
+    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_finished(value: false)
     if params.has_key?(:price_start) && params.has_key?(:price_end)
       @projects = @projects.by_price(price_start: params[:price_start],price_end: params[:price_end])
     end
@@ -19,6 +19,25 @@ class ProjectsController < ApplicationController
     end
     @projects = @projects.approved?.include_investor.include_account.include_client.include_receipts
     render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+  end
+
+  def historical
+    @projects = Project.load(page: params[:page], per_page: params[:per_page]).by_finished(value: true)
+    render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
+  end
+
+  def finish
+    if @project
+      @project.finished = true
+      if @project.save
+        head :ok
+      else
+        @object = @project
+        error_render
+      end
+    else
+      error_not_found
+    end
   end
 
   def clients
