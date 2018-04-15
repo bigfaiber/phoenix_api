@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:receipt,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account]
-  before_action :authenticate_admin!, only: [:add_warranty,:by_code,:finish,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
+  before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
   before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
-  before_action :authenticate_admin_or_client_investor!,only: [:generate_table]
+  before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
 
   def index
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_finished(value: false)
@@ -31,7 +31,13 @@ class ProjectsController < ApplicationController
   end
 
   def historical
-    @projects = Project.load(page: params[:page], per_page: params[:per_page]).by_finished(value: true).include_investor.include_account.include_client.include_receipts
+    @projects = Project.load(page: params[:page], per_page: params[:per_page]).by_finished(value: true)
+    if @current_client
+      @projects = @projects.by_client(id: @current_client.id)
+    elsif @current_investor
+      @projects = @projects.by_investor(id: @current_investor.id)
+    end
+    @projects = @projects.include_investor.include_account.include_client.include_receipts
     render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
   end
 
@@ -58,13 +64,13 @@ class ProjectsController < ApplicationController
   end
 
   def clients
-    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: @current_client.id)
+    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: @current_client.id).by_finished(value: false)
     @projects = @projects.include_investor.include_account.include_client.include_receipts
     render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
   end
 
   def investors
-    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: @current_investor.id)
+    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: @current_investor.id).by_finished(value: false)
     @projects = @projects.include_investor.include_account.include_client.include_receipts
     render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok
   end
