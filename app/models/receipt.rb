@@ -89,6 +89,7 @@ class Receipt < ApplicationRecord
         end
         return true
       else
+        p r.errors
         return false
       end
     end
