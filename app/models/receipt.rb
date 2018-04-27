@@ -70,9 +70,6 @@ class Receipt < ApplicationRecord
       r.is_grade = true
       r.delay = days
       r.grade = values[days.to_i]
-      p r.validate
-      p "hola"
-      p r.errors
       if r.save
         client = r.project.client.id
         projects = Project.by_client(id: client).ids

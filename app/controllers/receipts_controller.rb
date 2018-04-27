@@ -5,7 +5,8 @@ class ReceiptsController < ApplicationController
   def grade
     if @receipt
       if Receipt.grade(id: params[:id], days: params[:receipt][:days])
-        head :ok
+      @receipt = Receipt.by_id(params[:id])
+      render json: @receipt, serializer: ReceiptSerializer, status: :ok
       else
         error_grade
       end
