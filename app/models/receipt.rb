@@ -118,7 +118,8 @@ class Receipt < ApplicationRecord
   end
 
   def unique_payment_by_project
-    if Receipt.where(project_id: self.project_id).where(year: self.year).where(month: self.month).first
+    a = Receipt.where(project_id: self.project_id).where(year: self.year).where(month: self.month).first
+    if a && a.id != self.id
       errors.add(:project_id, "you have uploaded an receipt with the same date for the project")
     end
   end
