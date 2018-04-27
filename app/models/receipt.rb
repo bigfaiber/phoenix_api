@@ -30,7 +30,7 @@ class Receipt < ApplicationRecord
   validate :unique_payment_by_project
   validate :valid_delay
   validate :valid_grade
-  validate :valid_date
+  #validate :valid_date
   
 
   def self.load(page: 1, per_page: 10)
@@ -70,6 +70,9 @@ class Receipt < ApplicationRecord
       r.is_grade = true
       r.delay = days
       r.grade = values[days.to_i]
+      p r.validate
+      p "hola"
+      p r.errors
       if r.save
         client = r.project.client.id
         projects = Project.by_client(id: client).ids
@@ -89,7 +92,6 @@ class Receipt < ApplicationRecord
         end
         return true
       else
-        p r.errors
         return false
       end
     end
