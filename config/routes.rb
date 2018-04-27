@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     get 'projects/:id/amortization-table', to: "projects#generate_table", defaults: { format: 'pdf' }
     scope '/', defaults: { format: 'json' } do
       post '/login',  to: "authenticate#login"
+      resources :receipts, only: [] do
+        member do
+          post 'grade', to: "receipts#grade"
+        end
+      end
       resources :clients do
         member do
           post 'add-additional-data', to: "clients#additional_data"

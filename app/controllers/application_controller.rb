@@ -45,7 +45,15 @@ class ApplicationController < ActionController::API
   def error_warranty
     render json: {
       data: {
-        errors: ['We can upload the file']
+        errors: ['We cannot upload the file']
+      }
+    }, status: 500
+  end
+
+  def error_grade
+    render json: {
+      data: {
+        errors: ['We cannot grade the receipt']
       }
     }, status: 500
   end
