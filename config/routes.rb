@@ -12,8 +12,10 @@ Rails.application.routes.draw do
       resources :clients do
         member do
           post 'add-additional-data', to: "clients#additional_data"
+          post 'grade', to: "clients#grade"
         end
         collection do
+          get 'not-valid', to: "clients#not_valid"
           get 'end-sign-up', to: "clients#end_sign_up"
           get 'reset-password', to: "clients#reset"
           post 'new-password', to: "clients#new_password"

@@ -1,8 +1,8 @@
 class ClientsController < ApplicationController
-  before_action :authenticate_admin!, only: [:additional_data,:destroy,:new_clients,:old_clients]
+  before_action :authenticate_admin!, only: [:not_valid,:grade,:additional_data,:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
   before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:goods,:documents,:new_verification_code]
-  before_action :set_client, only: [:additional_data,:show,:update,:destroy,:show]
+  before_action :set_client, only: [:grade,:additional_data,:show,:update,:destroy,:show]
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
@@ -11,13 +11,25 @@ class ClientsController < ApplicationController
   end
 
   def new_clients
-    @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients.valid_form
+    @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients.valid_form.approved
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
     render json: @clients, meta: pagination_dict_new_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def old_clients
-    @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients.valid_form
+    @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients.valid_form.approved
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: ClientSerializer, status: :ok
+  end
+
+  def not_valid
+    if params.has_key?(:client) && params[:client].has_key?(:type) && params[:client][:type].to_s == "unfit"
+      @clients = Client.load(page: params[:page],per_page: params[:per_page]).valid_form.unfit
+    elsif params.has_key?(:client) && params[:client].has_key?(:type) && params[:client][:type].to_s == "evaluation"
+      @clients = Client.load(page: params[:page],per_page: params[:per_page]).valid_form.evaluation
+    else
+      @clients = Client.load(page: params[:page],per_page: params[:per_page]).valid_form.unfit
+    end
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
     render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
@@ -121,6 +133,20 @@ class ClientsController < ApplicationController
     else
       @object = @client
       error_render
+    end
+  end
+
+  def grade
+    if @client
+      @client.global = params[:client][:global].to_i
+      if @client.save
+        head :ok
+      else
+        @object = @client
+        error_render
+      end
+    else
+      error_not_found
     end
   end
 

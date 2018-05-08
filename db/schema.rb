@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180427001301) do
+ActiveRecord::Schema.define(version: 20180507203531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,9 @@ ActiveRecord::Schema.define(version: 20180427001301) do
     t.string "income"
     t.string "payment_capacity"
     t.integer "step", default: 1
+    t.integer "global", default: 0
+    t.integer "client_type", default: 0
+    t.integer "interest_level", default: 0
   end
 
   create_table "codes", force: :cascade do |t|
