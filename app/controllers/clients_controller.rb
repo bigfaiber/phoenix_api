@@ -31,7 +31,7 @@ class ClientsController < ApplicationController
       @clients = Client.load(page: params[:page],per_page: params[:per_page]).valid_form.unfit
     end
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def show
