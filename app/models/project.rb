@@ -64,6 +64,14 @@ class Project < ApplicationRecord
         }).group("clients.id")
   end
 
+  def self.has_project(client)
+    if Project.where(client_id: client).where(new_project: true).count > 0
+      true
+    else
+      false
+    end
+  end
+
   private
   def set_code
     code = Code.first

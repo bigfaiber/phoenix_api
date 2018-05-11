@@ -19,7 +19,7 @@ class ClientsController < ApplicationController
   def old_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients.valid_form.approved
     @clients = @clients.include_vehicle.include_estate.include_document.include_project
-    render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: ClientSerializer, status: :ok
+    render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: OldClientSerializer, status: :ok
   end
 
   def not_valid

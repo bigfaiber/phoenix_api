@@ -70,7 +70,7 @@ class Client < ApplicationRecord
   validates_inclusion_of :client_type, in: client_types.keys
   validates_numericality_of :identification, only_integer: true
   validates_length_of :phone, minimum: 10, maximum: 15
-  validates_length_of :identification, minimum: 8, maximum: 12
+  validates_length_of :identification, minimum: 5, maximum: 12
   validates_numericality_of :rent_payment, only_integer: true
   validates_numericality_of :interest_level, greater_than_or_equal_to: 0, less_than_or_equal_to: 4
   validates_numericality_of :global, greater_than_or_equal_to: 0, less_than_or_equal_to: 100
@@ -105,6 +105,10 @@ class Client < ApplicationRecord
     when "ingresos"
       Document.new(document_type: 3, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     end
+  end
+
+  def has_project
+    Project.has_project(self.id)
   end
 
   def recommended_interest
