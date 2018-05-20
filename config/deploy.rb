@@ -2,17 +2,17 @@
 lock "3.10.1"
 
 #Testing
-# server '35.231.77.182', port: 22, roles: [:web, :app, :db], primary: true
+server '35.231.77.182', port: 22, roles: [:web, :app, :db], primary: true
 #Production
-server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
+#server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
 
 
 set :repo_url,        'git@bitbucket.org:slabcode/phoenix_api.git'
 set :application,     'phoenix'
 #Testing
-# set :user,            'AndresGutierrez'
+set :user,            'AndresGutierrez'
 #Production
-set :user,            'agutierrezt'
+#set :user,            'agutierrezt'
 set :puma_threads,    [4, 16]
 set :puma_workers,    2   
 set :migration_role, :db

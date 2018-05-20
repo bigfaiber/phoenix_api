@@ -6,6 +6,7 @@ class Receipt < ApplicationRecord
   mount_uploader :receipt, ReceiptUploader
 
   scope :by_project, -> (id: ) { where(project_id: id) }
+  scope :is_grade, -> { where(is_grade: true) }
 
   enum month: {
     "Enero": 1,
@@ -70,6 +71,7 @@ class Receipt < ApplicationRecord
       r.is_grade = true
       r.delay = days
       r.grade = values[days.to_i]
+      r.days_in_arrears = 0.5 - 0.25 * r.delay
       if r.save
         client = r.project.client.id
         projects = Project.by_client(id: client).ids

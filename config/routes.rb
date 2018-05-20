@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         member do
           post 'add-additional-data', to: "clients#additional_data"
           post 'grade', to: "clients#grade"
+          get 'graph-values', to: "clients#graph"
         end
         collection do
           get 'not-valid', to: "clients#not_valid"

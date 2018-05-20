@@ -2,7 +2,7 @@ class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:not_valid,:grade,:additional_data,:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
   before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:goods,:documents,:new_verification_code]
-  before_action :set_client, only: [:grade,:additional_data,:show,:update,:destroy,:show]
+  before_action :set_client, only: [:graph,:grade,:additional_data,:show,:update,:destroy,:show]
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
@@ -133,6 +133,14 @@ class ClientsController < ApplicationController
     else
       @object = @client
       error_render
+    end
+  end
+
+  def graph
+    if @client
+      render json: @client.graph, status: :ok
+    else
+      error_not_found
     end
   end
 

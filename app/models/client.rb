@@ -111,6 +111,33 @@ class Client < ApplicationRecord
     Project.has_project(self.id)
   end
 
+  def graph
+    if self.global != 0
+      index = 0
+      values = {
+
+      }
+      values[index] = self.global
+      index = index + 1
+      Receipt.by_project(id: self.projects.ids).is_grade().group(:year,:month).sum(:days_in_arrears).values.each do |v|
+        p v
+        p values
+        values[index] = (values[index-1] + v).to_f
+      end
+      return {
+        data: {
+          values: values
+        }
+      }
+    else
+      return {
+        data: {
+          values: {}
+        }
+      }
+    end
+  end
+
   def recommended_interest
     interes = {
       "0": {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507203531) do
+ActiveRecord::Schema.define(version: 20180520133153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(version: 20180507203531) do
     t.boolean "is_grade", default: false
     t.integer "delay", default: 0
     t.decimal "grade", default: "0.0"
+    t.decimal "days_in_arrears", default: "0.0"
     t.index ["project_id"], name: "index_receipts_on_project_id"
   end
 
