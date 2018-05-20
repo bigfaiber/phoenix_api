@@ -119,7 +119,7 @@ class Client < ApplicationRecord
       }
       values[index] = self.global
       index = index + 1
-      Receipt.by_project(id: self.projects.ids).is_grade().group(:year,:month).sum(:days_in_arrears).values.each do |v|
+      Receipt.by_project(id: self.projects.ids).is_grade().group(:year,:month).average(:days_in_arrears).values.each do |v|
         p v
         p values
         values[index] = (values[index-1] + v).to_f
