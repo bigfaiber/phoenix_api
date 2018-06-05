@@ -137,6 +137,14 @@ class Client < ApplicationRecord
     end
   end
 
+  def calculated_global
+    calculated_global = self.global
+    Receipt.by_project(id: self.projects.ids).is_grade().group(:year,:month).average(:days_in_arrears).values.each do |v|
+      calculated_global = calculated_global + (v).to_f
+    end
+    calculated_global
+  end
+
   def recommended_interest
     interes = {
       "0": {

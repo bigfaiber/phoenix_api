@@ -1,6 +1,7 @@
 class ClientSerializer < ActiveModel::Serializer
-  attributes :id,:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:code_confirmation,:rent_tax,:rating,:employment_status,:avatar, :max_capacity, :patrimony, :current_debt, :income, :payment_capacity,:stability,:nivel,:job_position,:interest_level,:global,:client_type
+  attributes :id,:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:code_confirmation,:rent_tax,:rating,:employment_status,:avatar, :max_capacity, :patrimony, :current_debt, :income, :payment_capacity,:job_position,:interest_level,:client_type
   attribute :recommended_interest
+  attribute :global
   has_many :vehicles
   has_many :estates
   has_many :documents
@@ -8,5 +9,9 @@ class ClientSerializer < ActiveModel::Serializer
 
   def recommended_interest
     object.recommended_interest
+  end
+
+  def global
+    object.calculated_global
   end
 end
