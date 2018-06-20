@@ -364,7 +364,11 @@ class Client < ApplicationRecord
       }
     }
     if self.global >= 60
-      interes[self.interest_level.to_s.to_sym][self.global.to_s.to_sym]
+      calculated_global = self.global
+      Receipt.by_project(id: self.projects.ids).is_grade().group(:year,:month).average(:days_in_arrears).values.each do |v|
+        calculated_global = calculated_global + (v).to_f
+      end
+      interes[self.interest_level.to_s.to_sym][calculated_global.to_s.to_sym]
     else
       "NO HAY INTERES RECOMENDADO"
     end
