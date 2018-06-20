@@ -85,7 +85,7 @@ class Project < ApplicationRecord
           end 
         end 
       when 1
-        if time > 7
+        if time > 6
           if (valid_payment * 100.0)/time > 50 
             client.interest_level = 2
             client.save
