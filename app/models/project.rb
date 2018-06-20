@@ -72,6 +72,42 @@ class Project < ApplicationRecord
     end
   end
 
+  def change_level
+    client = Client.by_id(self.client_id)
+    time = self.receipts.count
+    valid_payment = self.receipts.where(delay: 0).count
+    case client.interest_level 
+      when 0
+        if time > 3
+          if (valid_payment * 100.0)/time > 25 
+            client.interest_level = 1
+            client.save
+          end 
+        end 
+      when 1
+        if time > 7
+          if (valid_payment * 100.0)/time > 50 
+            client.interest_level = 2
+            client.save
+          end 
+        end
+      when 2
+        if time > 9
+          if (valid_payment * 100.0)/time > 75 
+            client.interest_level = 3
+            client.save
+          end 
+        end
+      when 3
+        if time > 12
+          if (valid_payment * 100.0)/time > 99 
+            client.interest_level = 4
+            client.save
+          end 
+        end
+    end
+  end
+
   private
   def set_code
     code = Code.first

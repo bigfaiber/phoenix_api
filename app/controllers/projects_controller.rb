@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
     if @project
       @project.finished = true
       if @project.save
+        @project.change_level
         head :ok
       else
         @object = @project
