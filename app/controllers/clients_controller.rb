@@ -6,19 +6,19 @@ class ClientsController < ApplicationController
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
-    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
     render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def new_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients.valid_form.approved
-    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
     render json: @clients, meta: pagination_dict_new_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def old_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients.valid_form.approved
-    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
     render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: OldClientSerializer, status: :ok
   end
 
@@ -30,20 +30,20 @@ class ClientsController < ApplicationController
     else
       @clients = Client.load(page: params[:page],per_page: params[:per_page]).valid_form.unfit
     end
-    @clients = @clients.include_vehicle.include_estate.include_document.include_project
+    @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
     render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def show
     if @client
-      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
+      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'pros', 'cons'], status: :ok
     else
       error_not_found
     end
   end
 
   def token
-    render json: @current_client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
+    render json: @current_client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'pros', 'cons'], status: :ok
   end
 
   def reset
@@ -129,7 +129,7 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account'], status: :ok
+      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'pros', 'cons'], status: :ok
     else
       @object = @client
       error_render

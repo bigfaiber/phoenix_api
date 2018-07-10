@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :opinions
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #constraints subdomain: "api" do
     get 'projects/:id/amortization-table', to: "projects#generate_table", defaults: { format: 'pdf' }
@@ -9,7 +10,9 @@ Rails.application.routes.draw do
           post 'grade', to: "receipts#grade"
         end
       end
+      resources :opinions, only: [:update, :destroy]
       resources :clients do
+        resources :opinions, only: [:index,:create]
         member do
           post 'add-additional-data', to: "clients#additional_data"
           post 'grade', to: "clients#grade"
