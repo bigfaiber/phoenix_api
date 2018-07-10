@@ -89,12 +89,18 @@ class Project < ApplicationRecord
           if (valid_payment * 100.0)/time > 50 
             client.interest_level = 2
             client.save
+          elsif (valid_payment * 100.0)/time < 26
+            client.interest_level = 0
+            client.save
           end 
         end
       when 2
         if time > 9
           if (valid_payment * 100.0)/time > 75 
             client.interest_level = 3
+            client.save
+          elsif (valid_payment * 100.0)/time < 51 
+            client.interest_level = 1
             client.save
           end 
         end
@@ -103,8 +109,16 @@ class Project < ApplicationRecord
           if (valid_payment * 100.0)/time > 99 
             client.interest_level = 4
             client.save
+          elsif (valid_payment * 100.0)/time < 76 
+            client.interest_level = 2
+            client.save
           end 
         end
+      when 4
+        if (valid_payment * 100.0)/time < 100
+          client.interest_level = 3
+          client.save
+        end 
     end
   end
 
