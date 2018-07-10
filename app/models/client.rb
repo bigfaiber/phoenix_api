@@ -7,6 +7,9 @@ class Client < ApplicationRecord
   has_many :estates, dependent: :destroy
   has_many :documents, as: :imageable, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :pros, -> {where(opinion_status: 0)}, class_name: "Opinion", dependent: :destroy
+  has_many :cons, -> {where(opinion_status: 1)}, class_name: "Opinion", dependent: :destroy
+
 
 
   scope :new_clients, -> { where(new_client: true) }
@@ -19,6 +22,8 @@ class Client < ApplicationRecord
   scope :include_estate, -> {includes(:estates) }
   scope :include_document, -> {includes(:documents)}
   scope :include_project, -> {includes(:projects)}
+  scope :include_cons,  -> {includes(:cons)}
+  scope :include_pros,  -> {includes(:pros)}
 
 
   enum people: {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620205056) do
+ActiveRecord::Schema.define(version: 20180710012051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,15 @@ ActiveRecord::Schema.define(version: 20180620205056) do
     t.index ["project_id"], name: "index_matches_on_project_id"
   end
 
+  create_table "opinions", force: :cascade do |t|
+    t.text "opinion", null: false
+    t.integer "opinion_status", default: 0
+    t.bigint "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_opinions_on_client_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer "payment_type", default: 0, null: false
     t.string "name", null: false
@@ -216,6 +225,7 @@ ActiveRecord::Schema.define(version: 20180620205056) do
   add_foreign_key "estates", "clients"
   add_foreign_key "matches", "investors"
   add_foreign_key "matches", "projects"
+  add_foreign_key "opinions", "clients"
   add_foreign_key "projects", "clients"
   add_foreign_key "receipts", "projects"
   add_foreign_key "vehicles", "clients"
