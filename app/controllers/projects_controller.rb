@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
       @projects = @projects.by_time(time_start: params[:time_start],time_end: params[:time_end])
     end
     @projects = @projects.approved?.include_investor.include_account.include_client.include_receipts
-    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: '**'
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts']
   end
 
   def by_code
@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
       @projects = @projects.by_investor(id: @current_investor.id)
     end
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: '**'
+    render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts']
   end
 
   def finish
@@ -67,24 +67,24 @@ class ProjectsController < ApplicationController
   def clients
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: @current_client.id).by_finished(value: false)
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: '**'
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts']
   end
 
   def investors
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: @current_investor.id).by_finished(value: false)
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: '**'
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts']
   end
 
   def search
     if params.has_key?(:client)
       @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: params[:client])
       @projects = @projects.include_investor.include_account.include_client.include_receipts
-      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: '**'
+      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts']
     elsif params.has_key?(:investors)
       @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: params[:investor])
       @projects = @projects.include_investor.include_account.include_client.include_receipts
-      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: '**'
+      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts']
     else
       render json: {
         data: {
