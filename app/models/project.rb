@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   #before_save :update_fee
+  default_scope { order("matched DESC").order("approved DESC") }
   before_update :update_month
   before_create :set_code
 

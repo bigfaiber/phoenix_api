@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180710012051) do
+ActiveRecord::Schema.define(version: 20180717031936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20180710012051) do
     t.date "approved_date"
     t.string "code"
     t.boolean "finished", default: false
+    t.boolean "matched", default: false
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["investor_id"], name: "index_projects_on_investor_id"
