@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_client!, only: [:create,:receipt,:clients]
-  before_action :authenticate_admin_or_client!, only: [:update,:account]
+  before_action :authenticate_client!, only: [:create,:clients]
+  before_action :authenticate_admin_or_client!, only: [:update,:account,:receipt]
   before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
   before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
@@ -235,7 +235,7 @@ class ProjectsController < ApplicationController
 
   def receipt
     if @project
-      if @current_client.id == @project.client.id
+      if (@current_client && @current_client.id == @project.client.id) || @current_admin
         if Project.add_receipt(@project.id,receipt_params)
           head :ok
         else
