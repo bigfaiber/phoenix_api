@@ -1,5 +1,4 @@
 class AmortizationPdf < Prawn::Document
-
   def initialize(project)
     super()
     @project = project
@@ -33,16 +32,29 @@ class AmortizationPdf < Prawn::Document
     is_creating = true
     money_temp = @project.money + 0.0
     data = [["Periodo","Intereses","Abono a capital","Cuota a pagar","Saldo"]]
-    data += [["#{@project.initial_payment.strftime("%D")}","","","","$ #{price(@project.money)}"]]
+    if @project.initial_payment != nil
+      data += [["#{@project.initial_payment.strftime("%D")}","","","","$ #{price(@project.money)}"]]
+    else
+      data += [["#{period}","","","","$ #{price(@project.money)}"]]
+    end
+    
     while is_creating
       period = period + 1
       interest_temp = (@project.interest_rate/100.0)*money_temp
       payment = @project.monthly_payment - interest_temp
       if money_temp >= @project.monthly_payment
         money_temp = money_temp - payment
-        data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","$ #{price(@project.monthly_payment)}","$ #{price(money_temp.round)}"]]
+        if @project.initial_payment != nil
+          data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","$ #{price(@project.monthly_payment)}","$ #{price(money_temp.round)}"]]
+        else
+          data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(payment.round)}","$ #{price(@project.monthly_payment)}","$ #{price(money_temp.round)}"]]
+        end
       else
-        data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}"," $ #{price(money_temp.round + interest_temp.round)}","$ 0"]]
+        if @project.initial_payment != nil
+          data += [["#{(@project.initial_payment + period.month).strftime("%D")}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}"," $ #{price(money_temp.round + interest_temp.round)}","$ 0"]]
+        else
+          data += [["#{period}","$ #{price(interest_temp.round)}","$ #{price(money_temp.round)}"," $ #{price(money_temp.round + interest_temp.round)}","$ 0"]]
+        end
         money_temp = 0
       end
       

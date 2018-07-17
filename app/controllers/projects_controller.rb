@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
   before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
-  before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
+  #before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
 
   def index
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_finished(value: false)
@@ -259,13 +259,7 @@ class ProjectsController < ApplicationController
 
   def generate_table
     if @project
-      if @project.initial_payment == nil
-        render json: {
-          data: {
-            errors: ["The project doesn't have a date for the initial payment"]
-          }
-        }, status: 500
-      elsif @current_admin 
+      if @current_admin 
         pdf = AmortizationPdf.new(@project)
         send_data Base64.encode64(pdf.render),
         filename: "table.pdf",
@@ -278,12 +272,11 @@ class ProjectsController < ApplicationController
         type: 'application/octet-stream',
         disposition: 'attachment'
       else
-        render json: {
-          data: {
-            errors: ["You are not allowed to download this table"]
-          }
-        }, status: 500
-        
+        pdf = AmortizationPdf.new(@project)
+        send_data Base64.encode64(pdf.render),
+        filename: "table.pdf",
+        type: 'application/octet-stream',
+        disposition: 'attachment'
       end
     else
       error_not_found
