@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
   before_action :authenticate_investor!, only: [:like,:investors]
   before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
-  #before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
+  before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
 
   def index
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_finished(value: false)
