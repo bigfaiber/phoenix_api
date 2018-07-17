@@ -179,6 +179,7 @@ class ProjectsController < ApplicationController
           m.approved = true
           m.save
           @project.investor_id = @investor.id
+          @project.matched = true
           @project.save
           ClientMailer.investor_match(@investor).deliver_later
           ClientMailer.clinet_match(@client).deliver_later
