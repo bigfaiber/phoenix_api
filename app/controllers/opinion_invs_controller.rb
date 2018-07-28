@@ -1,15 +1,15 @@
-class OpinionsController < ApplicationController
+class OpinionInvsController < ApplicationController
   before_action :set_opinion, only: [:update, :destroy]
   before_action :authenticate_admin!, only: [:create,:update,:destroy]
 
   def index
-    @opinions = Opinion.load(page: params[:page] || 1, per_page: params[:per_page] || 10).by_client(client: params[:client_id])
+    @opinions = OpinionInv.load(page: params[:page] || 1, per_page: params[:per_page] || 10).by_investor(investor: params[:investor_id])
     render json: @opinions, meta: pagination_dict(@opinions), each_serializer: OpinionSerializer, status: :ok
   end
 
   def create
-    @opinion = Opinion.new(opinion_params)
-    @opinion.client_id = params[:client_id]
+    @opinion = OpinionInv.new(opinion_params)
+    @opinion.investor_id = params[:investor_id]
     if @opinion.save
       render json: @opinion, serializer: OpinionSerializer, status: :created
     else
@@ -24,7 +24,7 @@ class OpinionsController < ApplicationController
         render json: @opinion, serializer: OpinionSerializer, status: :ok
       else
         @object = @opinion
-        error_render      
+        error_render
       end
     else
       error_not_found
@@ -42,7 +42,7 @@ class OpinionsController < ApplicationController
 
   private
   def set_opinion
-    @opinion = Opinion.by_id(params[:id])
+    @opinion = OpinionInv.by_id(params[:id])
   end
 
   def opinion_params

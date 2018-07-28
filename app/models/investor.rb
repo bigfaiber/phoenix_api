@@ -6,6 +6,8 @@ class Investor < ApplicationRecord
   has_many :documents, as: :imageable, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_many :projects, -> {where(matches: {approved: true})} ,through: :matches
+  has_many :pros, -> {where(opinion_status: 0)}, class_name: "OpinionInv", dependent: :destroy
+  has_many :cons, -> {where(opinion_status: 1)}, class_name: "OpinionInv", dependent: :destroy
 
   scope :new_investors, -> { where(new_investor: true) }
   scope :valid_form, -> {where(step: 6)}

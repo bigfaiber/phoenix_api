@@ -3,4 +3,6 @@ class InvestorSerializer < ActiveModel::Serializer
   has_one :payment
   has_many :documents
   has_many :projects
+  has_many :cons
+  has_many :pros
 end

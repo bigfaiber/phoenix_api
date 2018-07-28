@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         end
       end
       resources :opinions, only: [:update, :destroy]
+      resources :opinion_invs, only: [:update,:destroy]
       resources :clients do
         resources :opinions, only: [:index,:create]
         member do
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
         end
       end
       resources :investors do
+        resources :opinion_invs, only: [:index,:create]
         resources :projects, only: [] do
           member do
             post 'match', to: "projects#match"
