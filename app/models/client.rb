@@ -83,6 +83,10 @@ class Client < ApplicationRecord
   validate :valid_step
   validates_numericality_of :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, allow_nil: true, only_integer: true
 
+  def full_name
+    "#{name} #{lastname}"
+  end
+
   def self.load(page: 1, per_page: 10)
     paginate(page: page, per_page: per_page)
   end

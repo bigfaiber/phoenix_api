@@ -1,5 +1,5 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:show,:update,:destroy]
+  before_action :set_investor, only: [:show,:update,:destroy,:graphs]
   before_action :authenticate_admin_or_investor!, only: [:update]
   before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors]
   before_action :authenticate_investor!, only: [:end_sign_up,:token,:verification,:avatar,:payment,:documents,:new_verification_code]
@@ -191,6 +191,21 @@ class InvestorsController < ApplicationController
       render json: {data: {
         errors: ["We don't have a client with that email"]
         }}, status: 500
+    end
+  end
+
+  def graphs
+    if @investor
+      p = Project.by_investor(id: @investor.id).ids
+      render json: {
+        data: {
+          debt: Tracing.debt_by_year_and_month(p),
+          interest: Tracing.interest_by_year_and_month(p),
+          people: Project.capital_distribution(@investor.id) 
+        }
+      }
+    else
+      error_not_found
     end
   end
 

@@ -35,6 +35,9 @@ Rails.application.routes.draw do
         end
       end
       resources :investors do
+        member do
+          get 'graphs', to: "investors#graphs"
+        end
         resources :opinion_invs, only: [:index,:create]
         resources :projects, only: [] do
           member do
@@ -70,6 +73,7 @@ Rails.application.routes.draw do
           get 'by-code', to: "projects#by_code"
         end
         member do
+          post 'add-month-balance', to: "projects#add_month_balance"
           post 'add-warranty', to: "projects#add_warranty"
           post 'finish', to: "projects#finish"
           post 'add-table', to: "projects#add_table"

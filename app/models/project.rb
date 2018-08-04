@@ -12,6 +12,9 @@ class Project < ApplicationRecord
   has_many :receipts, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_many :investors, through: :matches
+  has_many :tracings, dependent: :destroy
+
+  delegate :full_name, to: :client
 
   scope :include_investor, -> { includes(:investor) }
   scope :include_account, -> { includes(:account )}
@@ -47,6 +50,10 @@ class Project < ApplicationRecord
 
   def self.by_id(id)
     find_by_id(id)
+  end
+
+  def self.capital_distribution(investor)
+    by_investor(id: investor).by_finished(value: false).pluck(:id,:money).map {|v| [Project.by_id(v[0]).full_name, v[1]]}
   end
 
   def self.add_receipt(project, params)

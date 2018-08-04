@@ -1,9 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account,:receipt]
-  before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search]
+  before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search,:add_month_balance]
   before_action :authenticate_investor!, only: [:like,:investors]
-  before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match]
+  before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match,:add_month_balance]
   before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
 
   def index
@@ -39,6 +39,40 @@ class ProjectsController < ApplicationController
     end
     @projects = @projects.include_investor.include_account.include_client.include_receipts
     render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.cons','investor.pros','warranty_file']
+  end
+
+  def add_month_balance
+    if @project
+      if @project.investor_id != nil
+        a = Tracing.by_year_month_and_project(year: params[:project][:year], month: params[:project][:month], project: @project.id)
+        if a
+          a.interest = params[:project][:interest]
+          a.debt = params[:project][:debt]
+          if a.save
+            head :ok
+          else
+            @object = a
+            error_render
+          end
+        else
+          a = Tracing.new(year: params[:project][:year], month: params[:project][:month], project_id: @project.id,interest: params[:project][:interest], debt: params[:project][:debt])
+          if a.save
+            head :ok
+          else
+            @object = a
+            error_render
+          end
+        end
+      else
+        render json: {
+          data: {
+            errors: ['Project does not have an investor', 'Project has been finished']
+          }
+        }, status: 500
+      end
+    else
+      error_not_found
+    end
   end
 
   def finish
