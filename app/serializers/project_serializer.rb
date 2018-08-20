@@ -3,6 +3,7 @@ class ProjectSerializer < ActiveModel::Serializer
   has_many :receipts
   belongs_to :investor
   belongs_to :account
+  belongs_to :inv_account
   belongs_to :client
   has_one :amortization_table
   has_one :warranty_file

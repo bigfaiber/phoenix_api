@@ -1,9 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account,:receipt]
+  before_action :authenticate_admin_or_investor!, only: [:inv_account]
   before_action :authenticate_admin!, only: [:create_admin,:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search,:add_month_balance]
   before_action :authenticate_investor!, only: [:like,:investors]
-  before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match,:add_month_balance]
+  before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:inv_account,:show,:approve, :like,:match,:add_month_balance]
   before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
 
   def index
@@ -18,7 +19,7 @@ class ProjectsController < ApplicationController
       @projects = @projects.by_time(time_start: params[:time_start],time_end: params[:time_end])
     end
     @projects = @projects.approved?.include_investor.include_account.include_client.include_receipts
-    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
   end
 
   def by_code
@@ -38,7 +39,7 @@ class ProjectsController < ApplicationController
       @projects = @projects.by_investor(id: @current_investor.id)
     end
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.cons','investor.pros','warranty_file']
+    render json: @projects, meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.cons','investor.pros','warranty_file']
   end
 
   def add_month_balance
@@ -101,24 +102,24 @@ class ProjectsController < ApplicationController
   def clients
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: @current_client.id).by_finished(value: false)
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
   end
 
   def investors
     @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: @current_investor.id).by_finished(value: false)
     @projects = @projects.include_investor.include_account.include_client.include_receipts
-    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
+    render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
   end
 
   def search
     if params.has_key?(:client)
       @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_client(id: params[:client])
       @projects = @projects.include_investor.include_account.include_client.include_receipts
-      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
+      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
     elsif params.has_key?(:investors)
       @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_investor(id: params[:investor])
       @projects = @projects.include_investor.include_account.include_client.include_receipts
-      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
+      render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
     else
       render json: {
         data: {
@@ -130,7 +131,7 @@ class ProjectsController < ApplicationController
 
   def show
     if @project
-      render json: @project, serializer: ProjectSerializer, include: ['client.cons', 'client.pros','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
+      render json: @project, serializer: ProjectSerializer, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
     else
       error_not_found
     end
@@ -293,7 +294,35 @@ class ProjectsController < ApplicationController
     else
       error_not_found
     end
+  end
 
+  def inv_account
+    if @project
+      if(@current_investor && @project.investor && @current_investor.id == @project.investor.id) || @current_admin
+        if params[:new_account]
+          account = InvAccount.new(account_params)
+          account.investor_id = @project.investor.id
+          account.save
+          @project.inv_account_id = account.id
+        else
+          @project.inv_account_id = params[:project][:account]
+        end
+        if @project.save
+          render json: @project, serializer: ProjectSerializer, status: :ok
+        else
+          @object = @project
+          error_render
+        end
+      else
+        render json: {
+          data: {
+            errors: ["The investor is not the owner of the project"]
+          }
+        }, status: 401
+      end
+    else
+      error_not_found
+    end
   end
 
   def new_project

@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   #constraints subdomain: "api" do
     get 'projects/:id/amortization-table', to: "projects#generate_table", defaults: { format: 'pdf' }
     scope '/', defaults: { format: 'json' } do
+      get '/average-interest', to: "static#average_interest"
       post '/login',  to: "authenticate#login"
       resources :receipts, only: [] do
         member do
           post 'grade', to: "receipts#grade"
         end
       end
+      resources :inv_accounts, except: [:destroy]
       resources :profitabilities
       resources :opinions, only: [:update, :destroy]
       resources :opinion_invs, only: [:update,:destroy]
@@ -36,6 +38,7 @@ Rails.application.routes.draw do
         end
       end
       resources :investors do
+        resources :inv_accounts, only: [:index, :create]
         member do
           get 'graphs', to: "investors#graphs"
         end
@@ -82,6 +85,7 @@ Rails.application.routes.draw do
           post 'new-project', to: "projects#new_project"
           post 'change-interest', to: "projects#rate"
           post 'add-account', to: "projects#account"
+          post 'add-inv-account', to: "projects#inv_account"
           post 'approve-project', to: "projects#approve"
           post 'like', to: "projects#like"
           post 'add-receipt', to: "projects#receipt"

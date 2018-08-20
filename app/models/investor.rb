@@ -3,6 +3,7 @@ class Investor < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_one :payment, dependent: :destroy
+  has_many :accounts, class_name: 'InvAccount', dependent: :destroy
   has_many :documents, as: :imageable, dependent: :destroy
   has_many :matches, dependent: :destroy
   has_many :projects, -> {where(matches: {approved: true})} ,through: :matches

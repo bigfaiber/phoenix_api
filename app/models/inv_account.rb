@@ -1,4 +1,7 @@
-class Account < ApplicationRecord
+class InvAccount < ApplicationRecord
+  belongs_to :investor
+
+  scope :by_investor, -> (id:) {where(investor_id: id)}
 
   enum account_type: {
     "Ahorros": 0,
