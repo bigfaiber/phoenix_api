@@ -93,6 +93,7 @@ Rails.application.routes.draw do
       end
       resources :matches, only: [:index] do
         collection do
+          get 'grouped', to: "matches#grouped"
           get 'current-projects', to: "matches#current_projects"
         end
       end
