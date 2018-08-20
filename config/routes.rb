@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           post 'grade', to: "receipts#grade"
         end
       end
+      resources :profitabilities
       resources :opinions, only: [:update, :destroy]
       resources :opinion_invs, only: [:update,:destroy]
       resources :clients do

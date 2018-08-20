@@ -157,8 +157,12 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    head :no_content
+    if @project
+      @project.destroy
+      head :no_content
+    else
+      error_not_found
+    end
   end
 
   def rate
