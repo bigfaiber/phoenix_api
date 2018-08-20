@@ -67,6 +67,7 @@ Rails.application.routes.draw do
       end
       resources :projects, only: [:create,:update,:destroy,:show,:index] do
         collection do
+          post 'create-by-admin', to: "projects#create_admin"
           get 'by-clients', to: "projects#clients"
           get 'by-investors', to: "projects#investors"
           get 'search', to: "projects#search"

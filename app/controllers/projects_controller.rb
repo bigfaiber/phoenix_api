@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_client!, only: [:create,:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account,:receipt]
-  before_action :authenticate_admin!, only: [:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search,:add_month_balance]
+  before_action :authenticate_admin!, only: [:create_admin,:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search,:add_month_balance]
   before_action :authenticate_investor!, only: [:like,:investors]
   before_action :set_project, only: [:finish,:add_table,:new_project,:generate_table,:receipt,:update,:destroy,:rate,:account,:show,:approve, :like,:match,:add_month_balance]
   before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table]
@@ -147,6 +147,39 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def create_admin
+    @project = Project.new(project_admin_params)
+    @project.approved = true
+    @project.new_project = false 
+    if params[:project].has_key?(:investor_id) && params[:project][:investor_id] != nil
+      @project.initial_payment = params[:project][:initial_payment]
+      @project.investor_id = params[:project][:investor_id]
+      @project.matched = true
+    end
+    if @project.save
+      if @project.investor
+        Match.create(project_id: @project.id, investor_id: @project.investor.id,approved: true)
+        client = @project.client
+        client.new_client = false
+        client.save
+        investor = @project.investor
+        investor.new_investor = false
+        investor.save
+        ClientMailer.investor_match(investor).deliver_later
+        ClientMailer.clinet_match(client).deliver_later
+      end
+      account = Account.new(account_params)
+      if account.save
+        @project.account_id = account.id
+        @project.save
+      end
+      head :ok
+    else
+      @object = @project
+      error_render
+    end
+  end
+
   def update
     if @project.update(project_params)
       render json: @project, serializer: ProjectSerializer, status: :ok
@@ -178,6 +211,7 @@ class ProjectsController < ApplicationController
 
   def approve
     @project.approved = true
+    @project.new_project = false
     @project.save
     ClientMailer.project_approved(@project.client).deliver_later
     head :ok
@@ -346,6 +380,10 @@ class ProjectsController < ApplicationController
   private
   def set_project
     @project = Project.by_id(params[:id])
+  end
+
+  def project_admin_params
+    params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month,:approved_date, :interest_rate, :client_id)
   end
 
   def project_params
