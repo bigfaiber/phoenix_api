@@ -6,6 +6,7 @@ class Project < ApplicationRecord
 
   belongs_to :investor, optional: true
   belongs_to :account, optional: true
+  belongs_to :inv_account, optional: true
   belongs_to :client
   has_one :amortization_table, dependent: :destroy
   has_one :warranty_file, dependent: :destroy
@@ -43,6 +44,9 @@ class Project < ApplicationRecord
   validate :valid_date
   validates_inclusion_of :warranty, in: warranties.keys
 
+  def self.average_interest
+    by_finished(value: false).where(matched: true).average(:interest_rate)
+  end
 
   def self.load(page:1 ,per_page: 10)
     paginate(page: page, per_page: per_page)

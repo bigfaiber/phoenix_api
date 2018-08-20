@@ -1,7 +1,7 @@
 class AddCodeToProject < ActiveRecord::Migration[5.1]
   def change
     add_column :projects, :code, :string
-    Project.all.each do |pr|
+    Project.find_each do |pr|
       code = Code.first
       number = code.code[3..code.code.size].to_i
       number += 1

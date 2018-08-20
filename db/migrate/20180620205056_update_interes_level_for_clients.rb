@@ -1,6 +1,6 @@
 class UpdateInteresLevelForClients < ActiveRecord::Migration[5.1]
   def change
-    Client.all.each do |client|
+    Client.find_each do |client|
       projects = Project.where(client_id: client.id).where(finished: true)
       if projects.count > 0
         average_time = 0

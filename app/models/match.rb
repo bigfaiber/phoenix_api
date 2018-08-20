@@ -8,6 +8,7 @@ class Match < ApplicationRecord
     finished: false
   })}
   scope :by_approved, -> (value: ) { where(approved: value)}
+  scope :by_project, -> (project: ) {where(project_id: project)}
 
 
   def self.by_project_and_investor(project,investor)
@@ -21,5 +22,7 @@ class Match < ApplicationRecord
   def self.load(page: 1, per_page: 10)
     paginate(page: page, per_page: per_page).order("matches.created_at DESC")
   end
+
+  
 
 end

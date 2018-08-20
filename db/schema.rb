@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180804185328) do
+ActiveRecord::Schema.define(version: 20180820202637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,16 @@ ActiveRecord::Schema.define(version: 20180804185328) do
     t.index ["client_id"], name: "index_estates_on_client_id"
   end
 
+  create_table "inv_accounts", force: :cascade do |t|
+    t.string "bank", null: false
+    t.integer "account_type", default: 0, null: false
+    t.text "account_number", null: false
+    t.bigint "investor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["investor_id"], name: "index_inv_accounts_on_investor_id"
+  end
+
   create_table "investors", force: :cascade do |t|
     t.string "name", null: false
     t.string "lastname", null: false
@@ -175,6 +185,13 @@ ActiveRecord::Schema.define(version: 20180804185328) do
     t.index ["investor_id"], name: "index_payments_on_investor_id"
   end
 
+  create_table "profitabilities", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "percentage", default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "dream", null: false
     t.text "description", default: "", null: false
@@ -195,8 +212,10 @@ ActiveRecord::Schema.define(version: 20180804185328) do
     t.string "code"
     t.boolean "finished", default: false
     t.boolean "matched", default: false
+    t.bigint "inv_account_id"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["client_id"], name: "index_projects_on_client_id"
+    t.index ["inv_account_id"], name: "index_projects_on_inv_account_id"
     t.index ["investor_id"], name: "index_projects_on_investor_id"
   end
 
@@ -245,11 +264,13 @@ ActiveRecord::Schema.define(version: 20180804185328) do
 
   add_foreign_key "amortization_tables", "projects"
   add_foreign_key "estates", "clients"
+  add_foreign_key "inv_accounts", "investors"
   add_foreign_key "matches", "investors"
   add_foreign_key "matches", "projects"
   add_foreign_key "opinion_invs", "investors"
   add_foreign_key "opinions", "clients"
   add_foreign_key "projects", "clients"
+  add_foreign_key "projects", "inv_accounts"
   add_foreign_key "receipts", "projects"
   add_foreign_key "tracings", "projects"
   add_foreign_key "vehicles", "clients"

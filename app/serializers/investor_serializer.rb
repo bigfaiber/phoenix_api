@@ -5,4 +5,5 @@ class InvestorSerializer < ActiveModel::Serializer
   has_many :projects
   has_many :cons
   has_many :pros
+  has_many :accounts
 end

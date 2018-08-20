@@ -13,4 +13,9 @@ class MatchesController < ApplicationController
     render json: @matches, meta: pagination_dict(@matches), each_serializer: MatchSerializer, include: ['investor', 'project', 'project.client', 'project.account'], status: :ok
   end
 
+  def grouped
+    render json: MatchGrouped.grouped, status: :ok, each_serializer: MatchGroupedSerializer
+  end
+
+
 end
