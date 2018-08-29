@@ -35,7 +35,7 @@ class ProfitabilitiesController < ApplicationController
   end
 
   def destroy
-    if @@profitability
+    if @profitability
       @profitability.destroy
       head :no_content
     else
