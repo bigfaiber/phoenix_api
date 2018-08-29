@@ -25,14 +25,14 @@ class InvestorsController < ApplicationController
 
   def show
     if @investor
-      render json: @investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account'], status: :ok
+      render json: @investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account','projects.inv_account'], status: :ok
     else
       error_not_found
     end
   end
 
   def token
-    render json: @current_investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account'], status: :ok
+    render json: @current_investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account','projects.inv_account'], status: :ok
   end
 
   def create
