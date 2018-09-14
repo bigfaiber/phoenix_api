@@ -7,4 +7,9 @@ class ProjectSerializer < ActiveModel::Serializer
   belongs_to :client
   has_one :amortization_table
   has_one :warranty_file
+  has_many :investors
+
+  # def investors
+  #   object.investors.ids
+  # end
 end
