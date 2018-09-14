@@ -36,14 +36,14 @@ class ClientsController < ApplicationController
 
   def show
     if @client
-      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'projects.investor.pros', 'projects.investor.cons', 'projects.inv_account', 'projects.investors.cons', 'projects.investors.pros'], status: :ok
+      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'projects.investor.pros', 'projects.investor.cons', 'projects.inv_account', 'projects.investors.cons', 'projects.investors.pros', 'cons', 'pros'], status: :ok
     else
       error_not_found
     end
   end
 
   def token
-    render json: @current_client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'projects.investor.pros', 'projects.investor.cons', 'projects.inv_account', 'projects.investors.cons', 'projects.investors.pros'], status: :ok
+    render json: @current_client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'projects.investor.pros', 'projects.investor.cons', 'projects.inv_account', 'projects.investors.cons', 'projects.investors.pros', 'cons', 'pros'], status: :ok
   end
 
   def reset
