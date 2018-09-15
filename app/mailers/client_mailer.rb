@@ -176,7 +176,7 @@
     options = {
       :subject => "Sigue intentando",
       :email => investor.email,
-      :name => "#{investor.name} #{investor.lastname}"
+      :name => "#{investor.name} #{investor.lastname}",
       :global_merge_vars => [
         {
           name: 'name',
