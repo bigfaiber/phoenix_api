@@ -1,6 +1,6 @@
 class Receipt < ApplicationRecord
   default_scope do
-    order(year: :desc).order(month: :desc)
+    order(year: :asc).order(month: :asc)
   end
   belongs_to :project
   mount_uploader :receipt, ReceiptUploader

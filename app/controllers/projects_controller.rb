@@ -256,6 +256,10 @@ class ProjectsController < ApplicationController
           @project.save
           ClientMailer.investor_match(@investor).deliver_later
           ClientMailer.clinet_match(@client).deliver_later
+          m1 = Match.investors_by_project(@project.id)
+          m1.each do |t|
+            ClientMailer.investor_not_chosen(Investor.by_id(t.investor_id),@project).deliver_later
+          end
           Match.delete_not_approved(@project.id)
           head :ok
         else

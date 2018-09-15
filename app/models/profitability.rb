@@ -1,5 +1,5 @@
 class Profitability < ApplicationRecord
-
+  default_scope { order("created_at ASC") }
   validates_presence_of :percentage, :name
   validates_uniqueness_of :name
   validates_numericality_of :percentage, greater_than_or_equal_to: 0, less_than_or_equal_to: 100

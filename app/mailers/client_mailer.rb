@@ -172,6 +172,30 @@
     mandrill_send(options)
   end
 
+  def investor_not_chosen(investor,project)
+    options = {
+      :subject => "Sigue intentando",
+      :email => investor.email,
+      :name => "#{investor.name} #{investor.lastname}"
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: investor.name
+        },
+        {
+          name: 'lastname',
+          content: investor.lastname
+        },
+        {
+          name: 'project',
+          content: project.dream
+        }
+      ],
+      template: 'INVESTOR_NOT_CHOSEN'
+    }
+    mandrill_send(options)
+  end
+
   def new_password_confirmation(user, pass)
     options = {
       :subject => "Confirmacion Nueva Contrasena",
@@ -201,7 +225,7 @@
     message = {
       :subject=> "#{opts[:subject]}",
       :from_name=> "Phoenix team",
-      :from_email=>"non_reply@phx.com.co",
+      :from_email=>"operaciones@phx.com.co",
       :to=>
             [{"name"=>"#{opts[:name]}",
                 "email"=>"#{opts[:email]}",
