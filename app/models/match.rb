@@ -19,6 +19,10 @@ class Match < ApplicationRecord
     where(project_id: project).where(approved: false).destroy_all
   end
 
+  def self.investors_by_project(project)
+    where(project_id: project).where(approved: false)
+  end
+
   def self.load(page: 1, per_page: 10)
     paginate(page: page, per_page: per_page).order("matches.created_at DESC")
   end
