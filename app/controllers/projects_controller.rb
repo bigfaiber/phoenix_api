@@ -139,6 +139,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    average =  Project.average_interest
+    average ||= 1.5
+    @project.interest_rate = average
     @project.client_id = @current_client.id
     if @project.save
       render json: @project, serializer: ProjectSerializer, status: :ok
