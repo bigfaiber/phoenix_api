@@ -1,7 +1,7 @@
 class InvestorsController < ApplicationController
-  before_action :set_investor, only: [:show,:update,:destroy,:graphs]
+  before_action :set_investor, only: [:show,:update,:destroy,:graphs,:maximum]
   before_action :authenticate_admin_or_investor!, only: [:update]
-  before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors]
+  before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors,:maximum]
   before_action :authenticate_investor!, only: [:end_sign_up,:token,:verification,:avatar,:payment,:documents,:new_verification_code]
 
 
@@ -26,6 +26,20 @@ class InvestorsController < ApplicationController
   def show
     if @investor
       render json: @investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account','projects.inv_account'], status: :ok
+    else
+      error_not_found
+    end
+  end
+
+  def maximum
+    if @investor
+      @investor.maximum = params[:investor][:maximun]
+      if @investor.save
+        head :ok
+      else
+        @object = @investor
+        error_render
+      end
     else
       error_not_found
     end

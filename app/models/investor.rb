@@ -39,7 +39,7 @@ class Investor < ApplicationRecord
   validates_length_of :password, minimum: 8, if: Proc.new {|a| a.new_record? }
   validates_inclusion_of :employment_status, in: employment_statuses.keys
   validate :valid_age
-  validates_numericality_of :identification, only_integer: true
+  validates_numericality_of :identification, :maximum, only_integer: true
   validates_length_of :phone, minimum: 10, maximum: 15
   validates_length_of :identification, minimum: 8, maximum: 12
   validate :valid_step

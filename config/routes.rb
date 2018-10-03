@@ -41,6 +41,7 @@ Rails.application.routes.draw do
         resources :inv_accounts, only: [:index, :create]
         member do
           get 'graphs', to: "investors#graphs"
+          post 'change-maximum', to: "investors#maximum"
         end
         resources :opinion_invs, only: [:index,:create]
         resources :projects, only: [] do
