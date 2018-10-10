@@ -19,6 +19,6 @@ class ClientSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    (object.created_at - 5.hours).strftime("%Y, %B %A, %H:%M")
+    (object.created_at - 5.hours).strftime("%Y, %B %d - %A %H:%M")
   end
 end
