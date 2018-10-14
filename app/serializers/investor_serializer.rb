@@ -14,5 +14,6 @@ class InvestorSerializer < ActiveModel::Serializer
   end
 
   def debt
+    object.debt
   end
 end
