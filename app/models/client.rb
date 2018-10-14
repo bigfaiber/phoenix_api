@@ -62,6 +62,20 @@ class Client < ApplicationRecord
     'Califica': 3
   }
 
+  enum career: {
+    'Administrador': 0,
+    'Ingeniero': 1,
+    'Medicina': 2,
+    'Economia': 3,
+    'Veterinaria': 4,
+    'Contrabilidad': 5,
+    'Mercadeo': 6,
+    'Derecho': 7,
+    'Arquitectura': 8,
+    'Diseño': 9,
+    'Otra': 10
+  }
+
   validates_presence_of :name,:lastname,:identification,:phone,:address,:birthday,:email,:city
   validates_uniqueness_of :phone,:identification,:email
   validates_length_of :name,:lastname, minimum: 3
@@ -73,6 +87,7 @@ class Client < ApplicationRecord
   validates_inclusion_of :marital_status, in: marital_statuses.keys
   validates_inclusion_of :employment_status, in: employment_statuses.keys
   validates_inclusion_of :client_type, in: client_types.keys
+  validates_inclusion_of :career, in: careers.keys
   validates_numericality_of :identification, only_integer: true
   validates_length_of :phone, minimum: 10, maximum: 15
   validates_length_of :identification, minimum: 5, maximum: 12
@@ -82,6 +97,7 @@ class Client < ApplicationRecord
   validate :valid_rating
   validate :valid_step
   validates_numericality_of :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, allow_nil: true, only_integer: true
+  
 
   def full_name
     "#{name} #{lastname}"

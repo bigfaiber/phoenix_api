@@ -1,6 +1,8 @@
 class Tracing < ApplicationRecord
   belongs_to :project
 
+  default_scope {order('tracings.year ASC').order('tracings.month ASC')}
+
   validates_presence_of :year,:month,:interest,:debt
   validates_numericality_of :interest,:debt, greater_than_or_equal_to: 0
   validate :valid_month
@@ -26,6 +28,15 @@ class Tracing < ApplicationRecord
 
     def interest_by_year_and_month(ids)
       where(project_id: ids).group(:year,:month).sum(:interest)
+    end
+
+    def total_debt(ids)
+      v = where(project_id: ids).group(:year,:month).sum(:debt)
+      if v.empty? > 0
+        v[v.keys[v.length - 1]]
+      else
+        0.0
+      end
     end
 
   end

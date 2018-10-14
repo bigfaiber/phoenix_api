@@ -169,7 +169,11 @@ class ProjectsController < ApplicationController
         investor = @project.investor
         investor.new_investor = false
         investor.save
-        ClientMailer.investor_match(investor).deliver_later
+        if ((investor.maximum - investor.debt.to_f) < @project.money.to_f)
+          ClientMailer.investor_match_maximum(investor).deliver_later
+        else
+          ClientMailer.investor_match(investor).deliver_later
+        end
         ClientMailer.clinet_match(client).deliver_later
       end
       account = Account.new(account_params)

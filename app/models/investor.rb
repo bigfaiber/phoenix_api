@@ -32,10 +32,25 @@ class Investor < ApplicationRecord
     "Contratista": 3
   }
 
+  enum career: {
+    'Administrador': 0,
+    'Ingeniero': 1,
+    'Medicina': 2,
+    'Economia': 3,
+    'Veterinaria': 4,
+    'Contrabilidad': 5,
+    'Mercadeo': 6,
+    'Derecho': 7,
+    'Arquitectura': 8,
+    'Diseño': 9,
+    'Otra': 10
+  }
+
   validates_presence_of :name, :lastname, :identification, :phone, :address, :email, :city, :birthday
   validates_uniqueness_of :phone, :identification, :email
   validates_length_of :name,:lastname, minimum: 3
   validates_inclusion_of :education, in: educations.keys
+  validates_inclusion_of :career, in: careers.keys
   validates_length_of :password, minimum: 8, if: Proc.new {|a| a.new_record? }
   validates_inclusion_of :employment_status, in: employment_statuses.keys
   validate :valid_age
@@ -80,6 +95,11 @@ class Investor < ApplicationRecord
     when "ingresos"
       Document.new(document_type: 3, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     end
+  end
+
+  def debt
+    ids = self.projects.where(finished: false).ids
+    Tracing.total_debt(ids)
   end
 
   private

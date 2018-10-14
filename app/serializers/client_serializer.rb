@@ -1,5 +1,5 @@
 class ClientSerializer < ActiveModel::Serializer
-  attributes :id,:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:code_confirmation,:rent_tax,:rating,:employment_status,:avatar, :max_capacity, :patrimony, :current_debt, :income, :payment_capacity,:job_position,:interest_level,:client_type
+  attributes :id,:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:code_confirmation,:rent_tax,:rating,:employment_status,:avatar, :max_capacity, :patrimony, :current_debt, :income, :payment_capacity,:job_position,:interest_level,:client_type,:career
   attribute :recommended_interest
   attribute :created_at
   attribute :global

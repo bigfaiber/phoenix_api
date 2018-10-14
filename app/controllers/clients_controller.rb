@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:not_valid,:grade,:additional_data,:destroy,:new_clients,:old_clients]
   before_action :authenticate_admin_or_client!, only: [:update]
-  before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:goods,:documents,:new_verification_code]
+  before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:facebook_avatar,:goods,:documents,:new_verification_code]
   before_action :set_client, only: [:graph,:grade,:additional_data,:show,:update,:destroy,:show]
 
   def index
@@ -220,6 +220,16 @@ class ClientsController < ApplicationController
     end
   end
 
+  def facebook_avatar
+    @current_client.remote_avatar_url = params[:avatar]
+    if @current_client.save
+      render json: @current_client, serializer: ClientSerializer, status: :ok
+    else
+      @object = @current_client
+      error_render
+    end
+  end
+
   def documents
     Client.upload_document(@current_client,params[:type],params[:file])
     head :ok
@@ -241,10 +251,10 @@ class ClientsController < ApplicationController
 
   private
   def client_params_additional_data
-    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity)
+    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity,:career)
   end
   def client_params
-    params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions)
+    params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career)
   end
   def set_client
     @client = Client.by_id(params[:id])

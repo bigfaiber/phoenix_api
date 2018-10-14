@@ -2,7 +2,7 @@ class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show,:update,:destroy,:graphs,:maximum]
   before_action :authenticate_admin_or_investor!, only: [:update]
   before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors,:maximum]
-  before_action :authenticate_investor!, only: [:end_sign_up,:token,:verification,:avatar,:payment,:documents,:new_verification_code]
+  before_action :authenticate_investor!, only: [:end_sign_up,:token,:verification,:avatar,:facebook_avatar,:payment,:documents,:new_verification_code]
 
 
   def index
@@ -151,6 +151,16 @@ class InvestorsController < ApplicationController
     end
   end
 
+  def facebook_avatar
+    @current_investor.remote_avatar_url = params[:avatar]
+    if @current_investor.save
+      render json: @current_investor, serializer: InvestorSerializer, status: :ok
+    else
+      @object = @current_investor
+      error_render
+    end
+  end
+
   def payment
     if Investor.create_payment(@current_investor,payment_params)
       head :ok
@@ -225,11 +235,11 @@ class InvestorsController < ApplicationController
 
   private
   def investor_params
-    params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions)
+    params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions,:career)
   end
 
   def payment_params
-    params.require(:payment).permit(:name,:lastname,:card_number,:card_type,:ccv,:month,:year)
+    params.require(:payment).permit(:name,:lastname,:card_number,:card_type,:ccv,:month,:year,:career)
   end
 
   def set_investor

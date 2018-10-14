@@ -33,6 +33,7 @@ Rails.application.routes.draw do
           get 'old-clients', to: "clients#old_clients"
           get 'verification', to: "clients#verification"
           post 'upload-avatar', to: "clients#avatar"
+          post 'upload-facebook-avatar', to: "clients#facebook_avatar"
           post 'create-goods', to: "clients#goods"
           post 'upload-document', to: "clients#documents"
         end
@@ -59,6 +60,7 @@ Rails.application.routes.draw do
           get 'old-investors', to: "investors#old_investors"
           get 'verification', to: "investors#verification"
           post 'upload-avatar', to: "investors#avatar"
+          post 'upload-facebook-avatar', to: "clients#facebook_avatar"
           post 'create-payment', to: "investors#payment"
           post 'upload-document', to: "investors#documents"
         end

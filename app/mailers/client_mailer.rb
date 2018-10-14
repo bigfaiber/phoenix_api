@@ -148,6 +148,26 @@
     mandrill_send(options)
   end
 
+  def investor_match_maximum
+    options = {
+      :subject => 'Match Proyecto',
+      :email => user.email,
+      :name => "#{user.name} #{user.lastname}",
+      :global_merge_vars => [
+        {
+          name: 'name',
+          content: user.name
+        },
+        {
+          name: 'lastname',
+          content: user.lastname
+        }
+      ],
+      template: 'INVESTOR_MATCH_MAXIMUM'
+    }
+    mandrill_send(options)
+  end
+
   def new_password(resource, token)
     options = {
       :subject => "Solicitud Nueva Contrasena",
