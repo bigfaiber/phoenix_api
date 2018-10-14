@@ -32,7 +32,7 @@ class Tracing < ApplicationRecord
 
     def total_debt(ids)
       v = where(project_id: ids).group(:year,:month).sum(:debt)
-      if v.empty? > 0
+      if !v.empty?
         v[v.keys[v.length - 1]]
       else
         0.0
