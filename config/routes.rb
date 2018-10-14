@@ -60,7 +60,7 @@ Rails.application.routes.draw do
           get 'old-investors', to: "investors#old_investors"
           get 'verification', to: "investors#verification"
           post 'upload-avatar', to: "investors#avatar"
-          post 'upload-facebook-avatar', to: "clients#facebook_avatar"
+          post 'upload-facebook-avatar', to: "investors#facebook_avatar"
           post 'create-payment', to: "investors#payment"
           post 'upload-document', to: "investors#documents"
         end
