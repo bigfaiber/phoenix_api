@@ -1,3 +1,3 @@
 class VehicleSerializer < ActiveModel::Serializer
-  attributes :id,:price
+  attributes :id,:price,:plate
 end
