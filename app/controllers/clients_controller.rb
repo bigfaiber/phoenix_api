@@ -201,9 +201,11 @@ class ClientsController < ApplicationController
   end
 
   def goods
+    Vehicle.where(client_id: @current_client.id).destroy_all
+    Estate.where(client_id: @current_client.id).destroy_all
     params[:goods].each do |v|
       if v[:type] == "Vehicles"
-        Vehicle.new(price: v[:price],client_id: @current_client.id).save
+        Vehicle.new(plate: params[:plate], price: v[:price],client_id: @current_client.id).save
       else
         Estate.new(price: v[:price],client_id: @current_client.id).save
       end
@@ -231,7 +233,7 @@ class ClientsController < ApplicationController
   end
 
   def documents
-    Client.upload_document(@current_client,params[:type],params[:file])
+    Client.upload_document(params["file"].original_filename,@current_client,params[:type],params[:file])
     head :ok
   end
 
@@ -251,10 +253,10 @@ class ClientsController < ApplicationController
 
   private
   def client_params_additional_data
-    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity,:career)
+    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
   end
   def client_params
-    params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career)
+    params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
   end
   def set_client
     @client = Client.by_id(params[:id])

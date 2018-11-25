@@ -84,16 +84,16 @@ class Investor < ApplicationRecord
     p.save
   end
 
-  def self.upload_document(investor,type,file)
+  def self.upload_document(name,investor,type,file)
     case type
     when "cc"
-      Document.new(document_type: 0, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
+      Document.new(name: name, document_type: 0, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "renta"
-      Document.new(document_type: 1, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
+      Document.new(name: name, document_type: 1, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "extractos"
-      Document.new(document_type: 2, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
+      Document.new(name: name, document_type: 2, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     when "ingresos"
-      Document.new(document_type: 3, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
+      Document.new(name: name, document_type: 3, document: file,imageable_id: investor.id, imageable_type: investor.class.name).save
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181013231033) do
+ActiveRecord::Schema.define(version: 20181125164810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20181013231033) do
   create_table "accounts", force: :cascade do |t|
     t.string "bank", null: false
     t.bigint "account_type", default: 0, null: false
-    t.integer "account_number", null: false
+    t.text "account_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20181013231033) do
     t.integer "client_type", default: 0
     t.integer "interest_level", default: 0
     t.integer "career", default: 10
+    t.string "technical_career", default: ""
+    t.integer "household_type", default: 0
+    t.string "market_expenses", default: "0"
+    t.string "transport_expenses", default: "0"
+    t.string "public_service_expenses", default: "0"
+    t.string "bank_obligations", default: "0"
+    t.boolean "real_estate", default: false
+    t.boolean "payments_in_arrears", default: false
+    t.string "payments_in_arrears_value", default: "0"
+    t.string "payments_in_arrears_time", default: "No ha tenido mora"
   end
 
   create_table "codes", force: :cascade do |t|
@@ -93,6 +103,7 @@ ActiveRecord::Schema.define(version: 20181013231033) do
     t.bigint "imageable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "name", default: ""
     t.index ["imageable_type", "imageable_id"], name: "index_documents_on_imageable_type_and_imageable_id"
   end
 
@@ -254,6 +265,7 @@ ActiveRecord::Schema.define(version: 20181013231033) do
     t.bigint "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "plate", default: ""
     t.index ["client_id"], name: "index_vehicles_on_client_id"
   end
 

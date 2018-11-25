@@ -174,7 +174,7 @@ class InvestorsController < ApplicationController
   end
 
   def documents
-    Investor.upload_document(@current_investor,params[:type],params[:file])
+    Investor.upload_document(params["file"].original_filename,@current_investor,params[:type],params[:file])
     head :ok
   end
 

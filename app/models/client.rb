@@ -2,6 +2,7 @@ class Client < ApplicationRecord
   has_secure_password
   mount_uploader :avatar, AvatarUploader
   before_save :update_client_type
+  before_validation :set_payments_in_arrears
 
   has_many :vehicles, dependent: :destroy
   has_many :estates, dependent: :destroy
@@ -36,16 +37,16 @@ class Client < ApplicationRecord
 
   enum education: {
     "Primaria": 0,
-    "Secundaria": 1,
+    "Bachiller": 1,
     "Profesional": 2,
-    "Maestria": 3
+    "Maestria": 3,
+    "Tecnico/Tecnologo": 4
   }
 
   enum marital_status: {
     "Soltero": 0,
     "Casado": 1,
-    "Divorciado": 2,
-    "Viudo": 3
+    "Union libre": 2
   }
 
   enum employment_status: {
@@ -76,13 +77,22 @@ class Client < ApplicationRecord
     'Otra': 10
   }
 
+  enum household_type: {
+    "Arriendo": 0,
+    "Vivienda propia": 1,
+    "Vivienda familiar": 2,
+    "Estoy pagando vivienda": 3
+  }
+
   validates_presence_of :name,:lastname,:identification,:phone,:address,:birthday,:email,:city
   validates_uniqueness_of :phone,:identification,:email
   validates_length_of :name,:lastname, minimum: 3
   validate :valid_age
   validates_length_of :password, minimum: 8, if: Proc.new {|a| a.new_record? }
+  validates_length_of :technical_career, within: 3..50, if: Proc.new { |a| a.education == "Tecnico/Tecnologo"}
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
   validates_inclusion_of :people, in: people.keys
+  validates_inclusion_of :household_type, in: household_types.keys
   validates_inclusion_of :education, in: educations.keys
   validates_inclusion_of :marital_status, in: marital_statuses.keys
   validates_inclusion_of :employment_status, in: employment_statuses.keys
@@ -94,6 +104,12 @@ class Client < ApplicationRecord
   validates_numericality_of :rent_payment, only_integer: true
   validates_numericality_of :interest_level, greater_than_or_equal_to: 0, less_than_or_equal_to: 4
   validates_numericality_of :global, greater_than_or_equal_to: 0, less_than_or_equal_to: 100
+  validates_numericality_of :market_expenses, greater_than_or_equal_to: 0
+  validates_numericality_of :transport_expenses, greater_than_or_equal_to: 0
+  validates_numericality_of :public_service_expenses, greater_than_or_equal_to: 0
+  validates_numericality_of :bank_obligations, greater_than_or_equal_to: 0
+  validates_numericality_of :payments_in_arrears_value, equalt_to: 0, if: Proc.new { |a| a.payments_in_arrears }
+  validates_numericality_of :payments_in_arrears_value,  greater_than: 0, if: Proc.new { |a| !a.payments_in_arrears }
   validate :valid_rating
   validate :valid_step
   validates_numericality_of :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, allow_nil: true, only_integer: true
@@ -119,16 +135,16 @@ class Client < ApplicationRecord
     find_by_identification(identification)
   end
 
-  def self.upload_document(client,type,file)
+  def self.upload_document(name,client,type,file)
     case type
     when "cc"
-      Document.new(document_type: 0, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name,document_type: 0, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "renta"
-      Document.new(document_type: 1, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name,document_type: 1, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "extractos"
-      Document.new(document_type: 2, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name,document_type: 2, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     when "ingresos"
-      Document.new(document_type: 3, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name,document_type: 3, document: file,imageable_id: client.id, imageable_type: client.class.name).save
     end
   end
 
@@ -413,7 +429,15 @@ class Client < ApplicationRecord
     errors.add(:rating,"is not valid") if self.rating && (self.rating < 0 || self.rating > 5)
   end
 
+  def set_payments_in_arrears
+    if !self.payments_in_arrears
+      self.payments_in_arrears_value = "0"
+      self.payments_in_arrears_time = "No ha tenido mora"
+    end
+  end
+
   def update_client_type
+    
     if self.global_changed?
       if self.global <= 50 
         self.client_type = 1
