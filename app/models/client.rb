@@ -108,8 +108,7 @@ class Client < ApplicationRecord
   validates_numericality_of :transport_expenses, greater_than_or_equal_to: 0
   validates_numericality_of :public_service_expenses, greater_than_or_equal_to: 0
   validates_numericality_of :bank_obligations, greater_than_or_equal_to: 0
-  validates_numericality_of :payments_in_arrears_value, equalt_to: 0, if: Proc.new { |a| a.payments_in_arrears }
-  validates_numericality_of :payments_in_arrears_value,  greater_than: 0, if: Proc.new { |a| !a.payments_in_arrears }
+  validates_numericality_of :payments_in_arrears_value,  greater_than_or_equal_to: 0
   validate :valid_rating
   validate :valid_step
   validates_numericality_of :max_capacity, :patrimony, :current_debt, :income, :payment_capacity, allow_nil: true, only_integer: true
