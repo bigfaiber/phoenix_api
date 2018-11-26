@@ -205,7 +205,7 @@ class ClientsController < ApplicationController
     Estate.where(client_id: @current_client.id).destroy_all
     params[:goods].each do |v|
       if v[:type] == "Vehicles"
-        Vehicle.new(plate: params[:plate], price: v[:price],client_id: @current_client.id).save
+        Vehicle.new(plate: v[:plate], price: v[:price],client_id: @current_client.id).save
       else
         Estate.new(price: v[:price],client_id: @current_client.id).save
       end
