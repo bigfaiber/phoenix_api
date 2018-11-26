@@ -20,9 +20,10 @@ class Investor < ApplicationRecord
 
   enum education: {
     "Primaria": 0,
-    "Secundaria": 1,
+    "Bachiller": 1,
     "Profesional": 2,
-    "Maestria": 3
+    "Maestria": 3,
+    "Tecnico/Tecnologo": 4
   }
 
   enum employment_status: {
@@ -49,6 +50,7 @@ class Investor < ApplicationRecord
   validates_presence_of :name, :lastname, :identification, :phone, :address, :email, :city, :birthday
   validates_uniqueness_of :phone, :identification, :email
   validates_length_of :name,:lastname, minimum: 3
+  validates_length_of :technical_career, within: 3..50, if: Proc.new { |a| a.education == "Tecnico/Tecnologo"}
   validates_inclusion_of :education, in: educations.keys
   validates_inclusion_of :career, in: careers.keys
   validates_length_of :password, minimum: 8, if: Proc.new {|a| a.new_record? }

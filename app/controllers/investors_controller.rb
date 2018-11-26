@@ -235,11 +235,11 @@ class InvestorsController < ApplicationController
 
   private
   def investor_params
-    params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions,:career)
+    params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions,:career,:technical_career)
   end
 
   def payment_params
-    params.require(:payment).permit(:name,:lastname,:card_number,:card_type,:ccv,:month,:year,:career)
+    params.require(:payment).permit(:name,:lastname,:card_number,:card_type,:ccv,:month,:year,:career,:technical_career)
   end
 
   def set_investor
