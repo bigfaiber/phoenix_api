@@ -2,13 +2,203 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74df345e-a2bc-4365-b048-fbeb41b04b20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.generators" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.generators" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.rakeTasks" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/phoenix_api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/phoenix_api.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Capfile" beforeDir="false" afterPath="$PROJECT_DIR$/Capfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rakefile" beforeDir="false" afterPath="$PROJECT_DIR$/Rakefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/channels/application_cable/channel.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/channels/application_cable/channel.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/channels/application_cable/connection.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/channels/application_cable/connection.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/commands/authenticate_command.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/commands/authenticate_command.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/admins_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admins_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/authenticate_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/authenticate_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/clients_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/clients_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/concerns/.keep" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/concerns/.keep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/concerns/secured.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/concerns/secured.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/documents_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/documents_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/inv_accounts_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/inv_accounts_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/investors_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/investors_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/matches_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/matches_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/opinion_invs_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/opinion_invs_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/opinions_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/opinions_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/profitabilities_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/profitabilities_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/projects_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/projects_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/receipts_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/receipts_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/static_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/static_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/jobs/application_job.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/jobs/application_job.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mailers/application_mailer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/mailers/application_mailer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mailers/client_mailer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/mailers/client_mailer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/account.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/account.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/admin.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/admin.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/amortization_table.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/amortization_table.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/application_record.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/application_record.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/code.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/code.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/concerns/.keep" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/concerns/.keep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/document.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/document.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/estate.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/estate.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/inv_account.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/inv_account.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/investor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/investor.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/match.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/match.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/match_grouped.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/match_grouped.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/opinion.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/opinion.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/opinion_inv.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/opinion_inv.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/payment.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/payment.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/profitability.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/profitability.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/receipt.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/receipt.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/tracing.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/tracing.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/vehicle.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/vehicle.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/warranty_file.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/warranty_file.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pdfs/amortization_pdf.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/pdfs/amortization_pdf.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/account_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/account_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/admin_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/admin_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/amortization_table_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/amortization_table_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/client_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/client_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/document_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/document_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/estate_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/estate_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/inv_account_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/inv_account_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/investor_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/investor_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/match_grouped_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/match_grouped_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/match_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/match_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/old_client_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/old_client_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/opinion_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/opinion_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/payment_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/payment_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/profitability_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/profitability_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/project_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/project_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/receipt_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/receipt_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers/vehicle_serializer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers/vehicle_serializer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uploaders/avatar_uploader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/uploaders/avatar_uploader.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uploaders/document_uploader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/uploaders/document_uploader.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uploaders/receipt_uploader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/uploaders/receipt_uploader.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/uploaders/table_uploader.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/uploaders/table_uploader.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/mailer.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/mailer.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/mailer.text.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/mailer.text.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/bundle" beforeDir="false" afterPath="$PROJECT_DIR$/bin/bundle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/rails" beforeDir="false" afterPath="$PROJECT_DIR$/bin/rails" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/rake" beforeDir="false" afterPath="$PROJECT_DIR$/bin/rake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/setup" beforeDir="false" afterPath="$PROJECT_DIR$/bin/setup" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/spring" beforeDir="false" afterPath="$PROJECT_DIR$/bin/spring" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/update" beforeDir="false" afterPath="$PROJECT_DIR$/bin/update" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.ru" beforeDir="false" afterPath="$PROJECT_DIR$/config.ru" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/application.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/application.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/boot.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/boot.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/cable.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/cable.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/deploy.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/deploy.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/deploy/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/deploy/production.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/deploy/staging.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/deploy/staging.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/environment.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environment.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/environments/development.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environments/development.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/environments/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environments/production.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/environments/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/environments/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/ams.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/ams.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/application_controller_renderer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/application_controller_renderer.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/backtrace_silencers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/backtrace_silencers.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/carrier_wave.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/carrier_wave.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/cors.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/cors.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/filter_parameter_logging.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/filter_parameter_logging.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/inflections.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/inflections.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/mandrill.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/mandrill.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/mime_types.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/mime_types.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/initializers/wrap_parameters.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/initializers/wrap_parameters.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/locales/en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/config/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/puma.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/puma.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/secrets.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/secrets.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/spring.rb" beforeDir="false" afterPath="$PROJECT_DIR$/config/spring.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208193559_create_admins.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208193559_create_admins.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208195433_create_clients.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208195433_create_clients.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208195518_create_estates.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208195518_create_estates.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208195600_create_vehicles.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208195600_create_vehicles.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208213058_create_investors.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208213058_create_investors.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208213105_create_payments.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208213105_create_payments.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208220723_create_documents.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208220723_create_documents.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208220724_create_accounts.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208220724_create_accounts.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171208224424_create_projects.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171208224424_create_projects.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171209000014_create_receipts.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171209000014_create_receipts.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20171209024314_create_matches.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20171209024314_create_matches.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180102181927_add_password_toekn_to_clients.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180102181927_add_password_toekn_to_clients.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180102181941_add_password_token_to_investor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180102181941_add_password_token_to_investor.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180105211642_add_initial_payment_date_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180105211642_add_initial_payment_date_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180105212430_change_month_in_recipt.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180105212430_change_month_in_recipt.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180105213427_add_day_to_receipt.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180105213427_add_day_to_receipt.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180109172748_add_aditional_fields_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180109172748_add_aditional_fields_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180111001745_add_new_project_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180111001745_add_new_project_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180123205128_add_step_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180123205128_add_step_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180123205143_add_step_to_investor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180123205143_add_step_to_investor.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180206200951_add_approved_date_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180206200951_add_approved_date_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180206202521_create_amortization_tables.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180206202521_create_amortization_tables.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180408042924_remove_index_to_documents.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180408042924_remove_index_to_documents.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180413165136_create_codes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180413165136_create_codes.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180413165321_add_code_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180413165321_add_code_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180414223858_add_finished_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180414223858_add_finished_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180414230622_create_warranty_files.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180414230622_create_warranty_files.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180427001301_add_columns_to_receipt.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180427001301_add_columns_to_receipt.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180507203531_add_tacometro_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180507203531_add_tacometro_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180520133153_add_days_in_arrears_to_receipt.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180520133153_add_days_in_arrears_to_receipt.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180605193933_remove_colums_to_clients.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180605193933_remove_colums_to_clients.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180620205056_update_interes_level_for_clients.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180620205056_update_interes_level_for_clients.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180710012051_create_opinions.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180710012051_create_opinions.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180717031936_add_matched_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180717031936_add_matched_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180717033825_calculated_match_for_projects.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180717033825_calculated_match_for_projects.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180728172303_create_opinion_invs.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180728172303_create_opinion_invs.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180804185328_create_tracings.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180804185328_create_tracings.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180820155945_create_profitabilities.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180820155945_create_profitabilities.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180820195023_create_inv_accounts.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180820195023_create_inv_accounts.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180820202637_add_inv_account_to_project.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180820202637_add_inv_account_to_project.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20180907212812_update_matched_projects.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20180907212812_update_matched_projects.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181003025102_add_maximum_to_investor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181003025102_add_maximum_to_investor.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181013230944_add_career_to_clients.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181013230944_add_career_to_clients.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181013231033_add_career_to_investor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181013231033_add_career_to_investor.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125153447_add_name_to_documents.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125153447_add_name_to_documents.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125154805_add_plate_to_vehicle.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125154805_add_plate_to_vehicle.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125161315_add_technical_career_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125161315_add_technical_career_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125162030_add_household_type_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125162030_add_household_type_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125163149_add_expenses_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125163149_add_expenses_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125164004_add_real_estate_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125164004_add_real_estate_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181125164810_add_payments_in_arrears_to_client.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181125164810_add_payments_in_arrears_to_client.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migrate/20181126202452_add_technical_career_to_investor.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20181126202452_add_technical_career_to_investor.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/seeds.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/json_web_token.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/json_web_token.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/message_sender.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/message_sender.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tasks/.keep" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tasks/.keep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/.keep" beforeDir="false" afterPath="$PROJECT_DIR$/log/.keep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/admin/avatars/avatar/1/52fc7d2e-199e-4e17-9eaa-56a1c24c30c4" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/admin/avatars/avatar/1/52fc7d2e-199e-4e17-9eaa-56a1c24c30c4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/client/avatars/avatar/12/2f83508e-06b2-4fa6-a608-0989cb680631" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/client/avatars/avatar/12/2f83508e-06b2-4fa6-a608-0989cb680631" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/client/avatars/avatar/2/899aed30-10af-49e7-bc53-21221fc86853" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/client/avatars/avatar/2/899aed30-10af-49e7-bc53-21221fc86853" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/client/avatars/avatar/2/aa57ceac-9f59-4be2-86a5-c693e1dcc4e8" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/client/avatars/avatar/2/aa57ceac-9f59-4be2-86a5-c693e1dcc4e8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/1/834922af-ed6e-46cf-9243-48a664d45342.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/1/834922af-ed6e-46cf-9243-48a664d45342.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/1/fa13581e-fc01-46fe-b4af-5548b968d5ef" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/1/fa13581e-fc01-46fe-b4af-5548b968d5ef" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/2/ef3a6739-8cf4-47e6-9413-061305e29ce7" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/2/ef3a6739-8cf4-47e6-9413-061305e29ce7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/8/aa65686b-3545-4759-a3b3-6985d630ddde.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/document/Client/documents/document/8/aa65686b-3545-4759-a3b3-6985d630ddde.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/document/Investor/documents/document/1/127eb516-7827-4daf-8666-36da1ab4e89e" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/document/Investor/documents/document/1/127eb516-7827-4daf-8666-36da1ab4e89e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/document/Investor/documents/document/3/361592e0-b6af-4a0b-a03e-3e742b54e4d5" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/document/Investor/documents/document/3/361592e0-b6af-4a0b-a03e-3e742b54e4d5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/investor/avatars/avatar/1/79cbaf7a-35ea-49a8-8463-afb0f71260de.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/investor/avatars/avatar/1/79cbaf7a-35ea-49a8-8463-afb0f71260de.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/investor/avatars/avatar/4/4951cb72-2f82-4620-b24c-2ca5b5e1a15e" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/investor/avatars/avatar/4/4951cb72-2f82-4620-b24c-2ca5b5e1a15e" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/receipt/1/receipts/receipt/1/ae5f755b-c7ad-4563-9f6b-2f973209b767" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/receipt/1/receipts/receipt/1/ae5f755b-c7ad-4563-9f6b-2f973209b767" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/receipt/1/receipts/receipt/1/fd29eecc-9792-491d-88da-2bfa963806dd" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/receipt/1/receipts/receipt/1/fd29eecc-9792-491d-88da-2bfa963806dd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/tmp/1512836139-38847-0001-3224/Screen_Shot_2017-12-08_at_17.33.36.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/tmp/1512836139-38847-0001-3224/Screen_Shot_2017-12-08_at_17.33.36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/tmp/1512836180-38847-0002-9027/Screen_Shot_2017-12-08_at_17.33.36.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/tmp/1512836180-38847-0002-9027/Screen_Shot_2017-12-08_at_17.33.36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/tmp/1512836501-38847-0004-6654/Screen_Shot_2017-12-08_at_17.33.36.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/tmp/1512836501-38847-0004-6654/Screen_Shot_2017-12-08_at_17.33.36.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/tmp/1523748165-11466-0001-9967/Screen_Shot_2018-04-05_at_12.05.45.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/tmp/1523748165-11466-0001-9967/Screen_Shot_2018-04-05_at_12.05.45.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/warranty_file/documents/document/2/cd8d6043-b832-4190-b6fd-7e17d9a0a857.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/uploads/warranty_file/documents/document/2/cd8d6043-b832-4190-b6fd-7e17d9a0a857.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/.keep" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/.keep" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/.keep" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/.keep" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -26,29 +216,56 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Capfile">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/deploy/production.rb">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/deploy/staging.rb">
+        <entry file="file://$PROJECT_DIR$/config/deploy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="57" column="27" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="27" />
+            <state relative-caret-position="527">
+              <caret line="31" column="89" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/deploy.rb">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+            <state relative-caret-position="-497">
+              <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/test.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-255" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/application.rb">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-510" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/nginx.conf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="544">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
             </state>
           </provider>
         </entry>
@@ -58,7 +275,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>agutierrezt</find>
+      <find>bra</find>
+      <find>phoenix</find>
+      <find>agutierrezt/apps/phoenix</find>
+      <find>ngin</find>
     </findStrings>
+    <replaceStrings>
+      <replace>phx/apps/api</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,7 +290,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/config/nginx.conf" />
         <option value="$PROJECT_DIR$/config/deploy.rb" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -81,7 +307,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -98,12 +323,13 @@
               <item name="phoenix_api" type="b2602c69:ProjectViewProjectNode" />
               <item name="phoenix_api" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="deploy" type="462c0819:PsiDirectoryNode" />
+              <item name="environments" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="RailsProjectView" />
     </panes>
   </component>
@@ -214,16 +440,18 @@
       <updated>1557932718437</updated>
       <workItem from="1557932719794" duration="622000" />
       <workItem from="1558103364412" duration="330000" />
+      <workItem from="1558645697932" duration="958000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="952000" />
+    <option name="totallyTimeSpent" value="2547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553305" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -261,10 +489,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/nginx.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/application.rb">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/test.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-497">
+          <caret line="42" column="24" lean-forward="true" selection-start-line="42" selection-start-column="24" selection-end-line="42" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/deploy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        <state relative-caret-position="527">
+          <caret line="31" column="89" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
