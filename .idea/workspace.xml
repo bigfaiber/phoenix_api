@@ -218,8 +218,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/deploy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="89" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
+            <state relative-caret-position="407">
+              <caret line="95" column="85" lean-forward="true" selection-start-line="95" selection-start-column="1" selection-end-line="95" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -245,7 +245,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -261,11 +261,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/nginx.conf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="17">
+              <caret line="1" column="57" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -276,9 +276,10 @@
     <findStrings>
       <find>agutierrezt</find>
       <find>bra</find>
-      <find>phoenix</find>
       <find>agutierrezt/apps/phoenix</find>
       <find>ngin</find>
+      <find>phoenix-puma</find>
+      <find>phoenix</find>
     </findStrings>
     <replaceStrings>
       <replace>phx/apps/api</replace>
@@ -290,9 +291,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/nginx.conf" />
-        <option value="$PROJECT_DIR$/config/deploy.rb" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/config/deploy.rb" />
+        <option value="$PROJECT_DIR$/config/nginx.conf" />
       </list>
     </option>
   </component>
@@ -445,7 +446,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2547000" />
+    <option name="totallyTimeSpent" value="6317000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -489,20 +490,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/nginx.conf">
+    <entry file="file://$PROJECT_DIR$/config/environments/test.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="-255" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/test.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255" />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
       <provider selected="true" editor-type-id="text-editor">
@@ -513,15 +514,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/deploy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="89" selection-start-line="31" selection-start-column="89" selection-end-line="31" selection-end-column="89" />
+        <state relative-caret-position="407">
+          <caret line="95" column="85" lean-forward="true" selection-start-line="95" selection-start-column="1" selection-end-line="95" selection-end-column="85" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/config/nginx.conf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        <state relative-caret-position="17">
+          <caret line="1" column="57" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
         </state>
       </provider>
     </entry>

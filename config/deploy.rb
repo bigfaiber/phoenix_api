@@ -93,3 +93,4 @@ end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
+#sudo ln -nfs /home/phx/apps/api/current/config/nginx.conf /etc/nginx/conf.d/api.conf
