@@ -39,7 +39,7 @@
     <orderEntry type="library" scope="PROVIDED" name="arel (v8.0.0, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.11, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.3, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.0.1, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.0.2, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="byebug (v10.0.0, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capistrano (v3.10.1, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capistrano-bundler (v1.3.0, Remote-rvm: ruby-2.5.1p57 ( revision 63029)-p57) [gem]" level="application" />
