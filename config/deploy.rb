@@ -1,13 +1,13 @@
 # config valid only for current version of Capistrano
 lock "3.10.1"
 
-#Testing
-#server '35.231.77.182', port: 22, roles: [:web, :app, :db], primary: true
+#Staging
+# server '35.196.13.213', port: 22, roles: [:web, :app, :db], primary: true
 #Production
-server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
+# server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
 
 
-set :repo_url,        'git@bitbucket.org:aliCamargo/phx_api.git'
+set :repo_url,        'git@github.com:bigfaiber/phoenix_api.git'
 set :application,     'api'
 #Testing
 #set :user,            'AndresGutierrez'
