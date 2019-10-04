@@ -80,4 +80,18 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: 'api.phx.com.co'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address   => "smtp.mandrillapp.com",
+    :port      => 587,
+    :enable_starttls_auto => true,
+    :user_name => "FINANCE",
+    :password  => "wz2YKz7YFKjJdwymttjL1g",
+    :authentication => 'login',
+    :domain => 'phx.com.co'
+  }
+
+  config.textris_delivery_method = :twilio
 end
