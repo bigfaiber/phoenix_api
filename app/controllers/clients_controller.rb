@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:not_valid,:grade,:additional_data,:destroy,:new_clients,:old_clients]
-  before_action :authenticate_admin_or_client!, only: [:update]
+  before_action :authenticate_admin_or_client!, only: [:update, :index, :show]
   before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:facebook_avatar,:goods,:documents,:new_verification_code]
   before_action :set_client, only: [:graph,:grade,:additional_data,:show,:update,:destroy,:show]
 

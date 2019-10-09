@@ -9,7 +9,7 @@ class AuthenticateCommand
   end
 
   def call
-    JsonWebToken.encode(playload: {id: find.id, type: @type }) if find
+    JsonWebToken.encode(payload: {id: find.id, type: @type }) if find
   end
 
   private
