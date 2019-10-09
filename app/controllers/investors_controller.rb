@@ -1,6 +1,6 @@
 class InvestorsController < ApplicationController
   before_action :set_investor, only: [:show,:update,:destroy,:graphs,:maximum]
-  before_action :authenticate_admin_or_investor!, only: [:update]
+  before_action :authenticate_admin_or_investor!, only: [:update, :index, :show]
   before_action :authenticate_admin!, only: [:destroy,:new_investors,:old_investors,:maximum]
   before_action :authenticate_investor!, only: [:end_sign_up,:token,:verification,:avatar,:facebook_avatar,:payment,:documents,:new_verification_code]
 
