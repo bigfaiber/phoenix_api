@@ -1,8 +1,8 @@
 class JsonWebToken
   class << self
-    def encode(playload: {}, exp: 30.minute.from_now)
-      playload[:exp] = exp.to_i
-      JWT.encode(playload,Rails.application.secrets.secret_key_base)
+    def encode(payload: {}, exp: 30.minute.from_now)
+      payload[:exp] = exp.to_i
+      JWT.encode(payload,Rails.application.secrets.secret_key_base)
     end
     def decode(token)
       body = JWT.decode(token,Rails.application.secrets.secret_key_base)[0]

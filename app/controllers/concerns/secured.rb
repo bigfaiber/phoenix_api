@@ -10,13 +10,13 @@ module Secured
         unless @current_client
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_client.id,type: @current_client.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_client.id,type: @current_client.class.name})
       elsif obj[:type] == "Admin"
         @current_admin = Admin.by_id(obj[:id])
         unless @current_admin
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_admin.id,type: @current_admin.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_admin.id,type: @current_admin.class.name})
       else
         raise JWT::VerificationError
       end
@@ -37,19 +37,19 @@ module Secured
         unless @current_client
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_client.id,type: @current_client.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_client.id,type: @current_client.class.name})
       elsif obj[:type] == "Admin"
         @current_admin = Admin.by_id(obj[:id])
         unless @current_admin
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_admin.id,type: @current_admin.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_admin.id,type: @current_admin.class.name})
       elsif obj[:type] == "Investor"
         @current_investor = Investor.by_id(obj[:id])
         unless @current_investor
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_investor.id,type: @current_investor.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_investor.id,type: @current_investor.class.name})
       else
         raise JWT::VerificationError
       end
@@ -70,13 +70,13 @@ module Secured
         unless @current_investor
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_investor.id,type: @current_investor.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_investor.id,type: @current_investor.class.name})
       elsif obj[:type] == "Admin"
         @current_admin = Admin.by_id(obj[:id])
         unless @current_admin
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_admin.id,type: @current_admin.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_admin.id,type: @current_admin.class.name})
       else
         raise JWT::VerificationError
       end
@@ -92,14 +92,14 @@ module Secured
   def authenticate_admin!
     begin
       obj = auth_token
-      if obj[:type] != "Admin"
+      if obj['type'] != "Admin"
         raise JWT::VerificationError
       else
         @current_admin = Admin.by_id(obj[:id])
         unless @current_admin
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_admin.id,type: @current_admin.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_admin.id,type: @current_admin.class.name})
       end
     rescue JWT::VerificationError, JWT::DecodeError
       render json: { data: {
@@ -112,14 +112,14 @@ module Secured
   def authenticate_client!
     begin
       obj = auth_token
-      if obj[:type] != "Client"
+      if obj['type'] != "Client"
         raise JWT::VerificationError
       else
         @current_client = Client.by_id(obj[:id])
         unless @current_client
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_client.id,type: @current_client.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_client.id,type: @current_client.class.name})
       end
     rescue JWT::VerificationError, JWT::DecodeError
       render json: { data: {
@@ -132,7 +132,6 @@ module Secured
   def authenticate_investor!
     begin
       obj = auth_token
-      p obj
       if obj[:type] != "Investor"
         raise JWT::VerificationError
       else
@@ -140,7 +139,7 @@ module Secured
         unless @current_investor
           raise JWT::VerificationError
         end
-        @token = JsonWebToken.encode(playload: {id: @current_investor.id,type: @current_investor.class.name})
+        @token = JsonWebToken.encode(payload: {id: @current_investor.id,type: @current_investor.class.name})
       end
     rescue JWT::VerificationError, JWT::DecodeError
       render json: { data: {
@@ -157,8 +156,8 @@ module Secured
   end
 
   def http_token
-    if request.headers['Authorization'].present?
-      values = request.headers['Authorization'].split(' ')
+    if request.headers['HTTP_AUTHORIZATION'].present?
+      values = request.headers['HTTP_AUTHORIZATION'].split(' ')
       if values[0] == "Bearer"
         return values.last
       else
