@@ -7,6 +7,10 @@ class ClientsController < ApplicationController
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
     @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
+    if params.has_key?(:filter)
+      p params[:filter]
+      @clients = @clients.where("upper(name) like upper('%#{params[:filter]}%') or upper(lastname) like upper('%#{params[:filter]}%')")
+    end
     render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
