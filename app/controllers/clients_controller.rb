@@ -7,22 +7,21 @@ class ClientsController < ApplicationController
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
     @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
-    if params.has_key?(:filter)
-      p params[:filter]
-      @clients = @clients.where("upper(name) like upper('%#{params[:filter]}%') or upper(lastname) like upper('%#{params[:filter]}%')")
-    end
+    filter_clients
     render json: @clients, meta: pagination_dict(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def new_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).new_clients.valid_form.approved
     @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
+    filter_clients
     render json: @clients, meta: pagination_dict_new_client(@clients), each_serializer: ClientSerializer, status: :ok
   end
 
   def old_clients
     @clients = Client.load(page: params[:page],per_page: params[:per_page]).old_clients.valid_form.approved
     @clients = @clients.include_vehicle.include_estate.include_document.include_project.include_pros.include_cons
+    filter_clients
     render json: @clients, meta: pagination_dict_old_client(@clients), each_serializer: OldClientSerializer, status: :ok
   end
 
@@ -264,5 +263,11 @@ class ClientsController < ApplicationController
   end
   def set_client
     @client = Client.by_id(params[:id])
+  end
+  def filter_clients
+    if params.has_key?(:filter)
+      p params[:filter]
+      @clients = @clients.where("upper(name) like upper('%#{params[:filter]}%') or upper(lastname) like upper('%#{params[:filter]}%')")
+    end
   end
 end
