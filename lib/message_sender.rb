@@ -4,8 +4,8 @@ class MessageSender
   end
 
   def initialize
-    account_sid = "ACa809307c884926237732fd472178bcb5"
-    auth_token  = "c87263bc9ace638802200644ded3f4eb"
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    auth_token  = ENV['TWILIO_AUTH_TOKEN']
     @client = Twilio::REST::Client.new(account_sid, auth_token)
   end
 
