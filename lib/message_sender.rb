@@ -11,7 +11,7 @@ class MessageSender
 
   def send_message(code,phone)
     @client.messages.create(
-      from:  "+18557824012",
+      from:  ENV['SENDER_PHONE'],
       to:    phone,
       body:  "Su codigo de verificacon es: \n #{code}"
     )

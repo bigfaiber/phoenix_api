@@ -98,6 +98,7 @@ class ClientsController < ApplicationController
         begin
           MessageSender.send_message(code,@client.phone)
         rescue Twilio::REST::TwilioError => error
+          p error
           return render json: {
             data: {
               errors: ["We can't send the code"]
