@@ -1,6 +1,6 @@
 class CloudEnvImporter
   include HTTParty
-  base_uri = 'http://metadata.google.internal/computeMetadata/v1/project/attributes/'
+  base_uri  'http://metadata.google.internal/computeMetadata/v1/project/attributes/'
 
   def get_request(service_url = '')
     headers = {"Metadata-Flavor": "Google"}
