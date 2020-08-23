@@ -11,7 +11,7 @@ class CloudEnvImporter
     keys = get_request.parsed_response.split("\n") - ['ssh-keys']
     env_vars = {}
     keys.each do |key|
-      env_vars[key] = get_request(key).parsed_response
+      env_vars[key] = get_request("/#{key}").parsed_response
     end
     env_vars
   end
