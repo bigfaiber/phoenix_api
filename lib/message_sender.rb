@@ -20,7 +20,7 @@ class MessageSender
     @client.messages.create(
       from:  ENV['SENDER_PHONE'],
       to:    phone,
-      body:  "Su codigo de verificacon es: \n #{code}"
+      body:  "Su codigo de verificacion es: \n #{code}"
     )
   end
 end
