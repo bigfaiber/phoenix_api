@@ -12,7 +12,7 @@ class CloudEnvImporter
   end
 
   def get_env_vars
-    keys = get_request&.parsed_response.split("\n") - ['ssh-keys']
+    keys = get_request&.parsed_response&.split("\n") - ['ssh-keys']
     env_vars = {}
     keys.each{ |key| env_vars[key] = get_request("/#{key}")&.parsed_response} if keys
     env_vars
