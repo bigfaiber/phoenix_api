@@ -4,7 +4,11 @@ class CloudEnvImporter
 
   def get_request(service_url = '')
     headers = {"Metadata-Flavor": "Google"}
-    self.class.get(service_url, {headers: headers})
+    begin
+      self.class.get(service_url, {headers: headers})
+    rescue
+      p "I'm on Heroku Environment"
+    end
   end
 
   def get_env_vars
