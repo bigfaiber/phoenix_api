@@ -88,7 +88,7 @@ Rails.application.configure do
     :port      => 587,
     :enable_starttls_auto => true,
     :user_name => "FINANCE",
-    :password  => "wz2YKz7YFKjJdwymttjL1g",
+    :password  => ENV['MAILCHIMP_KEY'],
     :authentication => 'login',
     :domain => 'phx.com.co'
   }
