@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'projects/:id/amortization-table', to: "projects#generate_table", defaults: { format: 'pdf' }
     scope '/', defaults: { format: 'json' } do
       get '/average-interest', to: "static#average_interest"
+      get '/projects-values-interest', to: "static#projects_values_interest"
       post '/login',  to: "authenticate#login"
       resources :receipts, only: [] do
         member do
