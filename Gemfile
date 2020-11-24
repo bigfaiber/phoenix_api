@@ -4,6 +4,7 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+ruby "2.6.6"
 
 gem 'httparty'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -59,6 +60,7 @@ gem 'twilio-ruby'
 gem 'prawn'
 gem 'prawn-table'
 
+gem 'faker'
 
 #mandrill
 gem 'mandrill-api'
