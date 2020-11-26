@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: phoenix_development
-  username: faiber
+  # username: faiber
 
 
   # The specified database role being used to connect to postgres.
@@ -60,7 +60,7 @@ development:
 test:
   <<: *default
   database: phoenix_test
-  username: faiber
+  # username: faiber
 
 
 # As with config/secrets.yml, you never want to store sensitive information,
