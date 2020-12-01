@@ -14,15 +14,13 @@ class AuthenticateCommand
 
   private
   def find
-    case @type
-    when "Admin"
-      find = Admin.by_email(@email)
-    when "Client"
-      find = Client.by_email(@email)
-    when "Investor"
-      find = Investor.by_email(@email)
+    types = ['Admin', 'Client', 'Investor']
+    user = nil
+    types.each do |type|
+      user = Kernel.const_get(type).by_email(@email)
+      break if user
     end
-    return find if find && find.authenticate(@password)
+    return user if user && user.authenticate(@password)
     errors.add :authentication, 'invalid credentials'
     nil
   end
