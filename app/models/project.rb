@@ -52,7 +52,7 @@ class Project < ApplicationRecord
   end
 
   def self.average_interest
-    by_finished(value: false).where(matched: true).average(:interest_rate)
+    by_finished(value: false).where(matched: true).average(:interest_rate).to_f.round(2)
   end
 
   def self.load(page:1 ,per_page: 10)
