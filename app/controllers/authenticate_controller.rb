@@ -1,7 +1,7 @@
 class AuthenticateController < ApplicationController
 
   def login
-    command = AuthenticateCommand.call(params[:email],params[:password],params[:type])
+    command = AuthenticateCommand.call(params[:email],params[:password])
     if command.success?
       render json: { data: {
         auth_token: command.result
