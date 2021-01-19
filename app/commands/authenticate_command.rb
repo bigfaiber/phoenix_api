@@ -2,14 +2,13 @@ class AuthenticateCommand
   prepend SimpleCommand
   attr_accessor :email,:password, :type
 
-  def initialize(email,password, type)
+  def initialize(email,password)
     @email = email
     @password = password
-    @type = type
   end
 
   def call
-    JsonWebToken.encode(payload: {id: find.id, type: @type }) if find
+    JsonWebToken.encode(payload: {id: find.id, type: find.class }) if find
   end
 
   private
