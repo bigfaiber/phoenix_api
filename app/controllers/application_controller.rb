@@ -2,11 +2,9 @@ class ApplicationController < ActionController::API
   include Secured
   after_action :set_header
 
-
   private
 
   def set_header
-    @type = nil
     if @current_admin
       @type = "Admin"
     elsif @current_client

@@ -3,6 +3,7 @@ class ClientSerializer < ActiveModel::Serializer
   attribute :recommended_interest
   attribute :created_at
   attribute :global
+  attribute :full_name
   has_many :vehicles
   has_many :estates
   has_many :documents
@@ -20,5 +21,9 @@ class ClientSerializer < ActiveModel::Serializer
 
   def created_at
     (object.created_at - 5.hours).strftime("%Y, %B %d - %A %H:%M")
+  end
+  
+  def full_name
+    "#{object.name} #{object.lastname}"
   end
 end

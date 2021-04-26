@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_client!, only: [:create,:clients]
+  #acutalizar con metodo nuevo
+  before_action -> { authorize_user(['Client']) }, only: [:create]
+  before_action :authenticate_client!, only: [:clients]
   before_action :authenticate_admin_or_client!, only: [:update,:account,:receipt]
   before_action :authenticate_admin_or_investor!, only: [:inv_account]
   before_action :authenticate_admin!, only: [:create_admin,:finish,:add_warranty,:by_code,:add_table,:new_project,:destroy,:rate,:approve,:match,:search,:add_month_balance]
@@ -8,7 +10,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_admin_or_client_investor!,only: [:historical,:generate_table, :index, :show]
 
   def index
-    @projects = Project.load(page: params[:page],per_page: params[:per_page]).by_finished(value: false)
+    @projects = Project.load(page: params[:page], per_page: params[:per_page]).by_finished(value: false)
     if params.has_key?(:price_start) && params.has_key?(:price_end)
       @projects = @projects.by_price(price_start: params[:price_start],price_end: params[:price_end])
     end
@@ -18,7 +20,7 @@ class ProjectsController < ApplicationController
     if params.has_key?(:time_start) && params.has_key?(:time_end)
       @projects = @projects.by_time(time_start: params[:time_start],time_end: params[:time_end])
     end
-    @projects = @projects.approved?.include_investor.include_account.include_client.include_receipts
+    @projects = @projects.include_investor.include_account.include_client.include_receipts
     render json: @projects,meta: pagination_dict(@projects), each_serializer: ProjectSerializer, status: :ok, include: ['client.cons', 'client.pros','inv_account','account','receipts','amortization_table','investor.pros','investor.cons','warranty_file']
   end
 
@@ -138,11 +140,10 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(project_params)
+    build_project
     average =  Project.average_interest
     average ||= 1.5
     @project.interest_rate = average
-    @project.client_id = @current_client.id
     if @project.save
       render json: @project, serializer: ProjectSerializer, status: :ok
     else
@@ -418,23 +419,29 @@ class ProjectsController < ApplicationController
 
 
   private
-  def set_project
-    @project = Project.by_id(params[:id])
-  end
+    def set_project
+      @project = Project.by_id(params[:id])
+    end
 
-  def project_admin_params
-    params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month,:approved_date, :interest_rate, :client_id)
-  end
+    def project_admin_params
+      params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month,:approved_date, :interest_rate, :client_id)
+    end
 
-  def project_params
-    params.require(:project).permit(:dream,:description,:money,:monthly_payment,:warranty,:month,:initial_payment,:approved_date)
-  end
+    def project_params
+      project_params = params[:project]
+      project_params ? project_params.permit(:dream, :description, :money, :monthly_payment, :warranty, :month, :initial_payment, :approved_date) : {}
+    end
 
-  def receipt_params
-    params.require(:receipt).permit(:month,:year,:receipt,:day)
-  end
+    def receipt_params
+      params.require(:receipt).permit(:month,:year,:receipt,:day)
+    end
 
-  def account_params
-    params.require(:bank).permit(:bank,:account_type,:account_number)
-  end
+    def account_params
+      params.require(:bank).permit(:bank,:account_type,:account_number)
+    end
+
+    def build_project
+      @project ||= @current_user.projects.build
+      @project.attributes = project_params
+    end
 end

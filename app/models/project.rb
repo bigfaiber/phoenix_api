@@ -31,12 +31,13 @@ class Project < ApplicationRecord
   scope :by_finished, -> (value:) { where(finished:  value) }
 
   enum warranty: {
-    "Prenda":0,
-    "Hipoteca":1,
-    "Pagare": 2
+    "prenda": 0,
+    "hipoteca": 1,
+    "pagare": 2
   }
 
-  validates_presence_of :dream, :description,:money,:monthly_payment,:month
+  # is not a field in front end :description,
+  validates_presence_of :dream,:money,:monthly_payment,:month
   validates_numericality_of :money,:monthly_payment,:month, only_integer: true
   validates_numericality_of :month
   validate :validate_number
