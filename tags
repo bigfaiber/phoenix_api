@@ -1,0 +1,459 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Account	app/models/account.rb	/^class Account < ApplicationRecord$/;"	c
+AccountSerializer	app/serializers/account_serializer.rb	/^class AccountSerializer < ActiveModel::Serializer$/;"	c
+AddAditionalFieldsToClient	db/migrate/20180109172748_add_aditional_fields_to_client.rb	/^class AddAditionalFieldsToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddApprovedDateToProject	db/migrate/20180206200951_add_approved_date_to_project.rb	/^class AddApprovedDateToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddCareerToClients	db/migrate/20181013230944_add_career_to_clients.rb	/^class AddCareerToClients < ActiveRecord::Migration[5.1]$/;"	c
+AddCareerToInvestor	db/migrate/20181013231033_add_career_to_investor.rb	/^class AddCareerToInvestor < ActiveRecord::Migration[5.1]$/;"	c
+AddCodeToProject	db/migrate/20180413165321_add_code_to_project.rb	/^class AddCodeToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddColumnsToReceipt	db/migrate/20180427001301_add_columns_to_receipt.rb	/^class AddColumnsToReceipt < ActiveRecord::Migration[5.1]$/;"	c
+AddDayToReceipt	db/migrate/20180105213427_add_day_to_receipt.rb	/^class AddDayToReceipt < ActiveRecord::Migration[5.1]$/;"	c
+AddDaysInArrearsToReceipt	db/migrate/20180520133153_add_days_in_arrears_to_receipt.rb	/^class AddDaysInArrearsToReceipt < ActiveRecord::Migration[5.1]$/;"	c
+AddExpensesToClient	db/migrate/20181125163149_add_expenses_to_client.rb	/^class AddExpensesToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddFinishedToProject	db/migrate/20180414223858_add_finished_to_project.rb	/^class AddFinishedToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddHouseholdTypeToClient	db/migrate/20181125162030_add_household_type_to_client.rb	/^class AddHouseholdTypeToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddInitialPaymentDateToProject	db/migrate/20180105211642_add_initial_payment_date_to_project.rb	/^class AddInitialPaymentDateToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddInvAccountToProject	db/migrate/20180820202637_add_inv_account_to_project.rb	/^class AddInvAccountToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddMatchedToProject	db/migrate/20180717031936_add_matched_to_project.rb	/^class AddMatchedToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddMaximumToInvestor	db/migrate/20181003025102_add_maximum_to_investor.rb	/^class AddMaximumToInvestor < ActiveRecord::Migration[5.1]$/;"	c
+AddNameToDocuments	db/migrate/20181125153447_add_name_to_documents.rb	/^class AddNameToDocuments < ActiveRecord::Migration[5.1]$/;"	c
+AddNewProjectToProject	db/migrate/20180111001745_add_new_project_to_project.rb	/^class AddNewProjectToProject < ActiveRecord::Migration[5.1]$/;"	c
+AddPasswordToeknToClients	db/migrate/20180102181927_add_password_toekn_to_clients.rb	/^class AddPasswordToeknToClients < ActiveRecord::Migration[5.1]$/;"	c
+AddPasswordTokenToInvestor	db/migrate/20180102181941_add_password_token_to_investor.rb	/^class AddPasswordTokenToInvestor < ActiveRecord::Migration[5.1]$/;"	c
+AddPaymentsInArrearsToClient	db/migrate/20181125164810_add_payments_in_arrears_to_client.rb	/^class AddPaymentsInArrearsToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddPlateToVehicle	db/migrate/20181125154805_add_plate_to_vehicle.rb	/^class AddPlateToVehicle < ActiveRecord::Migration[5.1]$/;"	c
+AddRealEstateToClient	db/migrate/20181125164004_add_real_estate_to_client.rb	/^class AddRealEstateToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddStepToClient	db/migrate/20180123205128_add_step_to_client.rb	/^class AddStepToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddStepToInvestor	db/migrate/20180123205143_add_step_to_investor.rb	/^class AddStepToInvestor < ActiveRecord::Migration[5.1]$/;"	c
+AddTacometroToClient	db/migrate/20180507203531_add_tacometro_to_client.rb	/^class AddTacometroToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddTechnicalCareerToClient	db/migrate/20181125161315_add_technical_career_to_client.rb	/^class AddTechnicalCareerToClient < ActiveRecord::Migration[5.1]$/;"	c
+AddTechnicalCareerToInvestor	db/migrate/20181126202452_add_technical_career_to_investor.rb	/^class AddTechnicalCareerToInvestor < ActiveRecord::Migration[5.1]$/;"	c
+Admin	app/models/admin.rb	/^class Admin < ApplicationRecord$/;"	c
+AdminSerializer	app/serializers/admin_serializer.rb	/^class AdminSerializer < ActiveModel::Serializer$/;"	c
+AdminsController	app/controllers/admins_controller.rb	/^class AdminsController < ApplicationController$/;"	c
+AmortizationPdf	app/pdfs/amortization_pdf.rb	/^class AmortizationPdf < Prawn::Document$/;"	c
+AmortizationTable	app/models/amortization_table.rb	/^class AmortizationTable < ApplicationRecord$/;"	c
+AmortizationTableSerializer	app/serializers/amortization_table_serializer.rb	/^class AmortizationTableSerializer < ActiveModel::Serializer$/;"	c
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:Phoenix
+ApplicationCable	app/channels/application_cable/channel.rb	/^module ApplicationCable$/;"	m
+ApplicationCable	app/channels/application_cable/connection.rb	/^module ApplicationCable$/;"	m
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::API$/;"	c
+ApplicationJob	app/jobs/application_job.rb	/^class ApplicationJob < ActiveJob::Base$/;"	c
+ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
+ApplicationRecord	app/models/application_record.rb	/^class ApplicationRecord < ActiveRecord::Base$/;"	c
+AuthenticateCommand	app/commands/authenticate_command.rb	/^class AuthenticateCommand$/;"	c
+AuthenticateController	app/controllers/authenticate_controller.rb	/^class AuthenticateController < ApplicationController$/;"	c
+AvatarUploader	app/uploaders/avatar_uploader.rb	/^class AvatarUploader < CarrierWave::Uploader::Base$/;"	c
+CalculatedMatchForProjects	db/migrate/20180717033825_calculated_match_for_projects.rb	/^class CalculatedMatchForProjects < ActiveRecord::Migration[5.1]$/;"	c
+ChangeMonthInRecipt	db/migrate/20180105212430_change_month_in_recipt.rb	/^class ChangeMonthInRecipt < ActiveRecord::Migration[5.1]$/;"	c
+Channel	app/channels/application_cable/channel.rb	/^  class Channel < ActionCable::Channel::Base$/;"	c	class:ApplicationCable
+Client	app/models/client.rb	/^class Client < ApplicationRecord$/;"	c
+ClientMailer	app/mailers/client_mailer.rb	/^  class ClientMailer < ApplicationMailer$/;"	c
+ClientSerializer	app/serializers/client_serializer.rb	/^class ClientSerializer < ActiveModel::Serializer$/;"	c
+ClientsController	app/controllers/clients_controller.rb	/^class ClientsController < ApplicationController$/;"	c
+CloudEnvImporter	lib/cloud_env_importer.rb	/^class CloudEnvImporter$/;"	c
+Code	app/models/code.rb	/^class Code < ApplicationRecord$/;"	c
+Connection	app/channels/application_cable/connection.rb	/^  class Connection < ActionCable::Connection::Base$/;"	c	class:ApplicationCable
+CreateAccounts	db/migrate/20171208220724_create_accounts.rb	/^class CreateAccounts < ActiveRecord::Migration[5.1]$/;"	c
+CreateAdmins	db/migrate/20171208193559_create_admins.rb	/^class CreateAdmins < ActiveRecord::Migration[5.1]$/;"	c
+CreateAmortizationTables	db/migrate/20180206202521_create_amortization_tables.rb	/^class CreateAmortizationTables < ActiveRecord::Migration[5.1]$/;"	c
+CreateClients	db/migrate/20171208195433_create_clients.rb	/^class CreateClients < ActiveRecord::Migration[5.1]$/;"	c
+CreateCodes	db/migrate/20180413165136_create_codes.rb	/^class CreateCodes < ActiveRecord::Migration[5.1]$/;"	c
+CreateDocuments	db/migrate/20171208220723_create_documents.rb	/^class CreateDocuments < ActiveRecord::Migration[5.1]$/;"	c
+CreateEstates	db/migrate/20171208195518_create_estates.rb	/^class CreateEstates < ActiveRecord::Migration[5.1]$/;"	c
+CreateInvAccounts	db/migrate/20180820195023_create_inv_accounts.rb	/^class CreateInvAccounts < ActiveRecord::Migration[5.1]$/;"	c
+CreateInvestors	db/migrate/20171208213058_create_investors.rb	/^class CreateInvestors < ActiveRecord::Migration[5.1]$/;"	c
+CreateMatches	db/migrate/20171209024314_create_matches.rb	/^class CreateMatches < ActiveRecord::Migration[5.1]$/;"	c
+CreateOpinionInvs	db/migrate/20180728172303_create_opinion_invs.rb	/^class CreateOpinionInvs < ActiveRecord::Migration[5.1]$/;"	c
+CreateOpinions	db/migrate/20180710012051_create_opinions.rb	/^class CreateOpinions < ActiveRecord::Migration[5.1]$/;"	c
+CreatePayments	db/migrate/20171208213105_create_payments.rb	/^class CreatePayments < ActiveRecord::Migration[5.1]$/;"	c
+CreateProfitabilities	db/migrate/20180820155945_create_profitabilities.rb	/^class CreateProfitabilities < ActiveRecord::Migration[5.1]$/;"	c
+CreateProjects	db/migrate/20171208224424_create_projects.rb	/^class CreateProjects < ActiveRecord::Migration[5.1]$/;"	c
+CreateReceipts	db/migrate/20171209000014_create_receipts.rb	/^class CreateReceipts < ActiveRecord::Migration[5.1]$/;"	c
+CreateTracings	db/migrate/20180804185328_create_tracings.rb	/^class CreateTracings < ActiveRecord::Migration[5.1]$/;"	c
+CreateVehicles	db/migrate/20171208195600_create_vehicles.rb	/^class CreateVehicles < ActiveRecord::Migration[5.1]$/;"	c
+CreateWarrantyFiles	db/migrate/20180414230622_create_warranty_files.rb	/^class CreateWarrantyFiles < ActiveRecord::Migration[5.1]$/;"	c
+Document	app/models/document.rb	/^class Document < ApplicationRecord$/;"	c
+DocumentSerializer	app/serializers/document_serializer.rb	/^class DocumentSerializer < ActiveModel::Serializer$/;"	c
+DocumentUploader	app/uploaders/document_uploader.rb	/^class DocumentUploader < CarrierWave::Uploader::Base$/;"	c
+DocumentsController	app/controllers/documents_controller.rb	/^class DocumentsController < ApplicationController$/;"	c
+Estate	app/models/estate.rb	/^class Estate < ApplicationRecord$/;"	c
+EstateSerializer	app/serializers/estate_serializer.rb	/^class EstateSerializer < ActiveModel::Serializer$/;"	c
+InvAccount	app/models/inv_account.rb	/^class InvAccount < ApplicationRecord$/;"	c
+InvAccountSerializer	app/serializers/inv_account_serializer.rb	/^class InvAccountSerializer < ActiveModel::Serializer$/;"	c
+InvAccountsController	app/controllers/inv_accounts_controller.rb	/^class InvAccountsController < ApplicationController$/;"	c
+Investor	app/models/investor.rb	/^class Investor < ApplicationRecord$/;"	c
+InvestorSerializer	app/serializers/investor_serializer.rb	/^class InvestorSerializer < ActiveModel::Serializer$/;"	c
+InvestorsController	app/controllers/investors_controller.rb	/^class InvestorsController < ApplicationController$/;"	c
+JsonWebToken	lib/json_web_token.rb	/^class JsonWebToken$/;"	c
+Match	app/models/match.rb	/^class Match < ApplicationRecord$/;"	c
+MatchGrouped	app/models/match_grouped.rb	/^class MatchGrouped$/;"	c
+MatchGroupedSerializer	app/serializers/match_grouped_serializer.rb	/^class MatchGroupedSerializer < ActiveModel::Serializer$/;"	c
+MatchSerializer	app/serializers/match_serializer.rb	/^class MatchSerializer < ActiveModel::Serializer$/;"	c
+MatchesController	app/controllers/matches_controller.rb	/^class MatchesController < ApplicationController$/;"	c
+MessageSender	lib/message_sender.rb	/^class MessageSender$/;"	c
+OldClientSerializer	app/serializers/old_client_serializer.rb	/^class OldClientSerializer < ActiveModel::Serializer$/;"	c
+Opinion	app/models/opinion.rb	/^class Opinion < ApplicationRecord$/;"	c
+OpinionInv	app/models/opinion_inv.rb	/^class OpinionInv < ApplicationRecord$/;"	c
+OpinionInvsController	app/controllers/opinion_invs_controller.rb	/^class OpinionInvsController < ApplicationController$/;"	c
+OpinionSerializer	app/serializers/opinion_serializer.rb	/^class OpinionSerializer < ActiveModel::Serializer$/;"	c
+OpinionsController	app/controllers/opinions_controller.rb	/^class OpinionsController < ApplicationController$/;"	c
+Payment	app/models/payment.rb	/^class Payment < ApplicationRecord$/;"	c
+PaymentSerializer	app/serializers/payment_serializer.rb	/^class PaymentSerializer < ActiveModel::Serializer$/;"	c
+Phoenix	config/application.rb	/^module Phoenix$/;"	m
+ProfitabilitiesController	app/controllers/profitabilities_controller.rb	/^class ProfitabilitiesController < ApplicationController$/;"	c
+Profitability	app/models/profitability.rb	/^class Profitability < ApplicationRecord$/;"	c
+ProfitabilitySerializer	app/serializers/profitability_serializer.rb	/^class ProfitabilitySerializer < ActiveModel::Serializer$/;"	c
+Project	app/models/project.rb	/^class Project < ApplicationRecord$/;"	c
+ProjectSerializer	app/serializers/project_serializer.rb	/^class ProjectSerializer < ActiveModel::Serializer$/;"	c
+ProjectsController	app/controllers/projects_controller.rb	/^class ProjectsController < ApplicationController$/;"	c
+Receipt	app/models/receipt.rb	/^class Receipt < ApplicationRecord$/;"	c
+ReceiptSerializer	app/serializers/receipt_serializer.rb	/^class ReceiptSerializer < ActiveModel::Serializer$/;"	c
+ReceiptUploader	app/uploaders/receipt_uploader.rb	/^class ReceiptUploader < CarrierWave::Uploader::Base$/;"	c
+ReceiptsController	app/controllers/receipts_controller.rb	/^class ReceiptsController < ApplicationController$/;"	c
+RemoveColumsToClients	db/migrate/20180605193933_remove_colums_to_clients.rb	/^class RemoveColumsToClients < ActiveRecord::Migration[5.1]$/;"	c
+RemoveIndexToDocuments	db/migrate/20180408042924_remove_index_to_documents.rb	/^class RemoveIndexToDocuments < ActiveRecord::Migration[5.1]$/;"	c
+Secured	app/controllers/concerns/secured.rb	/^module Secured$/;"	m
+StaticController	app/controllers/static_controller.rb	/^class StaticController < ApplicationController$/;"	c
+TableUploader	app/uploaders/table_uploader.rb	/^class TableUploader < CarrierWave::Uploader::Base$/;"	c
+Tracing	app/models/tracing.rb	/^class Tracing < ApplicationRecord$/;"	c
+UpdateInteresLevelForClients	db/migrate/20180620205056_update_interes_level_for_clients.rb	/^class UpdateInteresLevelForClients < ActiveRecord::Migration[5.1]$/;"	c
+UpdateMatchedProjects	db/migrate/20180907212812_update_matched_projects.rb	/^class UpdateMatchedProjects < ActiveRecord::Migration[5.1]$/;"	c
+Vehicle	app/models/vehicle.rb	/^class Vehicle < ApplicationRecord$/;"	c
+VehicleSerializer	app/serializers/vehicle_serializer.rb	/^class VehicleSerializer < ActiveModel::Serializer$/;"	c
+WarrantyFile	app/models/warranty_file.rb	/^class WarrantyFile < ApplicationRecord$/;"	c
+account	app/controllers/projects_controller.rb	/^  def account$/;"	f	class:ProjectsController
+account_params	app/controllers/projects_controller.rb	/^    def account_params$/;"	f	class:ProjectsController
+active_loans	app/models/project.rb	/^  def self.active_loans$/;"	F	class:Project
+active_projects	app/models/project.rb	/^  def self.active_projects$/;"	F	class:Project
+add_cloud_vars_to_env	lib/cloud_env_importer.rb	/^  def add_cloud_vars_to_env$/;"	f	class:CloudEnvImporter
+add_month_balance	app/controllers/projects_controller.rb	/^  def add_month_balance$/;"	f	class:ProjectsController
+add_receipt	app/models/project.rb	/^  def self.add_receipt(project, params)$/;"	F	class:Project
+add_table	app/controllers/projects_controller.rb	/^  def add_table$/;"	f	class:ProjectsController
+add_table	app/models/amortization_table.rb	/^  def self.add_table(project:, table:)$/;"	F	class:AmortizationTable
+add_warranty	app/controllers/projects_controller.rb	/^  def add_warranty$/;"	f	class:ProjectsController
+add_warranty	app/models/project.rb	/^  def self.add_warranty(project:, file:)$/;"	F	class:Project
+additional_data	app/controllers/clients_controller.rb	/^  def additional_data$/;"	f	class:ClientsController
+admin_account	app/mailers/client_mailer.rb	/^  def admin_account(name,lastname,password,email)$/;"	f	class:ClientMailer
+admin_params	app/controllers/admins_controller.rb	/^  def admin_params$/;"	f	class:AdminsController
+approve	app/controllers/projects_controller.rb	/^  def approve$/;"	f	class:ProjectsController
+authenticate_admin!	app/controllers/concerns/secured.rb	/^  def authenticate_admin!$/;"	f	class:Secured
+authenticate_admin_or_client!	app/controllers/concerns/secured.rb	/^  def authenticate_admin_or_client!$/;"	f	class:Secured
+authenticate_admin_or_client_investor!	app/controllers/concerns/secured.rb	/^  def authenticate_admin_or_client_investor!$/;"	f	class:Secured
+authenticate_admin_or_investor!	app/controllers/concerns/secured.rb	/^  def authenticate_admin_or_investor!$/;"	f	class:Secured
+authenticate_client!	app/controllers/concerns/secured.rb	/^  def authenticate_client!$/;"	f	class:Secured
+authenticate_investor!	app/controllers/concerns/secured.rb	/^  def authenticate_investor!$/;"	f	class:Secured
+authorize_user	app/controllers/concerns/secured.rb	/^  def authorize_user(valid_types = [])$/;"	f	class:Secured
+avatar	app/controllers/admins_controller.rb	/^  def avatar$/;"	f	class:AdminsController
+avatar	app/controllers/clients_controller.rb	/^  def avatar$/;"	f	class:ClientsController
+avatar	app/controllers/investors_controller.rb	/^  def avatar$/;"	f	class:InvestorsController
+average_interest	app/controllers/static_controller.rb	/^  def average_interest$/;"	f	class:StaticController
+average_interest	app/models/project.rb	/^  def self.average_interest$/;"	F	class:Project
+build_project	app/controllers/projects_controller.rb	/^    def build_project$/;"	f	class:ProjectsController
+by_code	app/controllers/projects_controller.rb	/^  def by_code$/;"	f	class:ProjectsController
+by_code	app/models/project.rb	/^  def self.by_code(code)$/;"	F	class:Project
+by_email	app/models/admin.rb	/^  def self.by_email(email)$/;"	F	class:Admin
+by_email	app/models/client.rb	/^  def self.by_email(email)$/;"	F	class:Client
+by_email	app/models/investor.rb	/^  def self.by_email(email)$/;"	F	class:Investor
+by_id	app/models/account.rb	/^  def self.by_id(id)$/;"	F	class:Account
+by_id	app/models/admin.rb	/^  def self.by_id(id)$/;"	F	class:Admin
+by_id	app/models/client.rb	/^  def self.by_id(id)$/;"	F	class:Client
+by_id	app/models/document.rb	/^    def by_id(id)$/;"	f	class:Document
+by_id	app/models/estate.rb	/^  def self.by_id(id)$/;"	F	class:Estate
+by_id	app/models/inv_account.rb	/^  def self.by_id(id)$/;"	F	class:InvAccount
+by_id	app/models/investor.rb	/^  def self.by_id(id)$/;"	F	class:Investor
+by_id	app/models/opinion.rb	/^    def by_id(id)$/;"	f	class:Opinion
+by_id	app/models/opinion_inv.rb	/^    def by_id(id)$/;"	f	class:OpinionInv
+by_id	app/models/payment.rb	/^  def self.by_id(id)$/;"	F	class:Payment
+by_id	app/models/profitability.rb	/^    def by_id(id:)$/;"	f	class:Profitability
+by_id	app/models/project.rb	/^  def self.by_id(id)$/;"	F	class:Project
+by_id	app/models/receipt.rb	/^  def self.by_id(id)$/;"	F	class:Receipt
+by_id	app/models/tracing.rb	/^    def by_id(id)$/;"	f	class:Tracing
+by_id	app/models/vehicle.rb	/^  def self.by_id(id)$/;"	F	class:Vehicle
+by_identification	app/models/client.rb	/^  def self.by_identification(identification)$/;"	F	class:Client
+by_identification	app/models/investor.rb	/^  def self.by_identification(identification)$/;"	F	class:Investor
+by_project_and_investor	app/models/match.rb	/^  def self.by_project_and_investor(project,investor)$/;"	F	class:Match
+by_project_id	app/models/warranty_file.rb	/^    def by_project_id(id)$/;"	f	class:WarrantyFile
+by_year_month_and_project	app/models/tracing.rb	/^    def by_year_month_and_project(year:, month:, project:)$/;"	f	class:Tracing
+calculated_global	app/models/client.rb	/^  def calculated_global$/;"	f	class:Client
+call	app/commands/authenticate_command.rb	/^  def call$/;"	f	class:AuthenticateCommand
+capital_distribution	app/models/project.rb	/^  def self.capital_distribution(investor)$/;"	F	class:Project
+change	db/migrate/20171208193559_create_admins.rb	/^  def change$/;"	f	class:CreateAdmins
+change	db/migrate/20171208195433_create_clients.rb	/^  def change$/;"	f	class:CreateClients
+change	db/migrate/20171208195518_create_estates.rb	/^  def change$/;"	f	class:CreateEstates
+change	db/migrate/20171208195600_create_vehicles.rb	/^  def change$/;"	f	class:CreateVehicles
+change	db/migrate/20171208213058_create_investors.rb	/^  def change$/;"	f	class:CreateInvestors
+change	db/migrate/20171208213105_create_payments.rb	/^  def change$/;"	f	class:CreatePayments
+change	db/migrate/20171208220723_create_documents.rb	/^  def change$/;"	f	class:CreateDocuments
+change	db/migrate/20171208220724_create_accounts.rb	/^  def change$/;"	f	class:CreateAccounts
+change	db/migrate/20171208224424_create_projects.rb	/^  def change$/;"	f	class:CreateProjects
+change	db/migrate/20171209000014_create_receipts.rb	/^  def change$/;"	f	class:CreateReceipts
+change	db/migrate/20171209024314_create_matches.rb	/^  def change$/;"	f	class:CreateMatches
+change	db/migrate/20180102181927_add_password_toekn_to_clients.rb	/^  def change$/;"	f	class:AddPasswordToeknToClients
+change	db/migrate/20180102181941_add_password_token_to_investor.rb	/^  def change$/;"	f	class:AddPasswordTokenToInvestor
+change	db/migrate/20180105211642_add_initial_payment_date_to_project.rb	/^  def change$/;"	f	class:AddInitialPaymentDateToProject
+change	db/migrate/20180105212430_change_month_in_recipt.rb	/^  def change$/;"	f	class:ChangeMonthInRecipt
+change	db/migrate/20180105213427_add_day_to_receipt.rb	/^  def change$/;"	f	class:AddDayToReceipt
+change	db/migrate/20180109172748_add_aditional_fields_to_client.rb	/^  def change$/;"	f	class:AddAditionalFieldsToClient
+change	db/migrate/20180111001745_add_new_project_to_project.rb	/^  def change$/;"	f	class:AddNewProjectToProject
+change	db/migrate/20180123205128_add_step_to_client.rb	/^  def change$/;"	f	class:AddStepToClient
+change	db/migrate/20180123205143_add_step_to_investor.rb	/^  def change$/;"	f	class:AddStepToInvestor
+change	db/migrate/20180206200951_add_approved_date_to_project.rb	/^  def change$/;"	f	class:AddApprovedDateToProject
+change	db/migrate/20180206202521_create_amortization_tables.rb	/^  def change$/;"	f	class:CreateAmortizationTables
+change	db/migrate/20180408042924_remove_index_to_documents.rb	/^  def change$/;"	f	class:RemoveIndexToDocuments
+change	db/migrate/20180413165136_create_codes.rb	/^  def change$/;"	f	class:CreateCodes
+change	db/migrate/20180413165321_add_code_to_project.rb	/^  def change$/;"	f	class:AddCodeToProject
+change	db/migrate/20180414223858_add_finished_to_project.rb	/^  def change$/;"	f	class:AddFinishedToProject
+change	db/migrate/20180414230622_create_warranty_files.rb	/^  def change$/;"	f	class:CreateWarrantyFiles
+change	db/migrate/20180427001301_add_columns_to_receipt.rb	/^  def change$/;"	f	class:AddColumnsToReceipt
+change	db/migrate/20180507203531_add_tacometro_to_client.rb	/^  def change$/;"	f	class:AddTacometroToClient
+change	db/migrate/20180605193933_remove_colums_to_clients.rb	/^  def change$/;"	f	class:RemoveColumsToClients
+change	db/migrate/20180620205056_update_interes_level_for_clients.rb	/^  def change$/;"	f	class:UpdateInteresLevelForClients
+change	db/migrate/20180710012051_create_opinions.rb	/^  def change$/;"	f	class:CreateOpinions
+change	db/migrate/20180717031936_add_matched_to_project.rb	/^  def change$/;"	f	class:AddMatchedToProject
+change	db/migrate/20180717033825_calculated_match_for_projects.rb	/^  def change$/;"	f	class:CalculatedMatchForProjects
+change	db/migrate/20180728172303_create_opinion_invs.rb	/^  def change$/;"	f	class:CreateOpinionInvs
+change	db/migrate/20180804185328_create_tracings.rb	/^  def change$/;"	f	class:CreateTracings
+change	db/migrate/20180820155945_create_profitabilities.rb	/^  def change$/;"	f	class:CreateProfitabilities
+change	db/migrate/20180820195023_create_inv_accounts.rb	/^  def change$/;"	f	class:CreateInvAccounts
+change	db/migrate/20180820202637_add_inv_account_to_project.rb	/^  def change$/;"	f	class:AddInvAccountToProject
+change	db/migrate/20180907212812_update_matched_projects.rb	/^  def change$/;"	f	class:UpdateMatchedProjects
+change	db/migrate/20181003025102_add_maximum_to_investor.rb	/^  def change$/;"	f	class:AddMaximumToInvestor
+change	db/migrate/20181013230944_add_career_to_clients.rb	/^  def change$/;"	f	class:AddCareerToClients
+change	db/migrate/20181013231033_add_career_to_investor.rb	/^  def change$/;"	f	class:AddCareerToInvestor
+change	db/migrate/20181125153447_add_name_to_documents.rb	/^  def change$/;"	f	class:AddNameToDocuments
+change	db/migrate/20181125154805_add_plate_to_vehicle.rb	/^  def change$/;"	f	class:AddPlateToVehicle
+change	db/migrate/20181125161315_add_technical_career_to_client.rb	/^  def change$/;"	f	class:AddTechnicalCareerToClient
+change	db/migrate/20181125162030_add_household_type_to_client.rb	/^  def change$/;"	f	class:AddHouseholdTypeToClient
+change	db/migrate/20181125163149_add_expenses_to_client.rb	/^  def change$/;"	f	class:AddExpensesToClient
+change	db/migrate/20181125164004_add_real_estate_to_client.rb	/^  def change$/;"	f	class:AddRealEstateToClient
+change	db/migrate/20181125164810_add_payments_in_arrears_to_client.rb	/^  def change$/;"	f	class:AddPaymentsInArrearsToClient
+change	db/migrate/20181126202452_add_technical_career_to_investor.rb	/^  def change$/;"	f	class:AddTechnicalCareerToInvestor
+change_level	app/models/project.rb	/^  def change_level$/;"	f	class:Project
+client_like	app/mailers/client_mailer.rb	/^  def client_like(user)$/;"	f	class:ClientMailer
+client_params	app/controllers/clients_controller.rb	/^  def client_params$/;"	f	class:ClientsController
+client_params_additional_data	app/controllers/clients_controller.rb	/^  def client_params_additional_data$/;"	f	class:ClientsController
+client_scope	app/controllers/clients_controller.rb	/^  def client_scope$/;"	f	class:ClientsController
+clients	app/controllers/projects_controller.rb	/^  def clients$/;"	f	class:ProjectsController
+clinet_match	app/mailers/client_mailer.rb	/^  def clinet_match(user)$/;"	f	class:ClientMailer
+code	app/mailers/client_mailer.rb	/^  def code(user)$/;"	f	class:ClientMailer
+create	app/controllers/admins_controller.rb	/^  def create$/;"	f	class:AdminsController
+create	app/controllers/clients_controller.rb	/^  def create$/;"	f	class:ClientsController
+create	app/controllers/inv_accounts_controller.rb	/^  def create$/;"	f	class:InvAccountsController
+create	app/controllers/investors_controller.rb	/^  def create$/;"	f	class:InvestorsController
+create	app/controllers/opinion_invs_controller.rb	/^  def create$/;"	f	class:OpinionInvsController
+create	app/controllers/opinions_controller.rb	/^  def create$/;"	f	class:OpinionsController
+create	app/controllers/profitabilities_controller.rb	/^  def create$/;"	f	class:ProfitabilitiesController
+create	app/controllers/projects_controller.rb	/^  def create$/;"	f	class:ProjectsController
+create_admin	app/controllers/projects_controller.rb	/^  def create_admin$/;"	f	class:ProjectsController
+create_payment	app/models/investor.rb	/^  def self.create_payment(investor,params)$/;"	F	class:Investor
+created_at	app/serializers/client_serializer.rb	/^  def created_at$/;"	f	class:ClientSerializer
+created_at	app/serializers/investor_serializer.rb	/^  def created_at$/;"	f	class:InvestorSerializer
+current_projects	app/controllers/matches_controller.rb	/^  def current_projects$/;"	f	class:MatchesController
+debt	app/models/investor.rb	/^  def debt$/;"	f	class:Investor
+debt	app/serializers/investor_serializer.rb	/^  def debt$/;"	f	class:InvestorSerializer
+debt_by_year_and_month	app/models/tracing.rb	/^    def debt_by_year_and_month(ids)$/;"	f	class:Tracing
+decode	lib/json_web_token.rb	/^    def decode(token)$/;"	f	class:JsonWebToken
+decode_token	app/controllers/concerns/secured.rb	/^  def decode_token$/;"	f	class:Secured
+delete_not_approved	app/models/match.rb	/^  def self.delete_not_approved(project)$/;"	F	class:Match
+destroy	app/controllers/admins_controller.rb	/^  def destroy$/;"	f	class:AdminsController
+destroy	app/controllers/clients_controller.rb	/^  def destroy$/;"	f	class:ClientsController
+destroy	app/controllers/investors_controller.rb	/^  def destroy$/;"	f	class:InvestorsController
+destroy	app/controllers/opinion_invs_controller.rb	/^  def destroy$/;"	f	class:OpinionInvsController
+destroy	app/controllers/opinions_controller.rb	/^  def destroy$/;"	f	class:OpinionsController
+destroy	app/controllers/profitabilities_controller.rb	/^  def destroy$/;"	f	class:ProfitabilitiesController
+destroy	app/controllers/projects_controller.rb	/^  def destroy$/;"	f	class:ProjectsController
+documents	app/controllers/clients_controller.rb	/^  def documents$/;"	f	class:ClientsController
+documents	app/controllers/investors_controller.rb	/^  def documents$/;"	f	class:InvestorsController
+down	db/migrate/20180520133153_add_days_in_arrears_to_receipt.rb	/^  def down$/;"	f	class:AddDaysInArrearsToReceipt
+encode	lib/json_web_token.rb	/^    def encode(payload: {}, exp: 30.minute.from_now)$/;"	f	class:JsonWebToken
+end_sign_up	app/controllers/clients_controller.rb	/^  def end_sign_up$/;"	f	class:ClientsController
+end_sign_up	app/controllers/investors_controller.rb	/^  def end_sign_up$/;"	f	class:InvestorsController
+error_grade	app/controllers/application_controller.rb	/^  def error_grade$/;"	f	class:ApplicationController
+error_not_authorized	app/controllers/application_controller.rb	/^  def error_not_authorized$/;"	f	class:ApplicationController
+error_not_found	app/controllers/application_controller.rb	/^  def error_not_found$/;"	f	class:ApplicationController
+error_render	app/controllers/application_controller.rb	/^  def error_render$/;"	f	class:ApplicationController
+error_warranty	app/controllers/application_controller.rb	/^  def error_warranty$/;"	f	class:ApplicationController
+extension_whitelist	app/uploaders/avatar_uploader.rb	/^  def extension_whitelist$/;"	f	class:AvatarUploader
+extension_whitelist	app/uploaders/document_uploader.rb	/^  def extension_whitelist$/;"	f	class:DocumentUploader
+extension_whitelist	app/uploaders/receipt_uploader.rb	/^  def extension_whitelist$/;"	f	class:ReceiptUploader
+extension_whitelist	app/uploaders/table_uploader.rb	/^  def extension_whitelist$/;"	f	class:TableUploader
+facebook_avatar	app/controllers/clients_controller.rb	/^  def facebook_avatar$/;"	f	class:ClientsController
+facebook_avatar	app/controllers/investors_controller.rb	/^  def facebook_avatar$/;"	f	class:InvestorsController
+filename	app/uploaders/avatar_uploader.rb	/^  def filename$/;"	f	class:AvatarUploader
+filename	app/uploaders/document_uploader.rb	/^  def filename$/;"	f	class:DocumentUploader
+filename	app/uploaders/receipt_uploader.rb	/^  def filename$/;"	f	class:ReceiptUploader
+filename	app/uploaders/table_uploader.rb	/^  def filename$/;"	f	class:TableUploader
+filter_clients	app/controllers/clients_controller.rb	/^  def filter_clients$/;"	f	class:ClientsController
+find	app/commands/authenticate_command.rb	/^  def find$/;"	f	class:AuthenticateCommand
+finish	app/controllers/projects_controller.rb	/^  def finish$/;"	f	class:ProjectsController
+full_name	app/models/client.rb	/^  def full_name$/;"	f	class:Client
+generate_table	app/controllers/projects_controller.rb	/^  def generate_table$/;"	f	class:ProjectsController
+generate_table	app/pdfs/amortization_pdf.rb	/^  def generate_table$/;"	f	class:AmortizationPdf
+get_env_vars	lib/cloud_env_importer.rb	/^  def get_env_vars$/;"	f	class:CloudEnvImporter
+get_request	lib/cloud_env_importer.rb	/^  def get_request(service_url = '')$/;"	f	class:CloudEnvImporter
+global	app/serializers/client_serializer.rb	/^  def global$/;"	f	class:ClientSerializer
+goods	app/controllers/clients_controller.rb	/^  def goods$/;"	f	class:ClientsController
+grade	app/controllers/clients_controller.rb	/^  def grade$/;"	f	class:ClientsController
+grade	app/controllers/receipts_controller.rb	/^  def grade$/;"	f	class:ReceiptsController
+grade	app/models/receipt.rb	/^  def self.grade(id:, days:)$/;"	F	class:Receipt
+graph	app/controllers/clients_controller.rb	/^  def graph$/;"	f	class:ClientsController
+graph	app/models/client.rb	/^  def graph$/;"	f	class:Client
+graphs	app/controllers/investors_controller.rb	/^  def graphs$/;"	f	class:InvestorsController
+grouped	app/controllers/matches_controller.rb	/^  def grouped$/;"	f	class:MatchesController
+grouped	app/models/match_grouped.rb	/^  def self.grouped$/;"	F	class:MatchGrouped
+has_project	app/models/client.rb	/^  def has_project$/;"	f	class:Client
+has_project	app/models/project.rb	/^  def self.has_project(client)$/;"	F	class:Project
+has_project	app/serializers/old_client_serializer.rb	/^  def has_project$/;"	f	class:OldClientSerializer
+historical	app/controllers/projects_controller.rb	/^  def historical$/;"	f	class:ProjectsController
+http_token	app/controllers/concerns/secured.rb	/^  def http_token$/;"	f	class:Secured
+index	app/controllers/admins_controller.rb	/^  def index$/;"	f	class:AdminsController
+index	app/controllers/clients_controller.rb	/^  def index$/;"	f	class:ClientsController
+index	app/controllers/inv_accounts_controller.rb	/^  def index$/;"	f	class:InvAccountsController
+index	app/controllers/investors_controller.rb	/^  def index$/;"	f	class:InvestorsController
+index	app/controllers/matches_controller.rb	/^  def index$/;"	f	class:MatchesController
+index	app/controllers/opinion_invs_controller.rb	/^  def index$/;"	f	class:OpinionInvsController
+index	app/controllers/opinions_controller.rb	/^  def index$/;"	f	class:OpinionsController
+index	app/controllers/profitabilities_controller.rb	/^  def index$/;"	f	class:ProfitabilitiesController
+index	app/controllers/projects_controller.rb	/^  def index$/;"	f	class:ProjectsController
+initialize	app/commands/authenticate_command.rb	/^  def initialize(email,password)$/;"	f	class:AuthenticateCommand
+initialize	app/models/match_grouped.rb	/^  def initialize(attributes)$/;"	f	class:MatchGrouped
+initialize	app/pdfs/amortization_pdf.rb	/^  def initialize(project)$/;"	f	class:AmortizationPdf
+initialize	lib/message_sender.rb	/^  def initialize$/;"	f	class:MessageSender
+interest_by_year_and_month	app/models/tracing.rb	/^    def interest_by_year_and_month(ids)$/;"	f	class:Tracing
+inv_account	app/controllers/projects_controller.rb	/^  def inv_account$/;"	f	class:ProjectsController
+inv_account_params	app/controllers/inv_accounts_controller.rb	/^  def inv_account_params$/;"	f	class:InvAccountsController
+investor_match	app/mailers/client_mailer.rb	/^  def investor_match(user)$/;"	f	class:ClientMailer
+investor_match_maximum	app/mailers/client_mailer.rb	/^  def investor_match_maximum$/;"	f	class:ClientMailer
+investor_not_chosen	app/mailers/client_mailer.rb	/^  def investor_not_chosen(investor,project)$/;"	f	class:ClientMailer
+investor_params	app/controllers/investors_controller.rb	/^  def investor_params$/;"	f	class:InvestorsController
+investors	app/controllers/projects_controller.rb	/^  def investors$/;"	f	class:ProjectsController
+investors_by_project	app/models/match.rb	/^  def self.investors_by_project(project)$/;"	F	class:Match
+is_credit?	app/models/payment.rb	/^  def is_credit?$/;"	f	class:Payment
+like	app/controllers/projects_controller.rb	/^  def like$/;"	f	class:ProjectsController
+load	app/models/account.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Account
+load	app/models/admin.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Admin
+load	app/models/client.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Client
+load	app/models/estate.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Estate
+load	app/models/inv_account.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:InvAccount
+load	app/models/investor.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Investor
+load	app/models/match.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Match
+load	app/models/opinion.rb	/^    def load(page: 1, per_page: 10)$/;"	f	class:Opinion
+load	app/models/opinion_inv.rb	/^    def load(page: 1, per_page: 10)$/;"	f	class:OpinionInv
+load	app/models/payment.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Payment
+load	app/models/profitability.rb	/^    def load(page: 1, per_page: 10)$/;"	f	class:Profitability
+load	app/models/project.rb	/^  def self.load(page:1 ,per_page: 10)$/;"	F	class:Project
+load	app/models/receipt.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Receipt
+load	app/models/tracing.rb	/^    def load(page: 1, per_page: 10)$/;"	f	class:Tracing
+load	app/models/vehicle.rb	/^  def self.load(page: 1, per_page: 10)$/;"	F	class:Vehicle
+load_client	app/controllers/clients_controller.rb	/^  def load_client$/;"	f	class:ClientsController
+login	app/controllers/authenticate_controller.rb	/^  def login$/;"	f	class:AuthenticateController
+mandrill_send	app/mailers/client_mailer.rb	/^  def mandrill_send(opts={})$/;"	f	class:ClientMailer
+match	app/controllers/projects_controller.rb	/^  def match$/;"	f	class:ProjectsController
+maximum	app/controllers/investors_controller.rb	/^  def maximum$/;"	f	class:InvestorsController
+new_clients	app/controllers/clients_controller.rb	/^  def new_clients$/;"	f	class:ClientsController
+new_investors	app/controllers/investors_controller.rb	/^  def new_investors$/;"	f	class:InvestorsController
+new_password	app/controllers/clients_controller.rb	/^  def new_password$/;"	f	class:ClientsController
+new_password	app/controllers/investors_controller.rb	/^  def new_password$/;"	f	class:InvestorsController
+new_password	app/mailers/client_mailer.rb	/^  def new_password(resource, token)$/;"	f	class:ClientMailer
+new_password_confirmation	app/mailers/client_mailer.rb	/^  def new_password_confirmation(user, pass)$/;"	f	class:ClientMailer
+new_project	app/controllers/projects_controller.rb	/^  def new_project$/;"	f	class:ProjectsController
+new_projects	app/models/project.rb	/^  def self.new_projects$/;"	F	class:Project
+new_verification_code	app/controllers/clients_controller.rb	/^  def new_verification_code$/;"	f	class:ClientsController
+new_verification_code	app/controllers/investors_controller.rb	/^  def new_verification_code$/;"	f	class:InvestorsController
+not_valid	app/controllers/clients_controller.rb	/^  def not_valid$/;"	f	class:ClientsController
+old_clients	app/controllers/clients_controller.rb	/^  def old_clients$/;"	f	class:ClientsController
+old_investors	app/controllers/investors_controller.rb	/^  def old_investors$/;"	f	class:InvestorsController
+opinion_params	app/controllers/opinion_invs_controller.rb	/^  def opinion_params$/;"	f	class:OpinionInvsController
+opinion_params	app/controllers/opinions_controller.rb	/^  def opinion_params$/;"	f	class:OpinionsController
+pagination_dict	app/controllers/application_controller.rb	/^  def pagination_dict(collection)$/;"	f	class:ApplicationController
+pagination_dict_new_client	app/controllers/application_controller.rb	/^  def pagination_dict_new_client(collection)$/;"	f	class:ApplicationController
+pagination_dict_old_client	app/controllers/application_controller.rb	/^  def pagination_dict_old_client(collection)$/;"	f	class:ApplicationController
+payment	app/controllers/investors_controller.rb	/^  def payment$/;"	f	class:InvestorsController
+payment_params	app/controllers/investors_controller.rb	/^  def payment_params$/;"	f	class:InvestorsController
+price	app/pdfs/amortization_pdf.rb	/^  def price(num)$/;"	f
+profitability_params	app/controllers/profitabilities_controller.rb	/^  def profitability_params$/;"	f	class:ProfitabilitiesController
+project_admin_params	app/controllers/projects_controller.rb	/^    def project_admin_params$/;"	f	class:ProjectsController
+project_approved	app/mailers/client_mailer.rb	/^  def project_approved(user)$/;"	f	class:ClientMailer
+project_params	app/controllers/projects_controller.rb	/^    def project_params$/;"	f	class:ProjectsController
+projects_values_interest	app/controllers/static_controller.rb	/^  def projects_values_interest$/;"	f	class:StaticController
+rate	app/controllers/projects_controller.rb	/^  def rate$/;"	f	class:ProjectsController
+receipt	app/controllers/projects_controller.rb	/^  def receipt$/;"	f	class:ProjectsController
+receipt_params	app/controllers/projects_controller.rb	/^    def receipt_params$/;"	f	class:ProjectsController
+recommended_interest	app/models/client.rb	/^  def recommended_interest$/;"	f	class:Client
+recommended_interest	app/serializers/client_serializer.rb	/^  def recommended_interest$/;"	f	class:ClientSerializer
+recommended_interest	app/serializers/old_client_serializer.rb	/^  def recommended_interest$/;"	f	class:OldClientSerializer
+replace	app/controllers/documents_controller.rb	/^  def replace$/;"	f	class:DocumentsController
+reset	app/controllers/clients_controller.rb	/^  def reset$/;"	f	class:ClientsController
+reset	app/controllers/investors_controller.rb	/^  def reset$/;"	f	class:InvestorsController
+search	app/controllers/projects_controller.rb	/^  def search$/;"	f	class:ProjectsController
+secure_token	app/uploaders/avatar_uploader.rb	/^  def secure_token$/;"	f	class:AvatarUploader
+secure_token	app/uploaders/document_uploader.rb	/^  def secure_token$/;"	f	class:DocumentUploader
+secure_token	app/uploaders/receipt_uploader.rb	/^  def secure_token$/;"	f	class:ReceiptUploader
+secure_token	app/uploaders/table_uploader.rb	/^  def secure_token$/;"	f	class:TableUploader
+send_message	lib/message_sender.rb	/^  def self.send_message(code,phone)$/;"	F	class:MessageSender
+send_message	lib/message_sender.rb	/^  def send_message(code,phone)$/;"	f	class:MessageSender
+set_admin	app/controllers/admins_controller.rb	/^  def set_admin$/;"	f	class:AdminsController
+set_client	app/controllers/clients_controller.rb	/^  def set_client$/;"	f	class:ClientsController
+set_code	app/models/project.rb	/^  def set_code$/;"	f	class:Project
+set_document	app/controllers/documents_controller.rb	/^  def set_document$/;"	f	class:DocumentsController
+set_header	app/controllers/application_controller.rb	/^  def set_header$/;"	f	class:ApplicationController
+set_inv_account	app/controllers/inv_accounts_controller.rb	/^  def set_inv_account$/;"	f	class:InvAccountsController
+set_investor	app/controllers/investors_controller.rb	/^  def set_investor$/;"	f	class:InvestorsController
+set_opinion	app/controllers/opinion_invs_controller.rb	/^  def set_opinion$/;"	f	class:OpinionInvsController
+set_opinion	app/controllers/opinions_controller.rb	/^  def set_opinion$/;"	f	class:OpinionsController
+set_payments_in_arrears	app/models/client.rb	/^  def set_payments_in_arrears$/;"	f	class:Client
+set_profitability	app/controllers/profitabilities_controller.rb	/^  def set_profitability$/;"	f	class:ProfitabilitiesController
+set_project	app/controllers/projects_controller.rb	/^    def set_project$/;"	f	class:ProjectsController
+set_receipt	app/controllers/receipts_controller.rb	/^  def set_receipt$/;"	f	class:ReceiptsController
+show	app/controllers/admins_controller.rb	/^  def show$/;"	f	class:AdminsController
+show	app/controllers/clients_controller.rb	/^  def show$/;"	f	class:ClientsController
+show	app/controllers/inv_accounts_controller.rb	/^  def show$/;"	f	class:InvAccountsController
+show	app/controllers/investors_controller.rb	/^  def show$/;"	f	class:InvestorsController
+show	app/controllers/profitabilities_controller.rb	/^  def show$/;"	f	class:ProfitabilitiesController
+show	app/controllers/projects_controller.rb	/^  def show$/;"	f	class:ProjectsController
+store_dir	app/uploaders/avatar_uploader.rb	/^  def store_dir$/;"	f	class:AvatarUploader
+store_dir	app/uploaders/document_uploader.rb	/^  def store_dir$/;"	f	class:DocumentUploader
+store_dir	app/uploaders/receipt_uploader.rb	/^  def store_dir$/;"	f	class:ReceiptUploader
+store_dir	app/uploaders/table_uploader.rb	/^  def store_dir$/;"	f	class:TableUploader
+token	app/controllers/admins_controller.rb	/^  def token$/;"	f	class:AdminsController
+token	app/controllers/clients_controller.rb	/^  def token$/;"	f	class:ClientsController
+token	app/controllers/investors_controller.rb	/^  def token$/;"	f	class:InvestorsController
+total_debt	app/models/tracing.rb	/^    def total_debt(ids)$/;"	f	class:Tracing
+unique_payment_by_project	app/models/receipt.rb	/^  def unique_payment_by_project$/;"	f	class:Receipt
+up	db/migrate/20180520133153_add_days_in_arrears_to_receipt.rb	/^  def up$/;"	f	class:AddDaysInArrearsToReceipt
+update	app/controllers/admins_controller.rb	/^  def update$/;"	f	class:AdminsController
+update	app/controllers/clients_controller.rb	/^  def update$/;"	f	class:ClientsController
+update	app/controllers/inv_accounts_controller.rb	/^  def update$/;"	f	class:InvAccountsController
+update	app/controllers/investors_controller.rb	/^  def update$/;"	f	class:InvestorsController
+update	app/controllers/opinion_invs_controller.rb	/^  def update$/;"	f	class:OpinionInvsController
+update	app/controllers/opinions_controller.rb	/^  def update$/;"	f	class:OpinionsController
+update	app/controllers/profitabilities_controller.rb	/^  def update$/;"	f	class:ProfitabilitiesController
+update	app/controllers/projects_controller.rb	/^  def update$/;"	f	class:ProjectsController
+update_client_type	app/models/client.rb	/^  def update_client_type$/;"	f	class:Client
+update_month	app/models/project.rb	/^  def update_month$/;"	f	class:Project
+upload_document	app/models/client.rb	/^  def self.upload_document(name,client,type,file)$/;"	F	class:Client
+upload_document	app/models/investor.rb	/^  def self.upload_document(name,investor,type,file)$/;"	F	class:Investor
+valid_age	app/models/client.rb	/^  def valid_age$/;"	f	class:Client
+valid_age	app/models/investor.rb	/^  def valid_age$/;"	f	class:Investor
+valid_card	app/models/payment.rb	/^  def valid_card$/;"	f	class:Payment
+valid_date	app/models/project.rb	/^  def valid_date$/;"	f	class:Project
+valid_date	app/models/receipt.rb	/^  def valid_date$/;"	f	class:Receipt
+valid_delay	app/models/receipt.rb	/^  def valid_delay$/;"	f	class:Receipt
+valid_grade	app/models/receipt.rb	/^  def valid_grade$/;"	f	class:Receipt
+valid_month	app/models/tracing.rb	/^  def valid_month$/;"	f
+valid_price	app/models/estate.rb	/^  def valid_price$/;"	f	class:Estate
+valid_price	app/models/vehicle.rb	/^  def valid_price$/;"	f	class:Vehicle
+valid_rating	app/models/client.rb	/^  def valid_rating$/;"	f	class:Client
+valid_step	app/models/client.rb	/^  def valid_step$/;"	f	class:Client
+valid_step	app/models/investor.rb	/^  def valid_step$/;"	f	class:Investor
+valid_year	app/models/tracing.rb	/^  def valid_year$/;"	f
+validate_number	app/models/project.rb	/^  def validate_number$/;"	f	class:Project
+verification	app/controllers/clients_controller.rb	/^  def verification$/;"	f	class:ClientsController
+verification	app/controllers/investors_controller.rb	/^  def verification$/;"	f	class:InvestorsController
+welcome	app/mailers/client_mailer.rb	/^  def welcome(user)$/;"	f	class:ClientMailer

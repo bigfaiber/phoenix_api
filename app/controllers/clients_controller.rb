@@ -1,8 +1,8 @@
 class ClientsController < ApplicationController
   before_action :authenticate_admin!, only: [:not_valid,:grade,:additional_data,:destroy,:new_clients,:old_clients]
-  before_action :authenticate_admin_or_client!, only: [:update, :index, :show]
   before_action :authenticate_client!, only: [:end_sign_up,:token,:verification,:avatar,:facebook_avatar,:goods,:documents,:new_verification_code]
-  before_action :set_client, only: [:graph,:grade,:additional_data,:show,:update,:destroy,:show]
+  before_action -> { authorize_user(['Admin', 'Client']) }, only: [:show, :update, :index]
+  before_action :set_client, only: [:graph, :grade, :additional_data, :update, :destroy]
 
   def index
     @clients = Client.load(page: params[:page], per_page: params[:per_page])
@@ -38,8 +38,8 @@ class ClientsController < ApplicationController
   end
 
   def show
-    if @client
-      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'projects.investor.pros', 'projects.investor.cons', 'projects.inv_account', 'projects.investors.cons', 'projects.investors.pros', 'cons', 'pros'], status: :ok
+    if load_client
+      render json: @client, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'projects.investor', 'projects.account', 'projects.investor.pros', 'projects.investor.cons', 'projects.investor.accounts', 'projects.investors.cons', 'projects.investors.pros', 'cons', 'pros'], status: :ok
     else
       error_not_found
     end
@@ -91,44 +91,30 @@ class ClientsController < ApplicationController
 
   def create
     if !Investor.by_identification(params[:client][:identification])
+      
       @client = Client.new(client_params)
-      code = SecureRandom.uuid[0..7]
-      @client.code = code
-      if @client.valid?
-        begin
-          MessageSender.send_message(code,@client.phone)
-        rescue Twilio::REST::TwilioError => error
-          p error
-          return render json: {
-            data: {
-              errors: ["We can't send the code"]
-            }
-          }, status: 500
-        rescue Twilio::REST::RestError => error
-          return render json: {
-            data: {
-              errors: ["We can't send the code"]
-            }
-          }, status: 500
-        end
-        @client.save
-        command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
+      
+      if @client.save
+        
+        command = AuthenticateCommand.call(params[:client][:email], params[:client][:password])
         @current_client = @client
         @token = command.result
-        @client = @client
-        ClientMailer.code(@client).deliver_later
         render json: @client, serializer: ClientSerializer, status: :created
       else
+        
         @object = @client
         error_render
       end
+      
     else
+      
       return render json: {
         data: {
           errors: ["We have an investor account with the same identification"]
         }
       }, status: 500
     end
+    
   end
 
   def update
@@ -256,19 +242,35 @@ class ClientsController < ApplicationController
   end
 
   private
-  def client_params_additional_data
-    params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
-  end
-  def client_params
-    params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
-  end
-  def set_client
-    @client = Client.by_id(params[:id])
-  end
-  def filter_clients
-    if params.has_key?(:filter)
-      p params[:filter]
-      @clients = @clients.where("upper(name) like upper('%#{params[:filter]}%') or upper(lastname) like upper('%#{params[:filter]}%')")
+    def client_params_additional_data
+      params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
     end
-  end
+    # 
+    # def client_params
+    #   params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
+    # end
+    
+    def client_params
+      params.require(:client).permit(:name, :lastname, :identification, :phone, :birthday, :email, :password, :password_confirmation, :terms_and_conditions, :client_type)
+      # :age, :gender
+    end
+    
+    def set_client
+      @client = Client.by_id(params[:id])
+    end
+    
+    def filter_clients
+      if params.has_key?(:filter)
+        p params[:filter]
+        @clients = @clients.where("upper(name) like upper('%#{params[:filter]}%') or upper(lastname) like upper('%#{params[:filter]}%')")
+      end
+    end
+
+    def load_client
+      @client ||= client_scope.find_by_id(params[:id])
+    end
+
+    def client_scope
+      Client.all
+    end
 end

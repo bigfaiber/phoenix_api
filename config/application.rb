@@ -35,7 +35,7 @@ module Phoenix
         resource "*",
         :headers => :any,
         :expose => ['token','token-type'],
-        :methods => [:get,:post,:options,:delete,:put,:patch,:head]
+        :methods => [:get,:post,:delete,:put,:patch,:options,:head]
       end
     end
     config.enable_dependency_loading = true
@@ -44,3 +44,4 @@ module Phoenix
 
   end
 end
+

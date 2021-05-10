@@ -47,7 +47,7 @@ class Investor < ApplicationRecord
     'Otra': 10
   }
 
-  validates_presence_of :name, :lastname, :identification, :phone, :address, :email, :city, :birthday
+  validates_presence_of :name, :lastname, :identification, :phone, :email, :birthday
   validates_uniqueness_of :phone, :identification, :email
   validates_length_of :name,:lastname, minimum: 3
   validates_length_of :technical_career, within: 3..50, if: Proc.new { |a| a.education == "Tecnico/Tecnologo"}

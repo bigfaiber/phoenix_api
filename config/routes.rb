@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   #constraints subdomain: "api" do
     get 'projects/:id/amortization-table', to: "projects#generate_table", defaults: { format: 'pdf' }
     scope '/', defaults: { format: 'json' } do
+      get '/send-verification-code', to: "validate_phones#send_verification_code"
+      post '/reset-password', to: "passwords#reset"
       get '/average-interest', to: "static#average_interest"
       get '/projects-values-interest', to: "static#projects_values_interest"
       post '/login',  to: "authenticate#login"
+      get '/users',  to: "users#index"
       resources :receipts, only: [] do
         member do
           post 'grade', to: "receipts#grade"
@@ -71,6 +74,9 @@ Rails.application.routes.draw do
           get 'by-token', to: "admins#token"
           post 'upload-avatar', to: "admins#avatar"
         end
+      end
+      namespace :projects do
+        resources :assign_investors, only: [:update]
       end
       resources :projects, only: [:create,:update,:destroy,:show,:index] do
         collection do

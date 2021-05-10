@@ -50,32 +50,15 @@ class InvestorsController < ApplicationController
   end
 
   def create
+    
     if !Client.by_identification(params[:investor][:identification])
+      
       @investor = Investor.new(investor_params)
-      code = SecureRandom.uuid[0..7]
-      @investor.code = code
-      if @investor.valid?
-        #ClientMailer.welcome(@investor).deliver_later
-        begin
-          MessageSender.send_message(code,@investor.phone)
-        rescue Twilio::REST::TwilioError => error
-          return render json: {
-            data: {
-              errors: ["We can't send the code"]
-            }
-          }, status: 500
-        rescue Twilio::REST::RestError => error
-          return render json: {
-            data: {
-              errors: ["We can't send the code"]
-            }
-          }, status: 500
-        end
-        @investor.save
+
+      if @investor.save
         command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
         @current_investor = @investor
         @token = command.result
-        ClientMailer.code(@investor).deliver_later
         render json: @investor, serializer: InvestorSerializer, status: :created
       else
         @object = @investor
@@ -90,6 +73,48 @@ class InvestorsController < ApplicationController
     end
 
   end
+  # 
+  # def create
+  #   if !Client.by_identification(params[:investor][:identification])
+  #     @investor = Investor.new(investor_params)
+  #     code = SecureRandom.uuid[0..7]
+  #     @investor.code = code
+  #     if @investor.valid?
+  #       #ClientMailer.welcome(@investor).deliver_later
+  #       begin
+  #         MessageSender.send_message(code,@investor.phone)
+  #       rescue Twilio::REST::TwilioError => error
+  #         return render json: {
+  #           data: {
+  #             errors: ["We can't send the code"]
+  #           }
+  #         }, status: 500
+  #       rescue Twilio::REST::RestError => error
+  #         return render json: {
+  #           data: {
+  #             errors: ["We can't send the code"]
+  #           }
+  #         }, status: 500
+  #       end
+  #       @investor.save
+  #       command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
+  #       @current_investor = @investor
+  #       @token = command.result
+  #       ClientMailer.code(@investor).deliver_later
+  #       render json: @investor, serializer: InvestorSerializer, status: :created
+  #     else
+  #       @object = @investor
+  #       error_render
+  #     end
+  #   else
+  #     return render json: {
+  #       data: {
+  #         errors: ["We have a client account with the same identification"]
+  #       }
+  #     }, status: 500
+  #   end
+  # 
+  # end
 
   def update
     if @investor.update(investor_params)
@@ -235,8 +260,11 @@ class InvestorsController < ApplicationController
 
   private
   def investor_params
-    params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions,:career,:technical_career)
+    params.require(:investor).permit(:name, :lastname, :identification, :phone, :birthday, :email, :password, :password_confirmation, :terms_and_conditions, :client_type)
   end
+  # def investor_params
+  #   params.require(:investor).permit(:step,:money_invest,:month,:monthly_payment,:profitability,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:employment_status,:education,:rent_tax,:terms_and_conditions,:career,:technical_career)
+  # end
 
   def payment_params
     params.require(:payment).permit(:name,:lastname,:card_number,:card_type,:ccv,:month,:year,:career,:technical_career)
