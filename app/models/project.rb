@@ -21,31 +21,39 @@ class Project < ApplicationRecord
   scope :include_account, -> { includes(:account )}
   scope :include_client, -> { includes(:client )}
   scope :include_receipts, -> { includes(:receipts )}
-  scope :approved?, -> {where(approved: true)}
+  scope :approved?, -> { where(approved: true) }
   scope :by_client, -> (id:) {where(client_id: id) }
   scope :by_investor, -> (id:) { where(investor_id: id).where(approved: true) }
   scope :by_account, -> (id:) { where(account_id: id) }
   scope :by_price, -> (price_start:,price_end:) { where(money: price_start..price_end) }
   scope :by_interest, -> (interest_start:,interest_end:) { where(interest_rate: interest_start..interest_end) }
   scope :by_time, -> (time_start:,time_end:) { where(month: time_start..time_end) }
-  scope :by_finished, -> (value: ) {where(finished:  value)}
-
+  scope :by_finished, -> (value:) { where(finished:  value) }
 
   enum warranty: {
-    "Prenda":0,
-    "Hipoteca":1,
-    "Pagare": 2
+    "prenda": 0,
+    "hipoteca": 1,
+    "pagare": 2
   }
 
-  validates_presence_of :dream, :description,:money,:monthly_payment,:month
+  # is not a field in front end :description,
+  validates_presence_of :dream,:money,:monthly_payment,:month
   validates_numericality_of :money,:monthly_payment,:month, only_integer: true
   validates_numericality_of :month
   validate :validate_number
   validate :valid_date
   validates_inclusion_of :warranty, in: warranties.keys
+  
+  def self.active_projects
+    approved?.size
+  end
+  
+  def self.active_loans
+    approved?.sum(:money)
+  end
 
   def self.average_interest
-    by_finished(value: false).where(matched: true).average(:interest_rate)
+    by_finished(value: false).where(matched: true).average(:interest_rate).to_f.round(2)
   end
 
   def self.load(page:1 ,per_page: 10)

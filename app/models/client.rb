@@ -11,8 +11,6 @@ class Client < ApplicationRecord
   has_many :pros, -> {where(opinion_status: 0)}, class_name: "Opinion", dependent: :destroy
   has_many :cons, -> {where(opinion_status: 1)}, class_name: "Opinion", dependent: :destroy
 
-
-
   scope :new_clients, -> { where(new_client: true) }
   scope :valid_form, -> {where(step: 5)}
   scope :approved, -> {where("client_type = 0 OR client_type = 3")}
@@ -84,7 +82,7 @@ class Client < ApplicationRecord
     "Estoy pagando vivienda": 3
   }
 
-  validates_presence_of :name,:lastname,:identification,:phone,:address,:birthday,:email,:city
+  validates_presence_of :name,:lastname,:identification,:phone,:birthday,:email
   validates_uniqueness_of :phone,:identification,:email
   validates_length_of :name,:lastname, minimum: 3
   validate :valid_age

@@ -184,7 +184,7 @@
         },
         {
           name: 'new_password',
-          content: "https://www.phx.com.co/new-password?email=#{resource.email}&token=#{token}&type=#{resource.class.name.downcase}"
+          content: "https://www.phx.com.co/new-password?email=#{resource.email}&token=#{token}&type=#{resource.class.name}"
         }
       ],
       template: 'NEW_PASSWORD'

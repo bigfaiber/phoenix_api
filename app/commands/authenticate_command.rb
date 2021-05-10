@@ -2,27 +2,24 @@ class AuthenticateCommand
   prepend SimpleCommand
   attr_accessor :email,:password, :type
 
-  def initialize(email,password, type)
+  def initialize(email,password)
     @email = email
     @password = password
-    @type = type
   end
 
   def call
-    JsonWebToken.encode(playload: {id: find.id, type: @type }) if find
+    JsonWebToken.encode(payload: {id: find.id, type: find.class }) if find
   end
 
   private
   def find
-    case @type
-    when "Admin"
-      find = Admin.by_email(@email)
-    when "Client"
-      find = Client.by_email(@email)
-    when "Investor"
-      find = Investor.by_email(@email)
+    types = ['Admin', 'Client', 'Investor']
+    user = nil
+    types.each do |type|
+      user = Kernel.const_get(type).by_email(@email)
+      break if user
     end
-    return find if find && find.authenticate(@password)
+    return user if user && user.authenticate(@password)
     errors.add :authentication, 'invalid credentials'
     nil
   end

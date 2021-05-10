@@ -1,13 +1,13 @@
 # config valid only for current version of Capistrano
 lock "3.10.1"
 
-#Testing
-#server '35.231.77.182', port: 22, roles: [:web, :app, :db], primary: true
+#Staging
+# server '35.196.13.213', port: 22, roles: [:web, :app, :db], primary: true
 #Production
-server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
+# server '35.196.49.244', port: 22, roles: [:web, :app, :db], primary: true
 
 
-set :repo_url,        'git@bitbucket.org:aliCamargo/phx_api.git'
+set :repo_url,        'git@github.com:bigfaiber/phoenix_api.git'
 set :application,     'api'
 #Testing
 #set :user,            'AndresGutierrez'
@@ -21,7 +21,7 @@ set :migration_role, :db
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
-set :stage,           :production
+# set :stage,           :production  #SET ON EACH ENVIRONMENT
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
@@ -36,7 +36,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Defaults:
 # set :scm,           :git
-set :branch,        :develop
+# set :branch,        :deploy    #CHANGE
 set :format,        :pretty
 set :log_level,     :debug
 set :keep_releases, 5
@@ -84,7 +84,7 @@ namespace :deploy do
     end
   end
 
-  before :starting,     :check_revision
+  # before :starting,     :check_revision
   #after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   #after  :finishing,    :restart
