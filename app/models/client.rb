@@ -82,7 +82,7 @@ class Client < ApplicationRecord
     "Estoy pagando vivienda": 3
   }
 
-  validates_presence_of :name,:lastname,:identification,:phone,:address,:birthday,:email,:city
+  validates_presence_of :name,:lastname,:identification,:phone,:birthday,:email
   validates_uniqueness_of :phone,:identification,:email
   validates_length_of :name,:lastname, minimum: 3
   validate :valid_age

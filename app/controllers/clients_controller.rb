@@ -89,83 +89,19 @@ class ClientsController < ApplicationController
     end
   end
 
-  # def create
-  #   if !Investor.by_identification(params[:client][:identification])
-  #     @client = Client.new(client_params)
-  #     code = SecureRandom.uuid[0..7]
-  #     @client.code = code
-  #     if @client.valid?
-  #       begin
-  #         MessageSender.send_message(code,@client.phone)
-  #       rescue Twilio::REST::TwilioError => error
-  #         p error
-  #         return render json: {
-  #           data: {
-  #             errors: ["We can't send the code"]
-  #           }
-  #         }, status: 500
-  #       rescue Twilio::REST::RestError => error
-  #         return render json: {
-  #           data: {
-  #             errors: ["We can't send the code"]
-  #           }
-  #         }, status: 500
-  #       end
-  #       @client.save
-  #       command = AuthenticateCommand.call(params[:client][:email],params[:client][:password],@client.class.name)
-  #       @current_client = @client
-  #       @token = command.result
-  #       @client = @client
-  #       ClientMailer.code(@client).deliver_later
-  #       render json: @client, serializer: ClientSerializer, status: :created
-  #     else
-  #       @object = @client
-  #       error_render
-  #     end
-  #   else
-  #     return render json: {
-  #       data: {
-  #         errors: ["We have an investor account with the same identification"]
-  #       }
-  #     }, status: 500
-  #   end
-  # end
-
   def create
-    
     if !Investor.by_identification(params[:client][:identification])
       
       @client = Client.new(client_params)
-
-      if @client.valid?
-        # begin
-        #   MessageSender.send_message(code,@client.phone)
-        # rescue Twilio::REST::TwilioError => error
-        #   p error
-        #   return render json: {
-        #     data: {
-        #       errors: ["We can't send the code"]
-        #     }
-        #   }, status: 500
-        # rescue Twilio::REST::RestError => error
-        #   return render json: {
-        #     data: {
-        #       errors: ["We can't send the code"]
-        #     }
-        #   }, status: 500
-        # end
-        @client.save
+      
+      if @client.save
         
-        command = AuthenticateCommand.call(params[:client][:email], params[:client][:password], @client.class.name)
-        
+        command = AuthenticateCommand.call(params[:client][:email], params[:client][:password])
         @current_client = @client
-        
         @token = command.result
-        
-        @client = @client
-        
         render json: @client, serializer: ClientSerializer, status: :created
       else
+        
         @object = @client
         error_render
       end
@@ -309,9 +245,14 @@ class ClientsController < ApplicationController
     def client_params_additional_data
       params.require(:client).permit(:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:job_position,:patrimony,:max_capacity,:current_debt,:income,:payment_capacity,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
     end
+    # 
+    # def client_params
+    #   params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
+    # end
     
     def client_params
-      params.require(:client).permit(:step,:name,:lastname,:identification,:phone,:address,:birthday,:email,:city,:password,:password_confirmation,:rent,:rent_payment,:people,:education,:marital_status,:rent_tax,:employment_status,:terms_and_conditions,:career,:technical_career,:household_type,:market_expenses,:transport_expenses,:public_service_expenses,:bank_obligations,:real_estate,:payments_in_arrears, :payments_in_arrears_value,:payments_in_arrears_time)
+      params.require(:client).permit(:name, :lastname, :identification, :phone, :birthday, :email, :password, :password_confirmation, :terms_and_conditions, :client_type)
+      # :age, :gender
     end
     
     def set_client

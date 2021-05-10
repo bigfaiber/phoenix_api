@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get '/average-interest', to: "static#average_interest"
       get '/projects-values-interest', to: "static#projects_values_interest"
       post '/login',  to: "authenticate#login"
+      get '/users',  to: "users#index"
       resources :receipts, only: [] do
         member do
           post 'grade', to: "receipts#grade"
@@ -73,6 +74,9 @@ Rails.application.routes.draw do
           get 'by-token', to: "admins#token"
           post 'upload-avatar', to: "admins#avatar"
         end
+      end
+      namespace :projects do
+        resources :assign_investors, only: [:update]
       end
       resources :projects, only: [:create,:update,:destroy,:show,:index] do
         collection do
