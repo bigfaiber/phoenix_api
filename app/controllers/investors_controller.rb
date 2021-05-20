@@ -273,5 +273,4 @@ class InvestorsController < ApplicationController
   def set_investor
     @investor = Investor.by_id(params[:id])
   end
-
 end
