@@ -59,6 +59,8 @@ class InvestorsController < ApplicationController
         command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
         @current_investor = @investor
         @token = command.result
+        Investor.upload_document(params[:investor][:file].original_filename, @current_investor, params[:investor][:file_type], params[:investor][:file])
+        
         render json: @investor, serializer: InvestorSerializer, status: :created
       else
         @object = @investor
@@ -73,48 +75,6 @@ class InvestorsController < ApplicationController
     end
 
   end
-  # 
-  # def create
-  #   if !Client.by_identification(params[:investor][:identification])
-  #     @investor = Investor.new(investor_params)
-  #     code = SecureRandom.uuid[0..7]
-  #     @investor.code = code
-  #     if @investor.valid?
-  #       #ClientMailer.welcome(@investor).deliver_later
-  #       begin
-  #         MessageSender.send_message(code,@investor.phone)
-  #       rescue Twilio::REST::TwilioError => error
-  #         return render json: {
-  #           data: {
-  #             errors: ["We can't send the code"]
-  #           }
-  #         }, status: 500
-  #       rescue Twilio::REST::RestError => error
-  #         return render json: {
-  #           data: {
-  #             errors: ["We can't send the code"]
-  #           }
-  #         }, status: 500
-  #       end
-  #       @investor.save
-  #       command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
-  #       @current_investor = @investor
-  #       @token = command.result
-  #       ClientMailer.code(@investor).deliver_later
-  #       render json: @investor, serializer: InvestorSerializer, status: :created
-  #     else
-  #       @object = @investor
-  #       error_render
-  #     end
-  #   else
-  #     return render json: {
-  #       data: {
-  #         errors: ["We have a client account with the same identification"]
-  #       }
-  #     }, status: 500
-  #   end
-  # 
-  # end
 
   def update
     if @investor.update(investor_params)
@@ -273,5 +233,4 @@ class InvestorsController < ApplicationController
   def set_investor
     @investor = Investor.by_id(params[:id])
   end
-
 end

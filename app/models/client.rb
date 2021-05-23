@@ -132,16 +132,17 @@ class Client < ApplicationRecord
     find_by_identification(identification)
   end
 
-  def self.upload_document(name,client,type,file)
+  def self.upload_document(name, client, type, file)
+    # se puede refactorizar, que el tipo de documento se valide antes de usar el metodo asi solo se debe crear el documento con este metodo
     case type
     when "cc"
-      Document.new(name: name,document_type: 0, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name, document_type: 0, document: file, imageable_id: client.id, imageable_type: client.class.name).save
     when "renta"
-      Document.new(name: name,document_type: 1, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name, document_type: 1, document: file, imageable_id: client.id, imageable_type: client.class.name).save
     when "extractos"
-      Document.new(name: name,document_type: 2, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name, document_type: 2, document: file, imageable_id: client.id, imageable_type: client.class.name).save
     when "ingresos"
-      Document.new(name: name,document_type: 3, document: file,imageable_id: client.id, imageable_type: client.class.name).save
+      Document.new(name: name, document_type: 3, document: file, imageable_id: client.id, imageable_type: client.class.name).save
     end
   end
 

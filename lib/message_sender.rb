@@ -6,7 +6,7 @@ class MessageSender
   # ENV['TWILIO_AUTH_TOKEN'] |= HTTParty.get(base_url + 'TWILIO_AUTH_TOKEN', headers: header)
   # ENV['SENDER_PHONE'] |= HTTParty.get(base_url + 'SENDER_PHONE', headers: header)
 
-  def self.send_message(code,phone)
+  def self.send_message(code, phone)
     new.send_message(code, phone)
   end
 

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
           post 'create-goods', to: "clients#goods"
           post 'upload-document', to: "clients#documents"
         end
+        resources :projects, only: [:index], controller: 'clients/projects'
       end
       resources :investors do
         resources :inv_accounts, only: [:index, :create]
@@ -68,6 +69,7 @@ Rails.application.routes.draw do
           post 'create-payment', to: "investors#payment"
           post 'upload-document', to: "investors#documents"
         end
+        resources :projects, only: [:update, :index], controller: 'investors/projects'
       end
       resources :admins do
         collection do

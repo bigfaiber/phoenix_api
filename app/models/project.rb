@@ -38,7 +38,7 @@ class Project < ApplicationRecord
 
   # is not a field in front end :description,
   validates_presence_of :dream,:money,:monthly_payment,:month
-  validates_numericality_of :money,:monthly_payment,:month, only_integer: true
+  validates_numericality_of :money, :monthly_payment, :month, only_integer: true
   validates_numericality_of :month
   validate :validate_number
   validate :valid_date
