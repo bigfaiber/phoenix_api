@@ -90,6 +90,7 @@ class ClientsController < ApplicationController
   end
 
   def create
+    
     if !Investor.by_identification(params[:client][:identification])
       
       @client = Client.new(client_params)
@@ -99,6 +100,8 @@ class ClientsController < ApplicationController
         command = AuthenticateCommand.call(params[:client][:email], params[:client][:password])
         @current_client = @client
         @token = command.result
+        Client.upload_document(params[:client][:file].original_filename, @current_client, params[:client][:file_type], params[:client][:file])
+        
         render json: @client, serializer: ClientSerializer, status: :created
       else
         
@@ -223,7 +226,7 @@ class ClientsController < ApplicationController
   end
 
   def documents
-    Client.upload_document(params["file"].original_filename,@current_client,params[:type],params[:file])
+    Client.upload_document(params["file"].original_filename, @current_client , params[:type], params[:file])
     head :ok
   end
 
@@ -252,7 +255,6 @@ class ClientsController < ApplicationController
     
     def client_params
       params.require(:client).permit(:name, :lastname, :identification, :phone, :birthday, :email, :password, :password_confirmation, :terms_and_conditions, :client_type)
-      # :age, :gender
     end
     
     def set_client

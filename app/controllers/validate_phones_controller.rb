@@ -17,7 +17,7 @@ class ValidatePhonesController < ApplicationController
         }
       }, status: 500
     end
-    # head :ok
+    head :ok
     
     # code = SecureRandom.uuid[0..7]
     # 

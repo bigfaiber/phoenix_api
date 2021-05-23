@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   #constraints subdomain: "api" do
     get 'projects/:id/amortization-table', to: "projects#generate_table", defaults: { format: 'pdf' }
     scope '/', defaults: { format: 'json' } do
-      get '/send-verification-code/:phone', to: "validate_phones#send_verification_code"
+      get '/send-verification-code', to: "validate_phones#send_verification_code"
       post '/reset-password', to: "passwords#reset"
       get '/average-interest', to: "static#average_interest"
       get '/projects-values-interest', to: "static#projects_values_interest"
