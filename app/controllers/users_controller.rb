@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
   
   private
+  
     def pattern_params
       if params[:pattern]
         "%#{ params[:pattern].downcase }%" 

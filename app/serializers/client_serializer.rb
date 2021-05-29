@@ -10,6 +10,7 @@ class ClientSerializer < ActiveModel::Serializer
   has_many :projects
   has_many :cons
   has_many :pros
+  has_one :financial_status
 
   def recommended_interest
     object.recommended_interest
