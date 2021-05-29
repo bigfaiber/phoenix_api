@@ -100,7 +100,9 @@ class ClientsController < ApplicationController
         command = AuthenticateCommand.call(params[:client][:email], params[:client][:password])
         @current_client = @client
         @token = command.result
-        Client.upload_document(params[:client][:file].original_filename, @current_client, params[:client][:file_type], params[:client][:file])
+        if params[:client][:file] != ''
+          Client.upload_document(params[:client][:file].original_filename, @current_client, params[:client][:file_type], params[:client][:file])
+        end
         
         render json: @client, serializer: ClientSerializer, status: :created
       else
