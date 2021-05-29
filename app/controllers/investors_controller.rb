@@ -59,7 +59,9 @@ class InvestorsController < ApplicationController
         command = AuthenticateCommand.call(params[:investor][:email],params[:investor][:password],@investor.class.name)
         @current_investor = @investor
         @token = command.result
-        Investor.upload_document(params[:investor][:file].original_filename, @current_investor, params[:investor][:file_type], params[:investor][:file])
+        if params[:investor][:file] != ''
+          Investor.upload_document(params[:investor][:file].original_filename, @current_investor, params[:investor][:file_type], params[:investor][:file])
+        end
         
         render json: @investor, serializer: InvestorSerializer, status: :created
       else
