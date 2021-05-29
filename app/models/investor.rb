@@ -1,10 +1,13 @@
 class Investor < ApplicationRecord
   has_secure_password
+  after_create :set_financial_status
+  
   mount_uploader :avatar, AvatarUploader
 
   has_one :payment, dependent: :destroy
   has_many :accounts, class_name: 'InvAccount', dependent: :destroy
   has_many :documents, as: :imageable, dependent: :destroy
+  has_one :financial_status, as: :fstatus, dependent: :destroy, class_name: 'FinancialStatus'
   has_many :matches, dependent: :destroy
   has_many :projects, -> {where(matches: {approved: true})} ,through: :matches
   has_many :pros, -> {where(opinion_status: 0)}, class_name: "OpinionInv", dependent: :destroy
@@ -32,6 +35,13 @@ class Investor < ApplicationRecord
     "Independiente": 2,
     "Contratista": 3
   }
+  
+  enum client_type: {
+    'No calificado': 0,
+    'No califica': 1,
+    'Evaluacion': 2,
+    'Califica': 3
+  }
 
   enum career: {
     'Administrador': 0,
@@ -55,6 +65,8 @@ class Investor < ApplicationRecord
   validates_inclusion_of :career, in: careers.keys
   validates_length_of :password, minimum: 8, if: Proc.new {|a| a.new_record? }
   validates_inclusion_of :employment_status, in: employment_statuses.keys
+  validates_numericality_of :global, greater_than_or_equal_to: 0, less_than_or_equal_to: 100
+  validates_inclusion_of :client_type, in: client_types.keys
   validate :valid_age
   validates_numericality_of :identification, :maximum, only_integer: true
   validates_length_of :phone, minimum: 10, maximum: 15
@@ -105,14 +117,17 @@ class Investor < ApplicationRecord
   end
 
   private
-  def valid_age
-    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year < 18
-    errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
-  end
+  
+    def valid_age
+      errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year < 18
+      errors.add(:birthday,"you are under 18") if Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
+    end
 
-  def valid_step
-    errors.add(:step,'is not valid') if self.step < 1 || self.step > 6
-  end
-
-
+    def valid_step
+      errors.add(:step,'is not valid') if self.step < 1 || self.step > 6
+    end
+    
+    def set_financial_status
+      FinancialStatus.new(available_equity: '', available_income: '', fstatus_type: 'Investor', fstatus_id: id).save
+    end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get '/projects-values-interest', to: "static#projects_values_interest"
       post '/login',  to: "authenticate#login"
       get '/users',  to: "users#index"
+      resources :financial_status, only: [:update]
       resources :receipts, only: [] do
         member do
           post 'grade', to: "receipts#grade"

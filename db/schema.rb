@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210509201906) do
+ActiveRecord::Schema.define(version: 20210529012722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,16 @@ ActiveRecord::Schema.define(version: 20210509201906) do
     t.index ["client_id"], name: "index_estates_on_client_id"
   end
 
+  create_table "financial_statuses", force: :cascade do |t|
+    t.json "available_equity"
+    t.json "available_income"
+    t.string "fstatus_type"
+    t.bigint "fstatus_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fstatus_type", "fstatus_id"], name: "index_financial_statuses_on_fstatus_type_and_fstatus_id"
+  end
+
   create_table "inv_accounts", force: :cascade do |t|
     t.string "bank", null: false
     t.integer "account_type", default: 0, null: false
@@ -154,6 +164,8 @@ ActiveRecord::Schema.define(version: 20210509201906) do
     t.string "maximum", default: "300000000"
     t.integer "career", default: 10
     t.string "technical_career", default: ""
+    t.integer "global", default: 0
+    t.integer "client_type", default: 0
   end
 
   create_table "matches", force: :cascade do |t|

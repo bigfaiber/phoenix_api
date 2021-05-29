@@ -2,11 +2,13 @@ class Client < ApplicationRecord
   has_secure_password
   mount_uploader :avatar, AvatarUploader
   before_save :update_client_type
+  after_create :set_financial_status
   before_validation :set_payments_in_arrears
 
   has_many :vehicles, dependent: :destroy
   has_many :estates, dependent: :destroy
   has_many :documents, as: :imageable, dependent: :destroy
+  has_one :financial_status, as: :fstatus, dependent: :destroy, class_name: 'FinancialStatus'
   has_many :projects, dependent: :destroy
   has_many :pros, -> {where(opinion_status: 0)}, class_name: "Opinion", dependent: :destroy
   has_many :cons, -> {where(opinion_status: 1)}, class_name: "Opinion", dependent: :destroy
@@ -414,36 +416,41 @@ class Client < ApplicationRecord
   end
 
   private
-  def valid_age
-    errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year < 18
-    errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
-  end
-
-  def valid_step
-    errors.add(:step,'is not valid') if self.step < 1 || self.step > 5
-  end
-
-  def valid_rating
-    errors.add(:rating,"is not valid") if self.rating && (self.rating < 0 || self.rating > 5)
-  end
-
-  def set_payments_in_arrears
-    if !self.payments_in_arrears
-      self.payments_in_arrears_value = "0"
-      self.payments_in_arrears_time = "No ha tenido mora"
+  
+    def valid_age
+      errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year < 18
+      errors.add(:birthday,"you are under 18") if self.birthday && Date.today.year - self.birthday.year == 18 && Date.today.month > self.birthday.month
     end
-  end
 
-  def update_client_type
-    
-    if self.global_changed?
-      if self.global <= 50 
-        self.client_type = 1
-      elsif self.global > 50 && self.global < 60
-        self.client_type = 2
-      elsif self.global >= 60
-        self.client_type = 3
+    def valid_step
+      errors.add(:step,'is not valid') if self.step < 1 || self.step > 5
+    end
+
+    def valid_rating
+      errors.add(:rating,"is not valid") if self.rating && (self.rating < 0 || self.rating > 5)
+    end
+
+    def set_payments_in_arrears
+      if !self.payments_in_arrears
+        self.payments_in_arrears_value = "0"
+        self.payments_in_arrears_time = "No ha tenido mora"
       end
     end
-  end
+
+    def update_client_type
+      
+      if self.global_changed?
+        if self.global <= 50 
+          self.client_type = 1
+        elsif self.global > 50 && self.global < 60
+          self.client_type = 2
+        elsif self.global >= 60
+          self.client_type = 3
+        end
+      end
+    end
+    
+    def set_financial_status
+      FinancialStatus.new(available_equity: '', available_income: '', fstatus_type: 'Client', fstatus_id: id).save
+    end
 end
