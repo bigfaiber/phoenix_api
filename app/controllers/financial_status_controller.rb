@@ -8,7 +8,7 @@ class FinancialStatusController < ApplicationController
       
       if user.financial_status.update(available_equity: params[:user][:available_equity].to_json, available_income: params[:user][:available_income].to_json)
         user.update(client_type: params[:user][:client_type], global: params[:user][:calification])
-        render json: user, serializer: ClientSerializer, include: ['documents', 'vehicles', 'estates', 'financial_status', 'projects.investor', 'projects.account', 'pros', 'cons'], status: :ok
+        render json: user, include: ['documents', 'vehicles', 'estates', 'financial_status', 'projects.investor', 'projects.account', 'pros', 'cons'], status: :ok
       else
         @object = @user
         error_render

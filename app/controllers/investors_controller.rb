@@ -25,7 +25,7 @@ class InvestorsController < ApplicationController
 
   def show
     if @investor
-      render json: @investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'projects.client', 'projects.account','projects.inv_account'], status: :ok
+      render json: @investor, serializer: InvestorSerializer, include: ['payment', 'documents', 'financial_status', 'projects.client', 'projects.account','projects.inv_account'], status: :ok
     else
       error_not_found
     end

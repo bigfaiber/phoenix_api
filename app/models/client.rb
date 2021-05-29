@@ -57,10 +57,10 @@ class Client < ApplicationRecord
   }
 
   enum client_type: {
-    'No calificado': 0,
-    'No califica': 1,
-    'Evaluacion': 2,
-    'Califica': 3
+    'no calificado': 0,
+    'no califica': 1,
+    'evaluacion': 2,
+    'califica': 3
   }
 
   enum career: {
@@ -451,6 +451,7 @@ class Client < ApplicationRecord
     end
     
     def set_financial_status
-      FinancialStatus.new(available_equity: '', available_income: '', fstatus_type: 'Client', fstatus_id: id).save
+      initial_status = { asset: 0, liability: 0 }.to_json
+      FinancialStatus.new(available_equity: initial_status, available_income: initial_status, fstatus_type: 'Client', fstatus_id: id).save
     end
 end
